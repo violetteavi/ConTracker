@@ -1,0 +1,15 @@
+CS 252 Lab 6: Web App
+Andrew Violette aviolett@purdue.edu
+Josh Schmitt schmit28@purdue.edu
+John Verhoff jverhoff@purdue.edu
+
+Welcome to ConTracker, the app that tracks monetary donations to candidate by
+state and party using the Federal Election Commision's open source data API.
+Specifically, stage one will break down how much money went to Democratic or
+Republicans in each of the fifty states.
+
+The technologies to be used in this project include:
+Python
+FEC API at https://www.fec.gov/data/advanced/
+D3js at https://d3js.org/
+simple-https-server.py at https://gist.github.com/dergachev/7028596
