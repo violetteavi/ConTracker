@@ -2,7 +2,7 @@
 # Html generator, patterned off of piecharts.html
 
 def generatePieHtmlBegin():
-	htmlBegin = """<!DOCTYPE html>
+    htmlBegin = """<!DOCTYPE html>
 <html>
   <head>    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -23,25 +23,25 @@ def generatePieHtmlBegin():
     var color = ["#98AFC7", "#B6B6B4", "#FB8885"];
 
     data = ["""
-	return htmlBegin
+    return htmlBegin
 
 def generatePieHtmlDataStr( initials, totalContributions, demPercent, otherPercent, repPercent):
-	dataStr = '{"percentages": '
-        dataStr = dataStr + '[{"value":' + str(demPercent) + '},'
-	dataStr = dataStr + '{"value":' + str(otherPercent) + '},'
-	dataStr = dataStr + '{"value":' + str(repPercent) + '}],'
-	dataStr = dataStr + '"total":' + str(totalContributions) + ','
-	dataStr = dataStr + '"initials":"' + initials + '"}'
-	return dataStr
+    dataStr = '{"percentages": '
+    dataStr = dataStr + '[{"value":' + str(demPercent) + '},'
+    dataStr = dataStr + '{"value":' + str(otherPercent) + '},'
+    dataStr = dataStr + '{"value":' + str(repPercent) + '}],'
+    dataStr = dataStr + '"total":' + str(totalContributions) + ','
+    dataStr = dataStr + '"initials":"' + initials + '"}'
+    return dataStr
 
 def generatePieHtmlEnd():
-	htmlEnd = """];
+    htmlEnd = """];
     var state;    
     for(state = 0; state < data.length; state++) {
-    	var r = 0.005 * Math.sqrt(data[state].total), 
-    	w = 2*r,                  
-    	h = 2*r;                  
-    	var vis = d3.select("body")
+        var r = 0.005 * Math.sqrt(data[state].total), 
+        w = 2*r,                  
+        h = 2*r;                  
+        var vis = d3.select("body")
         .append("svg:svg")              
         .data([data[state].percentages])               
             .attr("width", w)          
@@ -49,12 +49,12 @@ def generatePieHtmlEnd():
         .append("svg:g")             
             .attr("transform", "translate(" + r + "," + r + ")") 
 
-    	var arc = d3.svg.arc()            
+        var arc = d3.svg.arc()            
         .outerRadius(r);
 
-    	var pie = d3.layout.pie()       
+        var pie = d3.layout.pie()       
         .value(function(d) { return d.value; }).sort(null);    
-    	var arcs = vis.selectAll("g.slice")    
+        var arcs = vis.selectAll("g.slice")    
         .data(pie)                         
         .enter()                            
             .append("svg:g")                
@@ -73,7 +73,7 @@ def generatePieHtmlEnd():
             })
             .attr("text-anchor", "middle")                     
             .text(function(d, i) { return ""; });   
-		// was percentages[state][i].label
+        // was percentages[state][i].label
 
         vis.append("svg:text")                             
             .attr("text-anchor", "middle")                      
@@ -82,7 +82,7 @@ def generatePieHtmlEnd():
     </script>
   </body>
 </html>"""
-	return htmlEnd
+    return htmlEnd
 
 print(generatePieHtmlBegin())
 print(generatePieHtmlDataStr('CA', 9001, 75, 5, 20))
