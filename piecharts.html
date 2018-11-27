@@ -3,9 +3,8 @@
   <head>    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Testing Pie Chart</title>
-    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?2.1.3"></script>
-    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.geom.js?2.1.3"></script>
-    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js?2.1.3"></script>
+    <script src='http://d3js.org/d3.v2.js'></script>
+
 
     <style type="text/css">
         .slice text {
@@ -16,13 +15,10 @@
   </head>
   <body>
     <script type="text/javascript">
+// Adapted from http://bl.ocks.org/enjalot/1203641          //radius
+    var color = ["dodgerblue", "darkgrey", "firebrick"];
 
-    var r = 200,                        //width
-    w = 2*r,                            //height
-    h = 2*r,                            //radius
-    color = ["dodgerblue", "darkgrey", "firebrick"];
-
-    data = [
+    percentages = [
             [{"label":"Democrat", "value":40}, 
              {"label":"Other", "value":10}, 
              {"label":"Republican", "value":50}],
@@ -32,11 +28,16 @@
             [{"label":"Democrat", "value":45}, 
              {"label":"Other", "value":5}, 
              {"label":"Republican", "value":50}]];
+    totals = [ 16963417.30, 247669267.56, 9308656.83];
+    name = ["ME", "CA", "WY"];
     var state;    
-    for(state = 0; state < data.length; state++) {
+    for(state = 0; state < percentages.length; state++) {
+    	var r = 0.005 * Math.sqrt(totals[state]), 
+    	w = 2*r,                  
+    	h = 2*r;                  
     	var vis = d3.select("body")
         .append("svg:svg")              //create the SVG element inside the <body>
-        .data([data[state]])                   //associate our data with the document
+        .data([percentages[state]])                   //associate our data with the document
             .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
             .attr("height", h)
         .append("svg:g")                //make a group to hold our pie chart
@@ -46,7 +47,7 @@
         .outerRadius(r);
 
     	var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-        .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
+        .value(function(d) { return d.value; }).sort(null);    //we must tell it out to access the value of each element in our data array
 
     	var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
         .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
@@ -66,7 +67,8 @@
                 return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
             })
             .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return data[state][i].label; });        //get the label from our original data array
+            .text(function(d, i) { return ""; });        //get the label from our original data array
+		// was percentages[state][i].label
     }
     </script>
   </body>
