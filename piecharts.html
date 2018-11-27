@@ -16,28 +16,36 @@
   <body>
     <script type="text/javascript">
 // Adapted from http://bl.ocks.org/enjalot/1203641          //radius
-    var color = ["#98AFC7", "#B6B6B4", "lightcoral"];
+    var color = ["#98AFC7", "#B6B6B4", "#FB8885"];
 
-    percentages = [
-            [{"value":40}, // Democratic
+    data = [
+            {"percentages":
+	     [{"value":40}, // Democratic
              {"value":10}, // Other
              {"value":50}], //Republican
-            [{"value":60}, 
-             {"value":10}, 
+	     "total":16963417.30, // contributions in dollars
+	     "initials":"ME"}, // state initials
+            {"percentages":
+	     [{"value":60},
+             {"value":10},
              {"value":20}],
-            [{"value":45}, 
-             {"value":5}, 
-             {"value":50}]];
-    totals = [ 16963417.30, 247669267.56, 9308656.83]; // contrib in dollars
-    names = ["ME", "CA", "WY"]; // state initials
+	     "total":247669267.56,
+	     "initials":"CA"},
+            {"percentages":
+	     [{"value":45},
+             {"value":5},
+             {"value":50}],
+	     "total":9308656.83,
+	     "initials":"WY"}
+	    ];
     var state;    
-    for(state = 0; state < percentages.length; state++) {
-    	var r = 0.005 * Math.sqrt(totals[state]), 
+    for(state = 0; state < data.length; state++) {
+    	var r = 0.005 * Math.sqrt(data[state].total), 
     	w = 2*r,                  
     	h = 2*r;                  
     	var vis = d3.select("body")
         .append("svg:svg")              //create the SVG element inside the <body>
-        .data([percentages[state]])                   //associate our data with the document
+        .data([data[state].percentages])                   //associate our data with the document
             .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
             .attr("height", h)
         .append("svg:g")                //make a group to hold our pie chart
@@ -72,7 +80,7 @@
 
         vis.append("svg:text")                                     //add a label to each slice
             .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return names[state]; });        //get the label from our original data array
+            .text(function(d, i) { return data[state].initials; });        //get the label from our original data array
     }
     </script>
   </body>
