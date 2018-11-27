@@ -3,9 +3,9 @@ from pandas import DataFrame, read_csv, merge
 
 #Hardcoded Variables
 person = "O'CONNOR, DANIEL JAY"
-state = "WA"
+state = "WY"
 seat = "H"
-party = "DEM"
+party = "REP"
 
 df1 = pd.read_csv('candidate_summary_2018.csv')
 df1.head()
@@ -58,7 +58,9 @@ def state_by_office(state, office):
 def nationwide_total():
     df2 = df1[['Cand_Name', 'Cand_Office_St', 'Cand_Office', 'Total_Receipt', 'Cand_Party_Affiliation']]
     df2 = df2.sort_values(by='Total_Receipt', ascending=False)
-    print(df2.to_string(index=False))
+    #print(df2.to_string(index=False))
+    ret = df1['Total_Receipt'].sum()
+    return ret
 
 def nationwide_by_office(office):
     dfSeat = df1.loc[df1['Cand_Office'] == office]
@@ -72,13 +74,35 @@ def nationwide_by_party(party):
     dfNandR = dfNandR.sort_values(by='Total_Receipt', ascending=False)
     print(dfNandR.to_string(index=False))
 
+def state_over_national(state):
+    st = state_total(state)
+    return (100*(st/nationalAmount))
+
+def party_over_state(party, state):
+    pt = state_total_by_party(state, party)
+    st = state_total(state)
+    return (100*(pt/st))
+
+#ACTUAL STUFF
+nationalAmount = nationwide_total() #needed for proportions
+
+#EXAMPLE REQUESTS
+pOverS = party_over_state(party, state)
+print ("State: " + state)
+print ("Party: " + party)
+print (pOverS)
+
+#stateProportion = state_over_national(state)
+#print (stateProportion)
+
+
 #pRaised = candidate_total(person)
 #print (person + " raised: ")
 #print (pRaised)
 #sTotal = state_total(state)
 #officeInState = office_in_state_total(seat, state)
 #party_total(party)
-state_by_office(state, seat)
+#state_by_office(state, seat)
 #nationwide_total()
 #nationwide_by_office(seat)
 #nationwide_by_party(party)
