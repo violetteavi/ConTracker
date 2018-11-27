@@ -16,20 +16,20 @@
   <body>
     <script type="text/javascript">
 // Adapted from http://bl.ocks.org/enjalot/1203641          //radius
-    var color = ["dodgerblue", "darkgrey", "firebrick"];
+    var color = ["#98AFC7", "#B6B6B4", "lightcoral"];
 
     percentages = [
-            [{"label":"Democrat", "value":40}, 
-             {"label":"Other", "value":10}, 
-             {"label":"Republican", "value":50}],
-            [{"label":"Democrat", "value":60}, 
-             {"label":"Other", "value":10}, 
-             {"label":"Republican", "value":20}],
-            [{"label":"Democrat", "value":45}, 
-             {"label":"Other", "value":5}, 
-             {"label":"Republican", "value":50}]];
-    totals = [ 16963417.30, 247669267.56, 9308656.83];
-    name = ["ME", "CA", "WY"];
+            [{"value":40}, // Democratic
+             {"value":10}, // Other
+             {"value":50}], //Republican
+            [{"value":60}, 
+             {"value":10}, 
+             {"value":20}],
+            [{"value":45}, 
+             {"value":5}, 
+             {"value":50}]];
+    totals = [ 16963417.30, 247669267.56, 9308656.83]; // contrib in dollars
+    names = ["ME", "CA", "WY"]; // state initials
     var state;    
     for(state = 0; state < percentages.length; state++) {
     	var r = 0.005 * Math.sqrt(totals[state]), 
@@ -69,6 +69,10 @@
             .attr("text-anchor", "middle")                          //center the text on it's origin
             .text(function(d, i) { return ""; });        //get the label from our original data array
 		// was percentages[state][i].label
+
+        vis.append("svg:text")                                     //add a label to each slice
+            .attr("text-anchor", "middle")                          //center the text on it's origin
+            .text(function(d, i) { return names[state]; });        //get the label from our original data array
     }
     </script>
   </body>
