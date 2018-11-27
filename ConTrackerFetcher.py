@@ -102,40 +102,21 @@ def party_in_state_over_national_party(state, party):
     npt = nationwide_by_party(party)
     return (100*(pt/npt))
 
-#calTotal = state_total("CA")
-#print ("California")
-#print (calTotal)
-#maineTotal = state_total("ME")
-#print ("Maine")
-#print (maineTotal)
-#wyTotal = state_total("WY")
-#print ("Wyoming")
-#print (wyTotal)
+def getStateData(state):
+    #s = stateData()
+    #s.totalContributions = state_total(state);
+    #s.demPercent = party_over_state(state, "DEM")
+    #s.repPercent = party_over_state(state, "REP")
+    #s.otherPercent = 100 - (s.demPercent + s.repPercent)
+    statePercent = state_over_national(state)
+    tC = state_total(state)
+    demP = party_over_state(state, "DEM")
+    repP = party_over_state(state, "REP")
+    otherP = 100 - demP - repP
+    return (statePercent, tC, demP, repP, otherP)
 
-#EXAMPLE REQUESTS
-#pOverS = party_over_state(state, party)
-#print ("State: " + state)
-#print ("Party: " + party)
-#print (pOverS)
-
-#statePerf = party_in_state_over_national_party(state, party)
-#print (party + " Performance in " + state + " out of national party fundraising:")
-#print (statePerf)
-
-#stateProportion = state_over_national(state)
-#print (stateProportion)
-
-
-#pRaised = candidate_total(person)
-#print (person + " raised: ")
-#print (pRaised)
-#sTotal = state_total(state)
-#officeInState = office_in_state_total(state, seat)
-#party_total(party)
-#state_by_office(state, seat)
-#nationwide_total()
-#nationwide_by_office(seat)
-#nationwide_by_party(party)
-#stbp = state_total_by_party(state, party)
-#print (party + " Total in " + state + ": ")
-#print (stbp)
+#(s, con, dem, rep, other) = getStateData("CA")
+#print (con)
+#print (dem)
+#print (rep)
+#print (other)
