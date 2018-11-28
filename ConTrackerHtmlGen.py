@@ -38,7 +38,7 @@ def generatePieHtmlEnd():
     htmlEnd = """];
     var state;    
     for(state = 0; state < data.length; state++) {
-        var r = 0.005 * Math.sqrt(data[state].total), 
+        var r = 0.008 * Math.sqrt(data[state].total), 
         w = 2*r,                  
         h = 2*r;                  
         var vis = d3.select("body")
@@ -76,14 +76,11 @@ def generatePieHtmlEnd():
         // was percentages[state][i].label
 
         vis.append("svg:text")                             
-            .attr("text-anchor", "middle")                      
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate(" + 0 + "," + 6 + ")")                       
             .text(function(d, i) { return data[state].initials; });   
     }
     </script>
   </body>
 </html>"""
     return htmlEnd
-
-print(generatePieHtmlBegin())
-print(generatePieHtmlDataStr('CA', 9001, 75, 5, 20))
-print(generatePieHtmlEnd())

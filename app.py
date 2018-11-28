@@ -13,15 +13,13 @@ states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
 def writeHTMLforStates():
 
 	htmlContent = generatePieHtmlBegin();
-	for state in 'states':
-		
-
+	for state in states:	
 		(statePercentage,totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
 		
 		
 		htmlContent = htmlContent + generatePieHtmlDataStr(state,totalContState,DemPercent,OtherPercent,RepPercent)  
 		if(state != "WY"):
-			htmlContent = htmlContent + ","
+			htmlContent = htmlContent + ",\n"
 		
 		else:
 			htmlContent = htmlContent + generatePieHtmlEnd()
@@ -31,7 +29,7 @@ def writeHTMLforStates():
 	return htmlContent
 
 
-print(writeHTMLforStates)
+print(writeHTMLforStates())
 
 
 #app = Flask(__name__)
