@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 from ConTrackerFetcher import getStateData 
-
+from ConTrackerHtmlGen import generatePieHtmlBegin
+from ConTrackerHtmlGen import generatePieHtmlDataStr
+from ConTrackerHtmlGen import generatePieHtmlEnd
 
 states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
           "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
@@ -10,11 +12,28 @@ states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
 
 def writeHTMLforStates():
 
-	for state in 'states':
-		htmlContent = "";
-		(statePercentage,totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state);
+	htmlContent = generatePieHtmlBegin();
+	for state in states:	
+		(statePercentage,totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
+		
+		
+		htmlContent = htmlContent + generatePieHtmlDataStr(state,totalContState,DemPercent,OtherPercent,RepPercent)  
+		if(state != "WY"):
+			htmlContent = htmlContent + ",\n"
+		
+		else:
+			htmlContent = htmlContent + generatePieHtmlEnd()
 		
 
+
+	return htmlContent
+
+
+print(writeHTMLforStates())
+
+html_file = open("website.html", "w+")
+html_file.write("%s" % writeHTMLforStates())
+html_file.close()
 
 
 
@@ -22,8 +41,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-	return "Hello world"
-	#return render_template('index.html')
+	return writeHTMLforStates()
+	#return render_template('website.html')
 	#hmtl files need to be insie template 
 	#style.css files need to be in static
 
