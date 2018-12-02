@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>    
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Testing Pie Chart</title>
-    <script src='http://d3js.org/d3.v3.js'></script>
+<meta charset="utf-8">
+<style>
 
+body {
+  font: 10px sans-serif;
+}
 
-    <style type="text/css">
-        .slice text {
-            font-size: 12pt;
-            font-family: Arial;
-        }   
-    </style>
-  </head>
-  <body>
-    <script type="text/javascript">
-// Adapted from http://bl.ocks.org/enjalot/1203641     
-    var color = ["#98AFC7", "#B6B6B4", "#FB8885"];
+.bar rect {
+  shape-rendering: crispEdges;
+}
 
-    data = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
+.bar text {
+  fill: #999999;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+stateData = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
 {"percentages": [{"value":7.62092272691},{"value":54.0299072381},{"value":38.349170035}],"total":2738951.01,"initials":"AK"},
 {"percentages": [{"value":53.5404001662},{"value":1.12370169042},{"value":45.3358981433}],"total":69546864.32,"initials":"AZ"},
 {"percentages": [{"value":30.077329908},{"value":0.012180654035},{"value":69.910489438}],"total":9205499.12,"initials":"AR"},
@@ -69,51 +75,118 @@
 {"percentages": [{"value":43.780063275},{"value":14.1436017636},{"value":42.0763349615}],"total":29465196.77,"initials":"WV"},
 {"percentages": [{"value":67.3623698422},{"value":0.00746587330634},{"value":32.6301642845}],"total":64640796.89,"initials":"WI"},
 {"percentages": [{"value":9.52099101069},{"value":0.00322280652816},{"value":90.4757861828}],"total":9308656.83,"initials":"WY"}];
-    var state;    
-    for(state = 0; state < data.length; state++) {
-        var r = 0.008 * Math.sqrt(data[state].total), 
-        w = 2*r,                  
-        h = 2*r;                  
-        var vis = d3.select("body")
-        .append("svg:svg")              
-        .data([data[state].percentages])               
-            .attr("width", w)          
-            .attr("height", h)
-        .append("svg:g")             
-            .attr("transform", "translate(" + r + "," + r + ")") 
+var color = "steelblue";
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
+// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var values = stateData.map(function(d) { return d.total; });
+//d3.values(stateData, function(d) {return stateData.total})
+//d3.range(1000).map(d3.random.normal(20, 5));
 
-        var arc = d3.svg.arc()            
-        .outerRadius(r);
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
 
-        var pie = d3.layout.pie()       
-        .value(function(d) { return d.value; }).sort(null);    
-        var arcs = vis.selectAll("g.slice")    
-        .data(pie)                         
-        .enter()                            
-            .append("svg:g")                
-                .attr("class", "slice");    
+var margin = {top: 20, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
-        arcs.append("svg:path")
-                .attr("fill", function(d, i) { return color[i]; } ) 
-                .attr("d", arc);                             
+var max = d3.max(values);
+var min = d3.min(values);
+var x = d3.scale.linear()
+      .domain([min, max])
+      .range([0, width]);
 
-        arcs.append("svg:text")                                 
-                .attr("transform", function(d) {               
-                //we have to make sure to set these before calling arc.centroid
-                d.innerRadius = 0;
-                d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";     
-            })
-            .attr("text-anchor", "middle")                     
-            .text(function(d, i) { return ""; });   
-        // was percentages[state][i].label
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
 
-        vis.append("svg:text")                             
-            .attr("text-anchor", "middle")
-            .attr("transform", "translate(" + 0 + "," + 6 + ")")                       
-            .text(function(d, i) { return data[state].initials; });   
-    }
-    </script>
-  </body>
-</html>
+var yMax = d3.max(data, function(d){return d.length});
+var yMin = d3.min(data, function(d){return d.length});
+var colorScale = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
 
+var y = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("height", function(d) { return height - y(d.y); })
+    .attr("fill", function(d) { return colorScale(d.y) });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -12)
+    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+/*
+* Adding refresh method to reload new data
+*/
+function refresh(values){
+  // var values = d3.range(1000).map(d3.random.normal(20, 5));
+  var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+  // Reset y domain using new data
+  var yMax = d3.max(data, function(d){return d.length});
+  var yMin = d3.min(data, function(d){return d.length});
+  y.domain([0, yMax]);
+  var colorScale = d3.scale.linear()
+              .domain([yMin, yMax])
+              .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+  var bar = svg.selectAll(".bar").data(data);
+
+  // Remove object with data
+  bar.exit().remove();
+
+  bar.transition()
+    .duration(1000)
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+  bar.select("rect")
+      .transition()
+      .duration(1000)
+      .attr("height", function(d) { return height - y(d.y); })
+      .attr("fill", function(d) { return colorScale(d.y) });
+
+  bar.select("text")
+      .transition()
+      .duration(1000)
+      .text(function(d) { return formatCount(d.y); });
+
+}
+
+// Calling refresh repeatedly.
+setInterval(function() {
+  //var values = randomData
+  //refresh(values);
+}, 2000);
+
+</script>

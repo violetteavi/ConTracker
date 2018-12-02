@@ -37,14 +37,15 @@ html_file.close()
 
 
 
-app = Flask(__name__)
+#app = Flask(__name__)
 
 @app.route("/")
 def main():
-	return writeHTMLforStates()
-	#return render_template('website.html')
-	#hmtl files need to be insie template 
-	#style.css files need to be in static
+    print(writeHTMLForStates())
+    return writeHTMLforStates()
+    #return render_template('website.html')
+    #hmtl files need to be insie template 
+    #style.css files need to be in static
 
-if __name__ == "__main__":
-	app.run(debug=True,host="0.0.0.0",port=80)
+#if __name__ == "__main__":
+	#app.run(debug=True,host="0.0.0.0",port=80)
