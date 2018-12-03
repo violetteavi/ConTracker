@@ -28,23 +28,33 @@ def writeHTMLforStates():
 
 	return htmlContent
 
-
+"""
 print(writeHTMLforStates())
 
 html_file = open("website.html", "w+")
 html_file.write("%s" % writeHTMLforStates())
 html_file.close()
+"""
+Error404 = "<h1> You encountered a 404 error. Here is a patriotic puppy, do you see that? </h1><br><img src=\"/static/PatrioticPuppy.jpg\"> "
 
+application = Flask(__name__)
 
-
-app = Flask(__name__)
-
-@app.route("/")
+@application.route("/")
 def main():
 	return writeHTMLforStates()
-	#return render_template('website.html')
+
+@application.errorhandler(404)
+def error404(error):
+	return Error404,404
+
+@application.route("/HelloWorld")
+def test():
+	return "Hello World!"
+	
+	#return "Hello World"
 	#hmtl files need to be insie template 
 	#style.css files need to be in static
 
 if __name__ == "__main__":
-	app.run(debug=True,host="0.0.0.0",port=80)
+	application.debug = True
+	application.run()

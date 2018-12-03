@@ -1,38 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>    
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Testing Pie Chart</title>
-    <script src='https://d3js.org/d3.v3.js'></script>
+<meta charset="utf-8">
+<style>
 
+body {
+  font: 10px sans-serif;
+}
 
-    <style type="text/css">
-        .slice text {
-            font-size: 12pt;
-            font-family: Arial;
-        }   
-    </style>
-  </head>
-  <body>
-    <script type="text/javascript">
-    </script>
-    <div id="pieCharts" width=100vw height=100vh style="display:block">
-    </div>
-    <script type="text/javascript">
-    // Adapted from http://bl.ocks.org/enjalot/1203641     
-var color = ["#98AFC7", "#B6B6B4", "#FB8885"],
-ascending = -1,
-sortMode = 1,
-pieChartObjs = [],
-pieDataObjs = [],
-data = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
+.bar rect {
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #999999;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+stateData = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
 {"percentages": [{"value":7.62092272691},{"value":54.0299072381},{"value":38.349170035}],"total":2738951.01,"initials":"AK"},
 {"percentages": [{"value":53.5404001662},{"value":1.12370169042},{"value":45.3358981433}],"total":69546864.32,"initials":"AZ"},
 {"percentages": [{"value":30.077329908},{"value":0.012180654035},{"value":69.910489438}],"total":9205499.12,"initials":"AR"},
 {"percentages": [{"value":74.7100775453},{"value":0.693065924937},{"value":24.5968565297}],"total":247669267.56,"initials":"CA"},
 {"percentages": [{"value":65.6110152562},{"value":0.66442164402},{"value":33.7245630997}],"total":22154725.29,"initials":"CO"},
 {"percentages": [{"value":93.4852001608},{"value":3.5527136788e-15},{"value":6.51479983922}],"total":21643057.42,"initials":"CT"},
-//{"percentages": [{"value":98.3985729733},{"value":-1.7763568394e-15},{"value":1.6014270267}],"total":537957.7,"initials":"DC"},
+{"percentages": [{"value":98.3985729733},{"value":-1.7763568394e-15},{"value":1.6014270267}],"total":537957.7,"initials":"DC"},
 {"percentages": [{"value":83.6636343978},{"value":1.06581410364e-14},{"value":16.3363656022}],"total":5306939.2,"initials":"DE"},
 {"percentages": [{"value":41.0955611873},{"value":0.78206800592},{"value":58.1223708067}],"total":181200896.76,"initials":"FL"},
 {"percentages": [{"value":64.859008481},{"value":0.0557061077614},{"value":35.0852854112}],"total":72068345.13,"initials":"GA"},
@@ -76,148 +75,118 @@ data = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value
 {"percentages": [{"value":43.780063275},{"value":14.1436017636},{"value":42.0763349615}],"total":29465196.77,"initials":"WV"},
 {"percentages": [{"value":67.3623698422},{"value":0.00746587330634},{"value":32.6301642845}],"total":64640796.89,"initials":"WI"},
 {"percentages": [{"value":9.52099101069},{"value":0.00322280652816},{"value":90.4757861828}],"total":9308656.83,"initials":"WY"}];
+var color = "steelblue";
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
+// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var values = stateData.map(function(d) { return d.total; });
+//d3.values(stateData, function(d) {return stateData.total})
+//d3.range(1000).map(d3.random.normal(20, 5));
 
-drawPieDisplay();
-function drawPieDisplay() {
-    if(sortMode == 0) sortByInitials(data, ascending);
-    if(sortMode == 1) sortByDominance(data, ascending);
-    if(sortMode == 2) sortByTotals(data, ascending);
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
 
-    // display the pie charts
-    var state;   
-    /*
-    for(state = 0; state < data.length; state++) {
-        var vis = d3.select("#pieCharts")
-        .append("svg:svg")              
-        .data([])               
-        .append("svg:g")
+var margin = {top: 20, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
-        var arc = d3.svg.arc()            
-        .outerRadius(0);
-  	var pie = d3.layout.pie()
-        var arcs = vis.selectAll("g.slice")    
-        .data(pie)                         
-        .enter()                            
-            .append("svg:g")                
-                .attr("class", "slice");
-        vis.append("svg:text")                             
-            .attr("text-anchor", "middle")
-            .attr("font-family", "Times")
-            .text(""); 
+var max = d3.max(values);
+var min = d3.min(values);
+var x = d3.scale.linear()
+      .domain([min, max])
+      .range([0, width]);
 
-    }
-    */
-    for(state = 0; state < data.length; state++) {
-        var r = 0.006 * Math.sqrt(data[state].total), 
-        w = 2*r,                  
-        h = 2*r;
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
 
-        var vis = d3.select("#pieCharts")
-        .append("svg:svg")              
-        .data([data[state].percentages])               
-            .attr("width", w)          
-            .attr("height", h)
-        .append("svg:g")             
-            .attr("transform", "translate(" + r + "," + r + ")") 
+var yMax = d3.max(data, function(d){return d.length});
+var yMin = d3.min(data, function(d){return d.length});
+var colorScale = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
 
-        var arc = d3.svg.arc()            
-        .outerRadius(r);
+var y = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
 
-        var pie = d3.layout.pie()       
-        .value(function(d) { return d.value; }).sort(null);  
-  
-        var arcs = vis.selectAll("g.slice")    
-        .data(pie)                         
-        .enter()                            
-            .append("svg:g")                
-                .attr("class", "slice");
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
 
-        arcs.append("svg:path")
-                .attr("fill", function(d, i) { return color[i]; } ) 
-                .attr("d", arc);       
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        vis.append("svg:text")                             
-            .attr("text-anchor", "middle")
-            .attr("transform", "translate(" + 0 + "," + 0.35*r + ")")
-            .attr("font-family", "Times")
-            .attr("font-size", function(d,i) { 
-                return 2*(Math.floor(0.4*r))+"pt";
-            })
-            .text(function(d, i) { return data[state].initials; });   
-       
-       pieDataObjs.push(pie);
-       pieChartObjs.push(vis);
-    }
-}
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("height", function(d) { return height - y(d.y); })
+    .attr("fill", function(d) { return colorScale(d.y) });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -12)
+    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
 /*
-function updatePieDisplays(data) {
-    var state;
-    for(state = 0; state < data.length; state++) {
-        var r = 0.006 * Math.sqrt(data[state].total), 
-        w = 2*r,                  
-        h = 2*r;
-
-        var vis = pieChartObjs[state]              
-        .data([data[state].percentages])               
-            .attr("width", w)          
-            .attr("height", h)
-        .selectAll("g")           
-            .attr("transform", "translate(" + r + "," + r + ")") 
-  
-        var arcs = vis.selectAll("g.slice")    
-        .data(pieDataObjs[state])
-
-        vis.selectAll("text")
-            .attr("transform", "translate(" + 0 + "," + 0.35*r + ")")
-            .attr("font-size", function(d,i) { 
-                return 2*(Math.floor(0.4*r))+"pt";
-            })
-            .text(function(d, i) { return data[state].initials; });  
-    }
-}
+* Adding refresh method to reload new data
 */
+function refresh(values){
+  // var values = d3.range(1000).map(d3.random.normal(20, 5));
+  var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
 
-function sortByDominance(data, ascending) {
-    // sort the data by rep, dem
-    data.sort(function(a,b) { 
-         var aDemDominance = a.percentages[0].value - a.percentages[2].value;
-         var bDemDominance = b.percentages[0].value - b.percentages[2].value;
-         return ascending*(aDemDominance - bDemDominance);
-    });
+  // Reset y domain using new data
+  var yMax = d3.max(data, function(d){return d.length});
+  var yMin = d3.min(data, function(d){return d.length});
+  y.domain([0, yMax]);
+  var colorScale = d3.scale.linear()
+              .domain([yMin, yMax])
+              .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+  var bar = svg.selectAll(".bar").data(data);
+
+  // Remove object with data
+  bar.exit().remove();
+
+  bar.transition()
+    .duration(1000)
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+  bar.select("rect")
+      .transition()
+      .duration(1000)
+      .attr("height", function(d) { return height - y(d.y); })
+      .attr("fill", function(d) { return colorScale(d.y) });
+
+  bar.select("text")
+      .transition()
+      .duration(1000)
+      .text(function(d) { return formatCount(d.y); });
+
 }
 
-function sortByInitials(data, ascending) {
-    data.sort(function(a,b) { 
-    // from https://stackoverflow.com/questions/51165/how-to-sort-strings-in-javascript
-    if (a.initials < b.initials)
-        return -1 * ascending;
-    if ( a.initials > b.initials)
-        return 1 * ascending;
-    return 0 * ascending;
-    });
-}
-
-function sortByTotals(data, ascending) {
-    data.sort(function(a,b) { return ascending * (a.total - b.total); });
-}
-
-//var pieCharts = document.getElementById("pieCharts");
-//pieCharts.style.display = 'none';
+// Calling refresh repeatedly.
 setInterval(function() {
-/*
-    var pieCharts = document.getElementById("pieCharts");
-    if(pieCharts.style.display === "none")
-    {
-        pieCharts.style.display = "block";
-    } else {
-        pieCharts.style.display = "none";
-    }
-*/
-    ascending *= -1;
-    sortByTotals(data, ascending);
-    //updatePieDisplays(data);
+  //var values = randomData
+  //refresh(values);
 }, 2000);
-    </script>
-  </body>
-</html>
 
+</script>
