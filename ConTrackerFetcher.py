@@ -13,7 +13,7 @@ state = "CA"
 seat = "H"
 party = "DEM"
 
-df1 = pd.read_csv('candidate_summary_2018.csv')
+df1 = pd.read_csv('database/candidates/candidate_summary_2018.csv')
 df1.head()
 
 df1 = df1[df1['Total_Receipt'] > 0]
@@ -27,6 +27,7 @@ def state_total(state):
     #dfState = dfState[['Cand_Name', 'Total_Receipt', 'Cand_Party_Affiliation']]
     #print(dfState.to_string(index=False))
     stateTotal = dfState['Total_Receipt'].sum()
+    #print(stateTotal)
     return stateTotal
 
 def party_total(party):
@@ -117,9 +118,11 @@ def getStateData(state):
     otherP = 100 - demP - repP
     return (statePercent, tC, demP, repP, otherP)
 
-state_total("DC")
-#(s, con, dem, rep, other) = getStateData("CA")
-#print (con)
-#print (dem)
-#print (rep)
-#print (other)
+#state_total("TX")
+#nt = nationwide_total()
+#print(nt)
+(s, con, dem, rep, other) = getStateData("TX")
+print (con)
+print (dem)
+print (rep)
+print (other)

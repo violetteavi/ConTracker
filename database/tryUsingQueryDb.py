@@ -1,3 +1,10 @@
-from queryDatabase import getTopInState, getNR
-getNR()
+from queryDatabase import getTopInState, getNR, state_total, nationwide_total, getStateData
+#getNR()
 #getTopInState('TX')
+#state_total('TX')
+#nationwide_total()
+(total, demP, repP, otherP) = getStateData("TX")
+print(total)
+print(demP)
+print(repP)
+print(otherP)
