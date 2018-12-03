@@ -24,6 +24,8 @@ def candidate_total(name):
 
 def state_total(state):
     dfState = df1.loc[df1['Cand_Office_St'] == state]
+    #dfState = dfState[['Cand_Name', 'Total_Receipt', 'Cand_Party_Affiliation']]
+    #print(dfState.to_string(index=False))
     stateTotal = dfState['Total_Receipt'].sum()
     return stateTotal
 
@@ -115,6 +117,7 @@ def getStateData(state):
     otherP = 100 - demP - repP
     return (statePercent, tC, demP, repP, otherP)
 
+state_total("DC")
 #(s, con, dem, rep, other) = getStateData("CA")
 #print (con)
 #print (dem)
