@@ -1,73 +1,35 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
+<html>
+  <head>    
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>ConTracker v1.1</title>
+    <script src='https://d3js.org/d3.v3.js'></script>
 
-.link {
-  stroke: #000;
-  stroke-width: 1.5px;
-}
 
-.node {
-  cursor: move;
-  fill: #ccc;
-  stroke: #000;
-  stroke-width: 1.5px;
-}
-
-.node.fixed {
-  fill: #f00;
-}
-
-</style>
-<body>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script>
-
-var width = 960,
-    height = 500,
-	maxRadius = 30,
-	minRadius = 5,
-	padding = 1.5;
-/*
-var nodes = [
-    {"x": 469, "y": 410},
-    {"x": 493, "y": 364},
-    {"x": 442, "y": 365},
-    {"x": 467, "y": 314},
-    {"x": 477, "y": 248},
-    {"x": 425, "y": 207},
-    {"x": 402, "y": 155, "fixed":true},
-    {"x": 369, "y": 196, "fixed":true},
-    {"x": 350, "y": 148, "fixed":true},
-    {"x": 539, "y": 222, "fixed":true},
-    {"x": 594, "y": 235, "fixed":true},
-    {"x": 582, "y": 185, "fixed":true}
-  ];
-var links = [
-    {"source":  0, "target":  6},
-    {"source":  1, "target":  7},
-    {"source":  2, "target":  8},
-    {"source":  3, "target":  9},
-    {"source":  4, "target":  10},
-    {"source":  5, "target":  11}
-  ];
- *///
-/*
- var numNodes = 50;
- var nodes = [];
- var links = [];
- var genIndex;
- for(genIndex = 0; genIndex < numNodes; genIndex++) {
-    var sizeScale = Math.random();
-    var radius = (minRadius + sizeScale*(maxRadius-minRadius));
-	var xStart = (1+3*sizeScale)*width*0.2;
-	var yStart = (-0.015+.03*Math.random() + 0.5)*height;
-	nodes.push({"x":xStart, "y":yStart, "radius":radius, "fixed":true, "anchor":true});
-	nodes.push({"x":xStart, "y":yStart, "radius":radius});
-	links.push({"source":  2*genIndex, "target":  2*genIndex+1});
- }
-//*/
-nodes = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+    </script>
+    <button onclick="switchSortMode(0)">Party</button>
+    <button onclick="switchSortMode(1)">Total</button>
+    <button onclick="switchSortMode(2)">Initials</button>
+    <br>
+    <br>
+    <br>
+    <div id="pieCharts" width=100vw height=100vh style="display:block"></div>
+    
+    <script type="text/javascript">
+    // Adapted from http://bl.ocks.org/enjalot/1203641     
+var color = ["#98AFC7", "#B6B6B4", "#FB8885"],
+width = 960,
+height = 500,
+maxRadius = 100,
+padding = 1.5;
+currentSortMode = 0,
+currentAscending = 1,
+data = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
 {"percentages": [{"value":7.62092272691},{"value":54.0299072381},{"value":38.349170035}],"total":2738951.01,"initials":"AK"},
 {"percentages": [{"value":53.5404001662},{"value":1.12370169042},{"value":45.3358981433}],"total":69546864.32,"initials":"AZ"},
 {"percentages": [{"value":30.077329908},{"value":0.012180654035},{"value":69.910489438}],"total":9205499.12,"initials":"AR"},
@@ -118,27 +80,52 @@ nodes = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"valu
 {"percentages": [{"value":43.780063275},{"value":14.1436017636},{"value":42.0763349615}],"total":29465196.77,"initials":"WV"},
 {"percentages": [{"value":67.3623698422},{"value":0.00746587330634},{"value":32.6301642845}],"total":64640796.89,"initials":"WI"},
 {"percentages": [{"value":9.52099101069},{"value":0.00322280652816},{"value":90.4757861828}],"total":9308656.83,"initials":"WY"}];
+String.prototype.format = function () {
+        var args = [].slice.call(arguments);
+        return this.replace(/(\{\d+\})/g, function (a){
+            return args[+(a.substr(1,a.length-2))||0];
+        });
+};
 // display the pie charts
 var links = [];
-var numStates = nodes.length;
+var numStates = data.length;
 var state;
 for(state = 0; state < numStates; state++) {
-    var radius = 0.006 * Math.sqrt(nodes[state].total), 
+    var radius = 0.004 * Math.sqrt(data[state].total), 
     //alert(radius);
-    xStart = (1+3*radius/maxRadius)*width*0.2,
-    yStart = (-0.015+.03*Math.random() + 0.5)*height
-    nodes[state].x = xStart;
-    nodes[state].y = yStart;
-    nodes[state].radius = radius;
-    nodes[state].percentages[0].radius = radius;
-    nodes[state].percentages[1].radius = radius;
-    nodes[state].percentages[2].radius = radius;
-    var anchor = JSON.parse(JSON.stringify(nodes[state]));
+    xStart = (radius/maxRadius);
+    if(currentSortMode == 0) 
+	xStart = (data[state].percentages[0].value - data[state].percentages[2].value) / 100;
+    if(currentSortMode == 2) {
+        firstInitialInt = data[state].initials.charAt(0) - 'A';
+        secondInitialInt = data[state].initials.charAt(1) - 'A';
+        xStart = (firstInitialInt * 26 + secondInitialInt) / 26 / 26;
+    }
+	
+    if(currentAscending == -1) xStart = (1 - xStart);
+    xStart = xStart * width
+    var yStart = (-0.015+.03*Math.random() + 0.5)*height;
+    data[state].x = xStart;
+    data[state].y = yStart;
+    data[state].radius = radius;
+    data[state].percentages[0].radius = radius;
+    data[state].percentages[1].radius = radius;
+    data[state].percentages[2].radius = radius;
+    var anchor = JSON.parse(JSON.stringify(data[state]));
         anchor.fixed = true;
         anchor.anchor = true;
-    nodes.push(anchor);
+        anchor.percentages[0].anchor = true;
+        anchor.percentages[1].anchor = true;
+        anchor.percentages[2].anchor = true;
+    data.push(anchor);
     links.push({"source":  state, "target":  numStates + state});
+
 }
+//alert(JSON.stringify(links))
+//alert(JSON.stringify(data[5]))
+//alert(JSON.stringify(data[55]))
+//alert(JSON.stringify(data))
+// mashup from forcelayout.html
 var force = d3.layout.force()
     .size([width, height])
     .charge(0)
@@ -150,7 +137,7 @@ var force = d3.layout.force()
 var drag = force.drag()
     .on("dragstart", dragstart);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#pieCharts").append("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -158,16 +145,29 @@ var link = svg.selectAll(".link"),
     node = svg.selectAll(".node");
 
 force
-    .nodes(nodes)
+    .nodes(data)
     .links(links)
     .start();
 
-link = link.data(links)
-  //.enter().append("line")
-    //.attr("class", "link");
 
-node = node.data(nodes)
-  .enter().append("circle")
+link = link.data(links)
+nodeOnEnter = node.data(data)
+     .enter()
+
+node = nodeOnEnter
+     .append("svg:g")
+     .attr("width", function(d) { return 2*d.radius; })  
+     .attr("height", function(d) { return 2*d.radius; })
+     .attr("class", "node")
+     .attr("r", function(node){
+ 	if(node.fixed === true) return 0;
+         return node.radius;
+ 	})
+     .on("dblclick", dblclick)
+     .call(drag)  
+/*
+circles = nodeOnEnter
+    .append("circle")
     .attr("class", "node")
     .attr("r", function(node){
 		if(node.fixed === true) return 0;
@@ -175,16 +175,119 @@ node = node.data(nodes)
 	})
     .on("dblclick", dblclick)
     .call(drag);
+*/
+//alert(JSON.stringify(node.data()))
+var arcContainers = node
+  .append("svg:g")              
+    .data(data.map(function(d) { return d.percentages; }) )
+    .attr("transform", function(d) { 
+        //alert(d);
+        return "translate({0},{0})".format(d[0].radius); 
+    });     
 
+//alert(JSON.stringify(arcContainers.data()))
+var arc = d3.svg.arc()
+   .innerRadius(0)            
+   .outerRadius(function(d) {  
+       if(d.data.anchor) return 0;
+       return d.data.radius; } );
+
+var pie = d3.layout.pie()       
+   .value(function(d) { return d.value; }).sort(null);  
+  
+var arcs = arcContainers.selectAll("g.slice")    
+   .data(pie)                         
+   .enter()                            
+   .append("svg:g")                
+       .attr("class", "slice");
+
+arcs.append("svg:path")
+   .attr("fill", function(d, i) { return color[i]; } ) 
+   .attr("d", arc);       
+
+//alert(JSON.stringify(arcContainers.data()))
+   arcContainers.append("svg:text")
+       .data(data)                             
+       .attr("text-anchor", "middle")
+       .attr("transform", function(d){ 
+            return "translate(0," + 0.35*d.radius + ")";
+       })
+       .attr("font-family", "Times")
+       .attr("font-size", function(d) { 
+           return 2*(Math.floor(0.4*d.radius ))+"pt";
+       })
+       .text(function(d) { 
+           if(d.fixed) return "";
+           return d.initials; })
+       .attr("style.display", function(d) {
+           if(d.anchor) return "none";
+           return "block";
+       })
+
+
+function sortByDominance(data, ascending) {
+    // sort the data by rep, dem
+    data.sort(function(a,b) { 
+         var aDemDominance = a.percentages[0].value - a.percentages[2].value;
+         var bDemDominance = b.percentages[0].value - b.percentages[2].value;
+         return ascending*(aDemDominance - bDemDominance);
+    });
+}
+
+function sortByInitials(data, ascending) {
+    data.sort(function(a,b) { 
+    // from https://stackoverflow.com/questions/51165/how-to-sort-strings-in-javascript
+    if (a.initials < b.initials)
+        return -1 * ascending;
+    if ( a.initials > b.initials)
+        return 1 * ascending;
+    return 0 * ascending;
+    });
+}
+
+function sortByTotals(data, ascending) {
+    data.sort(function(a,b) { return ascending * (a.total - b.total); });
+}
+
+
+function switchSortMode(newSortMode){
+    if(newSortMode != currentSortMode) setCurrentSorting(newSortMode, 1);
+    else toggleAscending();
+}
+
+function toggleAscending() {
+    setCurrentSorting(currentSortMode, currentAscending * -1);
+}
+
+function setCurrentSorting(newSortMode, newAscending) {
+    hideCurrent();
+    currentSortMode = newSortMode;
+    currentAscending = newAscending;
+    showCurrent();
+}
+
+function hideCurrent() {
+    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
+    pieCharts.style.display = "none";
+}
+
+function showCurrent() {
+    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
+    pieCharts.style.display = "block";
+}
+
+
+function getTranslateByRadius(d) { 
+    return "translate({0},{0})".format(d.radius); 
+}
 function tick() {
-  link.attr("x1", function(d) { return d.source.x; })
+    link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
 
-  node.each(collide(0.5));
-  node.attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; });
+    node.each(collide(0.5));
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 }
 
 function dblclick(d) {
@@ -194,57 +297,11 @@ function dblclick(d) {
 function dragstart(d) {
   //d3.select(this).classed("selected", d.selected = true);
 }
-
-// from user Cool Blue at: https://stackoverflow.com/questions/32988306/how-to-simulate-mouse-move-in-d3-so-when-you-drag-nodes-other-nodes-move-automa/32998608#32998608
-function positionnodes(){
-        var ns = "CB:emit/drag/transition/or-whatever-you-feel-like",
-            shadowNodes = d3.select("body").selectAll("emitDrag")
-                .data(nodes.filter(function(d){return d.fixed})),
-            shadowedData = [];
-        shadowNodes.enter().append(function(){return document.createElementNS(ns, "emitDrag")});
-
-        shadowNodes.each(function(d, i){
-            var n = d3.select(this);
-            shadowedData[i] = d;
-            dragstart.call(node.filter(function(s){return s === d;}).node(), d);
-
-            d.fixed = true;
-            n.attr({cx: d.x, cy: d.y});
-
-            Object.defineProperties(d, {
-                px: {
-                    get: function() {return +n.attr("cx")},
-                    configurable: true
-                },
-                py: {
-                    get: function() {return +n.attr("cy")},
-                    configurable: true
-                }
-            });
-        });
-
-        force.start();
-
-        d3.range(1).reduce(function(o, s){
-            return o.transition().duration(750).ease("cubic")
-                    .attr({
-                        cx: function(){return (1+3*Math.random())*width*0.2},
-                        cy: function(){return (-0.015+.03*Math.random() + 0.5)*height}
-                    })
-        },shadowNodes)
-            .each("end", function(d, i){
-                var n = d3.select(this);
-                Object.defineProperties(shadowedData[i], {
-                    px: {value: +n.attr("cx"), writable: true},
-                    py: {value: +n.attr("cy"), writable: true}
-                });
-            });
- }
  
  // Resolves collisions between d and all other circles.
  // adapted from https://bl.ocks.org/mbostock/1748247
 function collide(alpha) {
-  var quadtree = d3.geom.quadtree(nodes.filter(function(d){return !d.fixed}));
+  var quadtree = d3.geom.quadtree(data.filter(function(d){return !d.fixed}));
   return function(d) {
     if(d.anchor) return true;
     var r = d.radius + maxRadius + padding,
@@ -272,8 +329,7 @@ function collide(alpha) {
 }
 
 
-setInterval(function() {
-    positionnodes();
-}, 50000);
+    </script>
+  </body>
+</html>
 
-</script>
