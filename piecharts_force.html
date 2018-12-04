@@ -7,10 +7,6 @@
 
 
     <style type="text/css">
-        .slice text {
-            font-size: 12pt;
-            font-family: Arial;
-        }   
     </style>
   </head>
   <body>
@@ -34,7 +30,7 @@
 var color = ["#98AFC7", "#B6B6B4", "#FB8885"],
 width = 960,
 height = 500,
-maxRadius = 200,
+maxRadius = 100,
 padding = 1.5;
 currentSortMode = 0,
 currentAscending = 1,
@@ -89,21 +85,33 @@ data = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value
 {"percentages": [{"value":43.780063275},{"value":14.1436017636},{"value":42.0763349615}],"total":29465196.77,"initials":"WV"},
 {"percentages": [{"value":67.3623698422},{"value":0.00746587330634},{"value":32.6301642845}],"total":64640796.89,"initials":"WI"},
 {"percentages": [{"value":9.52099101069},{"value":0.00322280652816},{"value":90.4757861828}],"total":9308656.83,"initials":"WY"}];
-
+String.prototype.format = function () {
+        var args = [].slice.call(arguments);
+        return this.replace(/(\{\d+\})/g, function (a){
+            return args[+(a.substr(1,a.length-2))||0];
+        });
+};
 // display the pie charts
 var links = [];
 var numStates = data.length;
 var state;
 for(state = 0; state < numStates; state++) {
-    var radius = 0.006 * Math.sqrt(data[state].total), 
-    xStart = (1+3*radius)*width*0.2,
-    yStart = (-0.015+.03*Math.random() + 0.5)*height;
+    var radius = 0.004 * Math.sqrt(data[state].total), 
+    //alert(radius);
+    xStart = (radius/maxRadius)*width,
+    yStart = (-0.015+.03*Math.random() + 0.5)*height
     data[state].x = xStart;
     data[state].y = yStart;
     data[state].radius = radius;
+    data[state].percentages[0].radius = radius;
+    data[state].percentages[1].radius = radius;
+    data[state].percentages[2].radius = radius;
     var anchor = JSON.parse(JSON.stringify(data[state]));
         anchor.fixed = true;
         anchor.anchor = true;
+        anchor.percentages[0].anchor = true;
+        anchor.percentages[1].anchor = true;
+        anchor.percentages[2].anchor = true;
     data.push(anchor);
     links.push({"source":  state, "target":  numStates + state});
 }
@@ -141,56 +149,74 @@ nodeOnEnter = node.data(data)
      .enter()
 
 node = nodeOnEnter
-     .append("svg:svg")
+     .append("svg:g")
      .attr("width", function(d) { return 2*d.radius; })  
      .attr("height", function(d) { return 2*d.radius; })
      .attr("class", "node")
-     .on("dblclick", dblclick)
-     .call(drag)  
      .attr("r", function(node){
  	if(node.fixed === true) return 0;
          return node.radius;
- 	});
+ 	})
+     .on("dblclick", dblclick)
+     .call(drag)  
+/*
+circles = nodeOnEnter
+    .append("circle")
+    .attr("class", "node")
+    .attr("r", function(node){
+		if(node.fixed === true) return 0;
+        return node.radius;
+	})
+    .on("dblclick", dblclick)
+    .call(drag);
+*/
 //alert(JSON.stringify(node.data()))
-var radii = data.map(function(d) { return d.radius; })
-var arcContainers = nodeOnEnter
+var arcContainers = node
   .append("svg:g")              
     .data(data.map(function(d) { return d.percentages; }) )
-    .attr("radius", function(d,i) {return data[i].radius;}))     
-    .attr("transform", "translate(" + radii + "," + radii + ")");     
+    .attr("transform", function(d) { 
+        //alert(d);
+        return "translate({0},{0})".format(d[0].radius); 
+    });     
 
 //alert(JSON.stringify(arcContainers.data()))
-var arc = d3.svg.arc()            
-   .outerRadius(radii);
+var arc = d3.svg.arc()
+   .innerRadius(0)            
+   .outerRadius(function(d) {  
+       if(d.data.anchor) return 0;
+       return d.data.radius; } );
 
 var pie = d3.layout.pie()       
    .value(function(d) { return d.value; }).sort(null);  
   
 var arcs = arcContainers.selectAll("g.slice")    
-//alert(JSON.stringify(arcs))
-arcs.data(pie)                         
+   .data(pie)                         
    .enter()                            
    .append("svg:g")                
        .attr("class", "slice");
 
-   arcs.append("svg:path")
-       .attr("fill", function(d, i) { return color[i]; } ) 
-       .attr("d", arc);       
+arcs.append("svg:path")
+   .attr("fill", function(d, i) { return color[i]; } ) 
+   .attr("d", arc);       
 
-alert(JSON.stringify(arcContainers.data()))
-   arcContainers.append("svg:text")                             
+//alert(JSON.stringify(arcContainers.data()))
+   arcContainers.append("svg:text")
+       .data(data)                             
        .attr("text-anchor", "middle")
-       .attr("transform", "translate(" + 0 + "," + 0.35*this.attr("radius") + ")")
+       .attr("transform", function(d){ 
+            return "translate(0," + 0.35*d.radius + ")";
+       })
        .attr("font-family", "Times")
        .attr("font-size", function(d) { 
-           return 2*(Math.floor(0.4*this.attr("radius")))+"pt";
+           return 2*(Math.floor(0.4*d.radius ))+"pt";
        })
-       .text(function(d) { return d.initials; })
+       .text(function(d) { 
+           if(d.fixed) return "";
+           return d.initials; })
        .attr("style.display", function(d) {
            if(d.anchor) return "none";
            return "block";
        })
-
 
 function sortByDominance(data, ascending) {
     // sort the data by rep, dem
@@ -244,7 +270,9 @@ function showCurrent() {
 }
 
 
-
+function getTranslateByRadius(d) { 
+    return "translate({0},{0})".format(d.radius); 
+}
 function tick() {
   link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
@@ -252,8 +280,7 @@ function tick() {
       .attr("y2", function(d) { return d.target.y; });
 
   node.each(collide(0.5));
-  node.attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; });
+  node.attr("transform", function(d) { return "translate(" +d.x + "," + d.y + ")"; })
 }
 
 function dblclick(d) {
@@ -339,6 +366,8 @@ function collide(alpha) {
     });
   };
 }
+
+
     </script>
   </body>
 </html>
