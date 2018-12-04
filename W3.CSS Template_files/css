@@ -227,6 +227,10 @@
         color: inherit;
       }
 
+td, th {
+  padding: 1px 4px;
+}
+
 
 /* latin-ext */
 
