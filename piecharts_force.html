@@ -18,12 +18,7 @@
     <br>
     <br>
     <br>
-    <div id="pieCharts01" width=100vw height=100vh style="display:block"></div>
-    <div id="pieCharts0-1" width=100vw height=100vh style="display:none"></div>
-    <div id="pieCharts11" width=100vw height=100vh style="display:none"></div>
-    <div id="pieCharts1-1" width=100vw height=100vh style="display:none"></div>
-    <div id="pieCharts21" width=100vw height=100vh style="display:none"></div>
-    <div id="pieCharts2-1" width=100vw height=100vh style="display:none"></div>
+    <div id="pieCharts" width=100vw height=100vh style="display:block"></div>
     
     <script type="text/javascript">
     // Adapted from http://bl.ocks.org/enjalot/1203641     
@@ -34,7 +29,7 @@ maxRadius = 100,
 padding = 1.5;
 currentSortMode = 0,
 currentAscending = 1,
-originalData = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
+data = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
 {"percentages": [{"value":7.62092272691},{"value":54.0299072381},{"value":38.349170035}],"total":2738951.01,"initials":"AK"},
 {"percentages": [{"value":53.5404001662},{"value":1.12370169042},{"value":45.3358981433}],"total":69546864.32,"initials":"AZ"},
 {"percentages": [{"value":30.077329908},{"value":0.012180654035},{"value":69.910489438}],"total":9205499.12,"initials":"AR"},
@@ -91,18 +86,7 @@ String.prototype.format = function () {
             return args[+(a.substr(1,a.length-2))||0];
         });
 };
-linksForTick = [];
-nodesForTick = [];
-datasForTick = [];
 // display the pie charts
-drawPieDisplay(0,1);
-drawPieDisplay(0,-1);
-drawPieDisplay(1,1);
-drawPieDisplay(1,-1);
-drawPieDisplay(2,1);
-drawPieDisplay(2,-1);
-function drawPieDisplay(sortMode, ascending) {
-data = JSON.parse(JSON.stringify(originalData));
 var links = [];
 var numStates = data.length;
 var state;
@@ -110,15 +94,15 @@ for(state = 0; state < numStates; state++) {
     var radius = 0.004 * Math.sqrt(data[state].total), 
     //alert(radius);
     xStart = (radius/maxRadius);
-    if(sortMode == 0) 
+    if(currentSortMode == 0) 
 	xStart = (data[state].percentages[0].value - data[state].percentages[2].value) / 100;
-    if(sortMode == 2) {
+    if(currentSortMode == 2) {
         firstInitialInt = data[state].initials.charAt(0) - 'A';
         secondInitialInt = data[state].initials.charAt(1) - 'A';
         xStart = (firstInitialInt * 26 + secondInitialInt) / 26 / 26;
     }
 	
-    if(ascending == -1) xStart = (1 - xStart);
+    if(currentAscending == -1) xStart = (1 - xStart);
     xStart = xStart * width
     var yStart = (-0.015+.03*Math.random() + 0.5)*height;
     data[state].x = xStart;
@@ -153,7 +137,7 @@ var force = d3.layout.force()
 var drag = force.drag()
     .on("dragstart", dragstart);
 
-var svg = d3.select("#pieCharts" + sortMode + "" + ascending).append("svg")
+var svg = d3.select("#pieCharts").append("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -240,10 +224,6 @@ arcs.append("svg:path")
            return "block";
        })
 
-linksForTick.push(link);
-nodesForTick.push(node);
-datasForTick.push(data);
-}
 
 function sortByDominance(data, ascending) {
     // sort the data by rep, dem
@@ -301,17 +281,13 @@ function getTranslateByRadius(d) {
     return "translate({0},{0})".format(d.radius); 
 }
 function tick() {
-  //alert(JSON.stringify(linksForTick));
-  var index;
-  for(index = 0; index < linksForTick.length; index++) {
-    linksForTick[index].attr("x1", function(d) { return d.source.x; })
+    link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
 
-    nodesForTick[index].each(collide(0.5, index));
-    nodesForTick[index].attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-  }
+    node.each(collide(0.5));
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 }
 
 function dblclick(d) {
@@ -324,8 +300,8 @@ function dragstart(d) {
  
  // Resolves collisions between d and all other circles.
  // adapted from https://bl.ocks.org/mbostock/1748247
-function collide(alpha, index) {
-  var quadtree = d3.geom.quadtree(datasForTick[index].filter(function(d){return !d.fixed}));
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(data.filter(function(d){return !d.fixed}));
   return function(d) {
     if(d.anchor) return true;
     var r = d.radius + maxRadius + padding,
