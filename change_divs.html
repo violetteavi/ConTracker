@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>    
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>ConTracker v1.1</title>
+    <script src='https://d3js.org/d3.v3.js'></script>
+
+
+    <style type="text/css">
+        .slice text {
+            font-size: 12pt;
+            font-family: Arial;
+        }   
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+    </script>
+    <button onclick="switchSortMode(0)">Party</button>
+    <button onclick="switchSortMode(1)">Total</button>
+    <button onclick="switchSortMode(2)">Initials</button>
+    <br>
+    <br>
+    <br>
+    <div id="pieCharts01" width=100vw height=100vh style="display:block"></div>
+    <div id="pieCharts0-1" width=100vw height=100vh style="display:none"></div>
+    <div id="pieCharts11" width=100vw height=100vh style="display:none"></div>
+    <div id="pieCharts1-1" width=100vw height=100vh style="display:none"></div>
+    <div id="pieCharts21" width=100vw height=100vh style="display:none"></div>
+    <div id="pieCharts2-1" width=100vw height=100vh style="display:none"></div>
+    
+    <script type="text/javascript">
+currentSortMode = 0,
+currentAscending = 1;
+
+function switchSortMode(newSortMode){
+    if(newSortMode != currentSortMode) setCurrentSorting(newSortMode, 1);
+    else toggleAscending();
+}
+
+function toggleAscending() {
+    setCurrentSorting(currentSortMode, currentAscending * -1);
+}
+
+function setCurrentSorting(newSortMode, newAscending) {
+    hideCurrent();
+    currentSortMode = newSortMode;
+    currentAscending = newAscending;
+    showCurrent();
+}
+
+function hideCurrent() {
+    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
+    pieCharts.style.display = "none";
+}
+
+function showCurrent() {
+    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
+    pieCharts.style.display = "block";
+}
+    </script>
+  </body>
+</html>
+
