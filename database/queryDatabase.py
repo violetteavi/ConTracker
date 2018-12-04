@@ -1,15 +1,9 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine('postgresql://jverhoff:john@localhost:5432/fecInfo')
+#engine = create_engine('postgresql://jverhoff:john@localhost:5432/fecInfo')
+engine = create_engine('postgresql://databasemaster:Purdue2020!@mydbinstance.cfaohzw41elj.us-east-2.rds.amazonaws.com:5432/databasemaster')
 
-def getNR():
-    df = pd.read_sql_query("SELECT cand_name, total_receipt FROM candidate_table ORDER BY total_receipt DESC;", engine)
-    print(df)
-
-def getTopInState(state):
-    df = pd.read_sql_query("SELECT cand_name, total_receipt, cand_party_affiliation FROM candidate_table WHERE cand_office_st='%s' ORDER BY total_receipt DESC;" % state, engine)
-    print(df)
 
 def state_total(state):
     df = pd.read_sql_query("SELECT total_receipt FROM candidate_table WHERE cand_office_st='%s';" % state, engine)
