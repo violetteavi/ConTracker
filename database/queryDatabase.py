@@ -1,8 +1,8 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-#engine = create_engine('postgresql://jverhoff:john@localhost:5432/fecInfo')
-engine = create_engine('postgresql://databasemaster:Purdue2020!@mydbinstance.cfaohzw41elj.us-east-2.rds.amazonaws.com:5432/databasemaster')
+engine = create_engine('postgresql://jverhoff:john@localhost:5432/fecInfo')
+#engine = create_engine('postgresql://databasemaster:Purdue2020!@mydbinstance.cfaohzw41elj.us-east-2.rds.amazonaws.com:5432/databasemaster')
 
 def state_total(state):
     df = pd.read_sql_query("SELECT total_receipt FROM candidate_table WHERE cand_office_st='%s';" % state, engine)
@@ -35,7 +35,7 @@ def getTopTenState(state):
     #print(df)
     topTenState = []
     for row in df.itertuples():
-        topTenState.append((row[1], row[2], row[3]))
+        topTenState.append((row[1], row[2], state, row[3]))
     #print(topTenState)
     return topTenState
 
@@ -53,7 +53,7 @@ def getWarchestState(state):
     #print(df)
     topTen = []
     for row in df.itertuples():
-        topTen.append((row[1], row[2], row[3]))
+        topTen.append((row[1], row[2], state, row[3]))
     #print(topTen)
     return topTen
 
@@ -79,3 +79,9 @@ def getStateData(state):
     repP = party_over_state(state, 'REP', tC)
     otherP = 100 - demP - repP
     return (tC, demP, repP, otherP)
+
+
+
+def totDonByParty(state, party):
+    df = pd.read_sql_query("SELECT candidate_table.cand_name, contribution_table.transaction_amt FROM contribution_table inner join com_table on contribution_table.cmte_id = com_table.cmte_id inner join candidate_table on com_table.cand_id = candidate_table.cand_id WHERE contribution_table.state='%s' AND candidate_table.cand_party_affiliation='%s' ORDER BY contribution_table.transaction_amt DESC;" %(state, party) , engine)
+    print(df)
