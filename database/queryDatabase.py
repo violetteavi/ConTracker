@@ -27,7 +27,7 @@ def getTopTenOverall():
     topTen = []
     for row in df.itertuples():
         topTen.append((row[1],row[2], row[3], row[4]))
-    #print(topTen)
+   # print(topTen)
     return topTen
 
 def getTopTenState(state):

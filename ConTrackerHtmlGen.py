@@ -38,20 +38,60 @@ def generatePieHtmlBegin():
 var color = ["#98AFC7", "#B6B6B4", "#FB8885"],
 currentSortMode = 0,
 currentAscending = 1,
-data = ["""
+"""
     return htmlBegin
 
-def generatePieHtmlDataStr( initials, totalContributions, demPercent, otherPercent, repPercent):
+def generatePieHtmlDataStr( initials, totalContributions, demPercent, otherPercent, repPercent, topTenCandidatesByDonation, topTenCandidatesByWarchest):
     dataStr = '{"percentages": '
     dataStr = dataStr + '[{"value":' + str(demPercent) + '},'
     dataStr = dataStr + '{"value":' + str(otherPercent) + '},'
     dataStr = dataStr + '{"value":' + str(repPercent) + '}],'
     dataStr = dataStr + '"total":' + str(totalContributions) + ','
-    dataStr = dataStr + '"initials":"' + initials + '"}'
+    dataStr = dataStr + '"initials":"' + initials + '",'
+    dataStr = dataStr + '"toptencandidates":' + formatCandidateRows(topTenCandidatesByDonation) + ','
+    dataStr = dataStr + '"toptenwarchests":' + formatWarchestRows(topTenCandidatesByWarchest) + '}'
     return dataStr
+
+def formatCandidateRows(topTen):
+    topStr = '{\n'
+    for cand in topTen[:-1]:
+        topStr = topStr + formatCandidateRow(cand)
+        topStr = topStr + ',\n'
+    topStr = topStr + formatCandidateRow(topTen[-1])
+    topStr = topStr + '}'
+    return topStr
+
+def formatCandidateRow(cand):
+    rowStr = '{'
+    rowStr = rowStr + '"name":"' + str(cand[0]) + '",'
+    rowStr = rowStr + '"totalDonations":' + str(cand[1]) + ','
+    rowStr = rowStr + '"initials":"' + str(cand[2]) + '",'
+    rowStr = rowStr + '"party":"' + str(cand[3]) + '"}'
+    return rowStr
+
+def formatWarchestRows(topTen):
+    topStr = '{\n'
+    for cand in topTen[:-1]:
+        topStr = topStr + formatWarchestRow(cand)
+        topStr = topStr + ',\n'
+    topStr = topStr + formatWarchestRow(topTen[-1])
+    topStr = topStr + '}'
+    return topStr
+
+def formatWarchestRow(cand):
+    rowStr = '{'
+    rowStr = rowStr + '"name":"' + str(cand[0]) + '",'
+    rowStr = rowStr + '"warchest":' + str(cand[1]) + ','
+    rowStr = rowStr + '"initials":"' + str(cand[2]) + '",'
+    rowStr = rowStr + '"party":"' + str(cand[3]) + '"}'
+    return rowStr
+
+#testingTopTen = [("O'ROURKE, ROBERT (BETO)", 70243103.56, 'TX', 'DEM'), ('SCOTT, RICK GOV', 68801011.68, 'FL', 'REP'), ('MCCASKILL, CLAIRE', 33385760.03, 'MO', 'DEM'), ('OSSOFF, T. JONATHAN', 31552052.24, 'GA', 'DEM'), ('HUGIN, ROBERT', 30289561.23, 'NJ', 'REP'), ('CRUZ, RAFAEL EDWARD  TED', 29972337.2, 'TX', 'REP'), ('NELSON, BILL', 26594280.91, 'FL', 'DEM'), ('BALDWIN, TAMMY', 25844219.98, 'WI', 'DEM'), ('HEITKAMP, HEIDI', 25353646.63, 'ND', 'DEM'), ('JONES, DOUG', 25083351.65, 'AL', 'DEM')]
+#print(formatWarchestRows(testingTopTen))
 
 def generatePieHtmlEnd():
     htmlEnd = """];
+
 
 drawPieDisplay(0,1);
 drawPieDisplay(0,-1);
