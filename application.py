@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from database.queryDatabase import getStateData 
+from ConTrackerFetcher import getStateData 
 from ConTrackerHtmlGen import generatePieHtmlBegin
 from ConTrackerHtmlGen import generatePieHtmlDataStr
 from ConTrackerHtmlGen import generatePieHtmlEnd
@@ -14,7 +14,7 @@ def writeHTMLforStates():
 
 	htmlContent = generatePieHtmlBegin();
 	for state in states:	
-		(totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
+		(statePercentage,totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
 		
 		
 		htmlContent = htmlContent + generatePieHtmlDataStr(state,totalContState,DemPercent,OtherPercent,RepPercent)  
