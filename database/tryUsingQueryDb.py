@@ -1,4 +1,4 @@
-from queryDatabase import state_total, nationwide_total, getTopTenOverall, getTopTenState, getStateData, getWarchestOverall, getWarchestState, listOfContributions, listOfWarchests
+from queryDatabase import state_total, nationwide_total, getTopTenOverall, getTopTenState, getStateData, getWarchestOverall, getWarchestState, listOfContributions, listOfWarchests, totDonByParty
 #state_total('TX')
 #nationwide_total()
 #(total, demP, repP, otherP) = getStateData("TX")
@@ -7,8 +7,10 @@ from queryDatabase import state_total, nationwide_total, getTopTenOverall, getTo
 #print(repP)
 #print(otherP)
 #getTopTenState("TX")
-#getTopTenOverall()
+topTen = getTopTenOverall()
+print(topTen[0][0])
 #getWarchestOverall()
 #getWarchestState("TX")
 #listOfContributions()
-listOfWarchests()
+#listOfWarchests()
+#totDonByParty("TX", "DEM")
