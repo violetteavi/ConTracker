@@ -11,36 +11,89 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 .mySlides {display:none}
 .w3-tag, .fa {cursor:pointer}
 .w3-tag {height:15px;width:15px;padding:0;margin-top:6px}
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #999999;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+
 </style>
+
+
+
 </head><body>
 
+
+<!--
+<header id="header">
+  <div class="inner">
+          <a href="index.html" class="logo"><strong>By </strong>Joshua Schmitt, Sam Trompen, Nick Glesing, and David Price</a>
+          <nav id="nav">
+            <a href="index.html">Overview</a>
+            <a href="#Problem">Problem</a>
+            <a href="#Solution">Solution</a>
+         
+            <a href="#Feasibility">Action</a>
+            <a href="#Conclusion">Conclusion</a>
+            <a href="generic.html">Resources</a>
+          </nav>
+          <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+        </div>
+</header>
+
+-->
+
 <!-- Links (sit on top) -->
+
+
 <div class="w3-top">
   <div class="w3-row w3-large w3-light-grey">
     <div class="w3-col s3">
-      <a href="https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm#" class="w3-button w3-block">Home</a>
+      <a href="W3.CSS Template.html" class="w3-button w3-block">Home</a>
     </div>
     <div class="w3-col s3">
-      <a href="https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm#plans" class="w3-button w3-block">Plans</a>
+      <a href="#donation table" class="w3-button w3-block">Donation Table</a>
     </div>
     <div class="w3-col s3">
-      <a href="https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm#about" class="w3-button w3-block">About</a>
+      <a href="#warchest table" class="w3-button w3-block">Warchest Table</a>
     </div>
     <div class="w3-col s3">
-      <a href="https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm#contact" class="w3-button w3-block">Contact</a>
+      <a href="#Histogram" class="w3-button w3-block">Histrogram</a>
     </div>
   </div>
 </div>
+
 
 <!-- Content -->
 <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
   <div class="w3-panel">
-    <h1><b>MARKETING</b></h1>
-    <p>Template by w3.css</p>
+    <h1><b>ConTracker</b></h1>
   </div>
 
+
+
+  <div class="bubbles">
+
+    <img src="W3.CSS Template_files/coffee.jpg">
+  </div>
   <!-- Slideshow -->
+
+  <!--
   <div class="w3-container">
     <div class="w3-display-container mySlides" style="display: block;">
       <img src="./W3.CSS Template_files/coffee.jpg" style="width:100%">
@@ -60,8 +113,10 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
         <span class="w3-white w3-padding-large w3-animate-bottom">Blorum pipsum</span>
       </div>
     </div>
-
+    -->
     <!-- Slideshow next/previous buttons -->
+
+    <!--
     <div class="w3-container w3-dark-grey w3-padding w3-xlarge">
       <div class="w3-left" onclick="plusDivs(-1)"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
       <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
@@ -74,10 +129,23 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
     </div>
   </div>
   
+  -->
+
+  <div class="w3-center w3-padding-64" id="donation table">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Donation Table</span>
+  </div>
+
+  <div class="Donation table">
+    <img src="W3.CSS Template_files/team1.jpg">
+  </div>
+
+
   <!-- Grid -->
+
+  <!--
   <div class="w3-row w3-container">
     <div class="w3-center w3-padding-64">
-      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">What We Offer</span>
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Donation Table</span>
     </div>
     <div class="w3-col l3 m6 w3-light-grey w3-container w3-padding-16">
       <h3>Design</h3>
@@ -99,11 +167,22 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
       <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
     </div>
   </div>
+  -->
+
 
   <!-- Grid -->
-  <div class="w3-row-padding" id="plans">
-    <div class="w3-center w3-padding-64">
-      <h3>Pricing Plans</h3>
+  <div class="w3-center w3-padding-64" id="warchest table">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Warchest Table</span>
+  </div>
+
+  <div class="Warchest table">
+    <img src="W3.CSS Template_files\team3.jpg">
+  </div>
+
+    
+  
+
+<!--
       <p>Choose a pricing plan that fits your needs.</p>
     </div>
 
@@ -159,11 +238,25 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
     </div>
   </div>
 
+-->
+
+
+
+
   <!-- Grid -->
-  <div class="w3-row-padding" id="about">
+  <div class="w3-row-padding" id="Histogram">
     <div class="w3-center w3-padding-64">
-      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Who We Are</span>
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Histogram</span>
     </div>
+
+    <div id="histogram_script" style="display: block">
+      
+    </div>
+
+   
+
+  </div>
+    <!--
 
     <div class="w3-third w3-margin-bottom">
       <div class="w3-card-4">
@@ -201,9 +294,13 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
       </div>
     </div>
   </div>
+-->
+
 
   <!-- Contact -->
-  <div class="w3-center w3-padding-64" id="contact">
+
+  <!--
+  <div class="w3-center w3-padding-64" id="Histogram">
     <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Contact Us</span>
   </div>
 
@@ -229,8 +326,10 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 
 </div>
 
-<!-- Footer -->
+-->
 
+<!-- Footer -->
+<!--
 <footer class="w3-container w3-padding-32 w3-light-grey w3-center">
   <h4>Footer</h4>
   <a href="https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm#" class="w3-button w3-black w3-margin"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
@@ -246,6 +345,9 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 </footer>
 
 
+
+-->
+<!--
 <script>
 // Slideshow
 var slideIndex = 1;
@@ -276,5 +378,215 @@ function showDivs(n) {
 }
 </script>
 
+-->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+stateData = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
+{"percentages": [{"value":7.62092272691},{"value":54.0299072381},{"value":38.349170035}],"total":2738951.01,"initials":"AK"},
+{"percentages": [{"value":53.5404001662},{"value":1.12370169042},{"value":45.3358981433}],"total":69546864.32,"initials":"AZ"},
+{"percentages": [{"value":30.077329908},{"value":0.012180654035},{"value":69.910489438}],"total":9205499.12,"initials":"AR"},
+{"percentages": [{"value":74.7100775453},{"value":0.693065924937},{"value":24.5968565297}],"total":247669267.56,"initials":"CA"},
+{"percentages": [{"value":65.6110152562},{"value":0.66442164402},{"value":33.7245630997}],"total":22154725.29,"initials":"CO"},
+{"percentages": [{"value":93.4852001608},{"value":3.5527136788e-15},{"value":6.51479983922}],"total":21643057.42,"initials":"CT"},
+{"percentages": [{"value":98.3985729733},{"value":-1.7763568394e-15},{"value":1.6014270267}],"total":537957.7,"initials":"DC"},
+{"percentages": [{"value":83.6636343978},{"value":1.06581410364e-14},{"value":16.3363656022}],"total":5306939.2,"initials":"DE"},
+{"percentages": [{"value":41.0955611873},{"value":0.78206800592},{"value":58.1223708067}],"total":181200896.76,"initials":"FL"},
+{"percentages": [{"value":64.859008481},{"value":0.0557061077614},{"value":35.0852854112}],"total":72068345.13,"initials":"GA"},
+{"percentages": [{"value":98.0356795254},{"value":5.3290705182e-15},{"value":1.96432047458}],"total":7311657.23,"initials":"HI"},
+{"percentages": [{"value":5.20537488163},{"value":0.0647751655889},{"value":94.7298499528}],"total":2968884.73,"initials":"ID"},
+{"percentages": [{"value":66.8196599433},{"value":0.465251925966},{"value":32.7150881308}],"total":70300102.32,"initials":"IL"},
+{"percentages": [{"value":39.1480800026},{"value":0.117117467355},{"value":60.7348025301}],"total":60663188.51,"initials":"IN"},
+{"percentages": [{"value":68.4826762539},{"value":-1.06581410364e-14},{"value":31.5173237461}],"total":21447446.06,"initials":"IA"},
+{"percentages": [{"value":54.2379935057},{"value":-7.1054273576e-15},{"value":45.7620064943}],"total":22309624.56,"initials":"KS"},
+{"percentages": [{"value":54.2292187019},{"value":-3.5527136788e-14},{"value":45.7707812981}],"total":20361383.17,"initials":"KY"},
+{"percentages": [{"value":13.5121669917},{"value":0.198935450679},{"value":86.2888975576}],"total":17413754.0,"initials":"LA"},
+{"percentages": [{"value":40.2298983708},{"value":29.9479737494},{"value":29.8221278799}],"total":16963417.3,"initials":"ME"},
+{"percentages": [{"value":88.1325705085},{"value":4.54753204009},{"value":7.31989745138}],"total":40913660.06,"initials":"MD"},
+{"percentages": [{"value":74.584181154},{"value":7.05379502057},{"value":18.3620238254}],"total":71231522.54,"initials":"MA"},
+{"percentages": [{"value":56.4414945434},{"value":0.314272145889},{"value":43.2442333108}],"total":76518696.66,"initials":"MI"},
+{"percentages": [{"value":41.330608044},{"value":26.5115157254},{"value":32.1578762306}],"total":56839596.71,"initials":"MN"},
+{"percentages": [{"value":29.0600804575},{"value":0.0},{"value":70.9399195425}],"total":19964860.45,"initials":"MS"},
+{"percentages": [{"value":61.8446953847},{"value":1.0209642809},{"value":37.1343403344}],"total":61758020.51,"initials":"MO"},
+{"percentages": [{"value":62.443641143},{"value":0.0419080184924},{"value":37.5144508385}],"total":46706312.31,"initials":"MT"},
+{"percentages": [{"value":37.2005855619},{"value":-2.13162820728e-14},{"value":62.7994144381}],"total":14190096.85,"initials":"NE"},
+{"percentages": [{"value":65.1251898999},{"value":0.00244456586083},{"value":34.8723655343}],"total":49088470.85,"initials":"NV"},
+{"percentages": [{"value":70.8371607616},{"value":-7.1054273576e-15},{"value":29.1628392384}],"total":11521716.19,"initials":"NH"},
+{"percentages": [{"value":52.17731251},{"value":0.0563036917992},{"value":47.7663837982}],"total":92834836.1,"initials":"NJ"},
+{"percentages": [{"value":80.2767005768},{"value":7.92893690647},{"value":11.7943625167}],"total":21282451.48,"initials":"NM"},
+{"percentages": [{"value":76.5181369716},{"value":0.466080199727},{"value":23.0157828287}],"total":115945753.61,"initials":"NY"},
+{"percentages": [{"value":42.1745397861},{"value":0.0855009566177},{"value":57.7399592572}],"total":37619836.4,"initials":"NC"},
+{"percentages": [{"value":75.7082442824},{"value":-3.5527136788e-15},{"value":24.2917557176}],"total":34650498.58,"initials":"ND"},
+{"percentages": [{"value":56.5762581954},{"value":0.0385231720993},{"value":43.3852186325}],"total":81644808.27,"initials":"OH"},
+{"percentages": [{"value":15.9959526867},{"value":0.120764599093},{"value":83.8832827142}],"total":11218395.21,"initials":"OK"},
+{"percentages": [{"value":58.1827653554},{"value":7.1054273576e-15},{"value":41.8172346446}],"total":12743272.35,"initials":"OR"},
+{"percentages": [{"value":65.4158636857},{"value":0.267200285115},{"value":34.3169360292}],"total":107603036.38,"initials":"PA"},
+{"percentages": [{"value":84.6122495137},{"value":0.17095326849},{"value":15.2167972178}],"total":8987783.7,"initials":"RI"},
+{"percentages": [{"value":34.2704005045},{"value":0.266839071538},{"value":65.4627604239}],"total":19934486.99,"initials":"SC"},
+{"percentages": [{"value":24.8506876265},{"value":0.577592738932},{"value":74.5717196346}],"total":3225456.06,"initials":"SD"},
+{"percentages": [{"value":38.2898855789},{"value":0.0161754333179},{"value":61.6939389878}],"total":53978584.86,"initials":"TN"},
+{"percentages": [{"value":56.9841384612},{"value":1.10755770233},{"value":41.9083038365}],"total":215729915.92,"initials":"TX"},
+{"percentages": [{"value":24.5671472198},{"value":3.74965489829},{"value":71.6831978819}],"total":21082588.97,"initials":"UT"},
+{"percentages": [{"value":8.46535296136},{"value":90.1697229852},{"value":1.36492405343}],"total":10264711.04,"initials":"VT"},
+{"percentages": [{"value":69.7657612226},{"value":0.119466600381},{"value":30.1147721771}],"total":72939566.14,"initials":"VA"},
+{"percentages": [{"value":71.8925427429},{"value":0.284749486776},{"value":27.8227077703}],"total":53979847.95,"initials":"WA"},
+{"percentages": [{"value":43.780063275},{"value":14.1436017636},{"value":42.0763349615}],"total":29465196.77,"initials":"WV"},
+{"percentages": [{"value":67.3623698422},{"value":0.00746587330634},{"value":32.6301642845}],"total":64640796.89,"initials":"WI"},
+{"percentages": [{"value":9.52099101069},{"value":0.00322280652816},{"value":90.4757861828}],"total":9308656.83,"initials":"WY"}];
+var color = "steelblue";
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
+// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var values = stateData.map(function(d) { return d.total; });
+//d3.values(stateData, function(d) {return stateData.total})
+//d3.range(1000).map(d3.random.normal(20, 5));
+
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
+
+var margin = {top: 20, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var max = d3.max(values);
+var min = d3.min(values);
+var x = d3.scale.linear()
+      .domain([min, max])
+      .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+var yMax = d3.max(data, function(d){return d.length});
+var yMin = d3.min(data, function(d){return d.length});
+var colorScale = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+var y = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var svg = d3.select("#histogram_script").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("height", function(d) { return height - y(d.y); })
+    .attr("fill", function(d) { return colorScale(d.y) });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -12)
+    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+/*
+* Adding refresh method to reload new data
+*/
+function refresh(values){
+  // var values = d3.range(1000).map(d3.random.normal(20, 5));
+  var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+  // Reset y domain using new data
+  var yMax = d3.max(data, function(d){return d.length});
+  var yMin = d3.min(data, function(d){return d.length});
+  y.domain([0, yMax]);
+  var colorScale = d3.scale.linear()
+              .domain([yMin, yMax])
+              .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+  var bar = svg.selectAll(".bar").data(data);
+
+  // Remove object with data
+  bar.exit().remove();
+
+  bar.transition()
+    .duration(1000)
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+  bar.select("rect")
+      .transition()
+      .duration(1000)
+      .attr("height", function(d) { return height - y(d.y); })
+      .attr("fill", function(d) { return colorScale(d.y) });
+
+  bar.select("text")
+      .transition()
+      .duration(1000)
+      .text(function(d) { return formatCount(d.y); });
+
+}
+
+// Calling refresh repeatedly.
+setInterval(function() {
+  //var values = randomData
+  //refresh(values);
+}, 2000);
+
+</script>
+
+<!--
+<script> 
+        $('a[href*="#"]')
+          // Remove links that don't actually link to anything
+          .not('[href="#"]')
+          .not('[href="#0"]')
+          .click(function(event) {
+            // On-page links
+            if (
+              location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+              && 
+              location.hostname == this.hostname
+            ) {
+              // Figure out element to scroll to
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+              // Does a scroll target exist?
+              if (target.length) {
+                // Only prevent default if animation is actually gonna happen
+                event.preventDefault();
+                $('html, body').animate({
+                  scrollTop: target.offset().top
+                }, 1000, function() {
+                  // Callback after animation
+                  // Must change focus!
+                  var $target = $(target);
+                  $target.focus();
+                  if ($target.is(":focus")) { // Checking if the target was focused
+                    return false;
+                  } else {
+                    $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+                    $target.focus(); // Set focus again
+                  };
+                });
+              }
+            }
+          });
+
+      </script>
+-->
 
 </body></html>
