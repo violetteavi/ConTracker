@@ -2,8 +2,8 @@
 from database.queryDatabase import getStateData
 from database.queryDatabase import getTopTenOverall
 from database.queryDatabase import getTopTenState
-from database.queryDatabase import getWarchestOverall
-from database.queryDatabase import getWarchestState
+from database.queryDatabase import listOfContributions
+from database.queryDatabase import listOfWarchests
 #from ConTrackerFetcher import getStateData 
 from ConTrackerHtmlGen import generatePieHtmlBegin
 from ConTrackerHtmlGen import generatePieHtmlDataStr
@@ -19,16 +19,14 @@ states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
 
 def writeHTMLforStates():
     htmlContent = generatePieHtmlBegin()
-    htmlContent = htmlContent + "topTenUSDonees = ["
-    htmlContent = htmlContent + formatCandidateRows(getTopTenOverall())
-    htmlContent = htmlContent + "]; \ntopTenUSWarchests = ["
-    htmlContent = htmlContent + formatWarchestRows(getWarchestOverall())
-    htmlContent = htmlContent + "]; \ndata = ["
+    htmlContent = htmlContent + "Contributions = "
+    htmlContent = htmlContent + str(listOfContributions())
+    htmlContent = htmlContent + "; \nWarchests = "
+    htmlContent = htmlContent + str(listOfWarchests())
+    htmlContent = htmlContent + "; \ndata = ["
     for state in states:
         (totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
-        topCon = getTopTenState(state)
-        topWar = getWarchestState(state)
-        htmlContent = htmlContent + generatePieHtmlDataStr(state, totalContState,DemPercent,OtherPercent,RepPercent, topCon, topWar)
+        htmlContent = htmlContent + generatePieHtmlDataStr(state, totalContState,DemPercent,OtherPercent,RepPercent)
         if(state != "WY"):
             htmlContent = htmlContent + ",\n"
         else:

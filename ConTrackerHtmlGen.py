@@ -41,15 +41,13 @@ currentAscending = 1,
 """
     return htmlBegin
 
-def generatePieHtmlDataStr( initials, totalContributions, demPercent, otherPercent, repPercent, topTenCandidatesByDonation, topTenCandidatesByWarchest):
+def generatePieHtmlDataStr( initials, totalContributions, demPercent, otherPercent, repPercent):
     dataStr = '{"percentages": '
     dataStr = dataStr + '[{"value":' + str(demPercent) + '},'
     dataStr = dataStr + '{"value":' + str(otherPercent) + '},'
     dataStr = dataStr + '{"value":' + str(repPercent) + '}],'
     dataStr = dataStr + '"total":' + str(totalContributions) + ','
-    dataStr = dataStr + '"initials":"' + initials + '",'
-    dataStr = dataStr + '"toptencandidates":' + formatCandidateRows(topTenCandidatesByDonation) + ','
-    dataStr = dataStr + '"toptenwarchests":' + formatWarchestRows(topTenCandidatesByWarchest) + '}'
+    dataStr = dataStr + '"initials":"' + initials + '"}'
     return dataStr
 
 def formatCandidateRows(topTen):
