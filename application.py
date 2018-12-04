@@ -5,9 +5,13 @@ from database.queryDatabase import getTopTenState
 from database.queryDatabase import listOfContributions
 from database.queryDatabase import listOfWarchests
 #from ConTrackerFetcher import getStateData 
-from ConTrackerHtmlGen import generatePieHtmlBegin
+from ConTrackerHtmlGen import generateHtmlBegin
+from ConTrackerHtmlGen import generateHtmlEnd
+from ConTrackerHtmlGen import generatePieChartHtmlBegin
 from ConTrackerHtmlGen import generatePieHtmlDataStr
-from ConTrackerHtmlGen import generatePieHtmlEnd
+from ConTrackerHtmlGen import generatePieChartHtmlEnd
+from ConTrackerHtmlGen import generateHistogramBegin
+from ConTrackerHtmlGen import generateHistorgramEnd
 from ConTrackerHtmlGen import formatCandidateRows
 from ConTrackerHtmlGen import formatWarchestRows
 
@@ -18,19 +22,27 @@ states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
           "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 
 def writeHTMLforStates():
-    htmlContent = generatePieHtmlBegin()
-    htmlContent = htmlContent + "Contributions = "
+    htmlContent = generateHtmlBegin()
+    htmlContent = htmlContent + generateHistogramBegin();
     htmlContent = htmlContent + str(listOfContributions())
-    htmlContent = htmlContent + "; \nWarchests = "
-    htmlContent = htmlContent + str(listOfWarchests())
-    htmlContent = htmlContent + "; \ndata = ["
+    htmlContent = htmlContent + generateHistorgramEnd("donations_script");
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(listOfContributions())
+    htmlContent = htmlContent + generateHistorgramEnd("warchest_script");
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(listOfContributions())
+    htmlContent = htmlContent + generateHistorgramEnd("histogram_script");
+    htmlContent = htmlContent + generatePieChartHtmlBegin()
+    stateContributions = []
     for state in states:
         (totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
+        stateContributions.append(totalContState)
         htmlContent = htmlContent + generatePieHtmlDataStr(state, totalContState,DemPercent,OtherPercent,RepPercent)
         if(state != "WY"):
             htmlContent = htmlContent + ",\n"
         else:
-            htmlContent = htmlContent + generatePieHtmlEnd()
+            htmlContent = htmlContent + generatePieChartHtmlEnd()
+    htmlContent = htmlContent + generateHtmlEnd();
     return htmlContent
 
 """

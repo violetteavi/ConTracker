@@ -1,8 +1,8 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine('postgresql://jverhoff:john@localhost:5432/fecInfo')
-#engine = create_engine('postgresql://databasemaster:Purdue2020!@mydbinstance.cfaohzw41elj.us-east-2.rds.amazonaws.com:5432/databasemaster')
+#engine = create_engine('postgresql://jverhoff:john@localhost:5432/fecInfo')
+engine = create_engine('postgresql://databasemaster:Purdue2020!@mydbinstance.cfaohzw41elj.us-east-2.rds.amazonaws.com:5432/databasemaster')
 
 
 def state_total(state):
