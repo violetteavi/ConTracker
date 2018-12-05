@@ -57,24 +57,24 @@ html_file.close()
 """
 Error404 = "<h1> You encountered a 404 error. Here is a patriotic puppy, do you see that? </h1><br><img src=\"/static/PatrioticPuppy.jpg\"> "
 
-#application = Flask(__name__)
+application = Flask(__name__)
 
-#@application.route("/")
-#def main():
-#	return writeHTMLforStates()
+@application.route("/")
+def main():
+	return writeHTMLforStates()
 
-#@application.errorhandler(404)
+@application.errorhandler(404)
 def error404(error):
 	return Error404,404
 
-#@application.route("/HelloWorld")
+@application.route("/HelloWorld")
 def test():
 	return "Hello World!"
 	
-	#return "Hello World"
+	return "Hello World"
 	#hmtl files need to be insie template 
 	#style.css files need to be in static
-print(writeHTMLforStates())
-#if __name__ == "__main__":
+#print(writeHTMLforStates())
+if __name__ == "__main__":
 	#application.debug = True
-	#application.run()
+	application.run()
