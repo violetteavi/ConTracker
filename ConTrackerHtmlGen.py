@@ -14,9 +14,9 @@ def generateHtmlBegin():
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./W3.CSS Template_files/w3.css">
-<link rel="stylesheet" href="./W3.CSS Template_files/css">
-<link rel="stylesheet" href="./W3.CSS Template_files/font-awesome.min.css">
+<link rel="stylesheet" href="./static/w3.css">
+<link rel="stylesheet" href="./static/css">
+<link rel="stylesheet" href="./static/font-awesome.min.css">
 
 
 
@@ -56,7 +56,7 @@ body {
 <div class="w3-top">
   <div class="w3-row w3-large w3-light-grey">
     <div class="w3-col s3">
-      <a href="integrationTest.html" class="w3-button w3-block">Home</a>
+      <a href="#" class="w3-button w3-block">Home</a>
     </div>
     <div class="w3-col s3">
       <a href="#donation_table" class="w3-button w3-block">Donation Table</a>
