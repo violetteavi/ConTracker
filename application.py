@@ -1,7 +1,9 @@
 from flask import Flask, render_template
 from database.queryDatabase import getStateData
 from database.queryDatabase import getTopTenOverall
+from database.queryDatabase import getWarchestOverall
 from database.queryDatabase import getTopTenState
+from database.queryDatabase import getWarchestState
 from database.queryDatabase import listOfContributions
 from database.queryDatabase import listOfWarchests
 from ConTrackerHtmlGen import generateHtmlBegin
@@ -27,7 +29,9 @@ def writeHTMLforStates():
     for state in states:
         (totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
         stateContributions.append(totalContState)
-        htmlContent = htmlContent + generatePieHtmlDataStr(state, totalContState,DemPercent,OtherPercent,RepPercent)
+        topTenDonees = getTopTenState(state);
+        topTenWarchests = getWarchestState(state);
+        htmlContent = htmlContent + generatePieHtmlDataStr(state, totalContState,DemPercent,OtherPercent,RepPercent, topTenDonees, topTenWarchests)
         if(state != "WY"):
             htmlContent = htmlContent + ",\n"
         else:

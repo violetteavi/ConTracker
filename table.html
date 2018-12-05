@@ -3,21 +3,35 @@
 <body>
 
 	<div id=page-wrap></div>
+    <div id="top10Donees_TX" width=100vw height=100vh style="display:block"></div>
 	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     <script type='text/javascript'>
+(function() {
 var data = [
-  { "date" : '2013-01-01', "close" : 45 },
-  { "date" : '2013-02-01', "close" : 50 },
-  { "date" : '2013-03-01', "close" : 55 },
-  { "date" : '2013-04-01', "close" : 50 },
-  { "date" : '2013-05-01', "close" : 45 },
-  { "date" : '2013-06-01', "close" : 50 },
-  { "date" : '2013-07-01', "close" : 50 },
-  { "date" : '2013-08-01', "close" : 52 }
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"},
+  { "Name": "Beto", "TotalContributions": "9001", "Party":"Democrat", "State":"TX"}
 ]
-		
-function tabulate(data, columns) {
-	var table = d3.select('body').append('table')
+// render the tables
+tabulate(data, ['Name', 'TotalContributions', 'Party', 'State'], "top10Donees_TX"); // 2 column table
+})()
+
+function tabulate(data, columns, targetDiv) {
+	var table = d3.select('#' + targetDiv).append('table')
 	var thead = table.append('thead')
 	var	tbody = table.append('tbody');
 
@@ -47,9 +61,6 @@ function tabulate(data, columns) {
 
   return table;
 }
-
-// render the tables
-tabulate(data, ['date', 'close']); // 2 column table
 	</script>
 	
 	

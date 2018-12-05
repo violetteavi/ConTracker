@@ -125,47 +125,49 @@ body {
  """ 
     return htmlBegin
 
-def generatePieHtmlDataStr( initials, totalContributions, demPercent, otherPercent, repPercent):
+def generatePieHtmlDataStr( initials, totalContributions, demPercent, otherPercent, repPercent, topTenDonees, topTenWarChests):
     dataStr = '{"percentages": '
     dataStr = dataStr + '[{"value":' + str(demPercent) + '},'
     dataStr = dataStr + '{"value":' + str(otherPercent) + '},'
     dataStr = dataStr + '{"value":' + str(repPercent) + '}],'
     dataStr = dataStr + '"total":' + str(totalContributions) + ','
+    dataStr = dataStr + '"top10Donees":' + str(formatCandidateRows(topTenDonees)) + ','
+    dataStr = dataStr + '"top10Warchests":' + str(formatWarchestRows(topTenWarChests)) + ','
     dataStr = dataStr + '"initials":"' + initials + '"}'
     return dataStr
 
 def formatCandidateRows(topTen):
-    topStr = '{\n'
+    topStr = '[\n'
     for cand in topTen[:-1]:
         topStr = topStr + formatCandidateRow(cand)
         topStr = topStr + ',\n'
     topStr = topStr + formatCandidateRow(topTen[-1])
-    topStr = topStr + '}'
+    topStr = topStr + ']'
     return topStr
 
 def formatCandidateRow(cand):
     rowStr = '{'
-    rowStr = rowStr + '"name":"' + str(cand[0]) + '",'
-    rowStr = rowStr + '"totalDonations":' + str(cand[1]) + ','
-    rowStr = rowStr + '"initials":"' + str(cand[2]) + '",'
-    rowStr = rowStr + '"party":"' + str(cand[3]) + '"}'
+    rowStr = rowStr + '"Name":"' + str(cand[0]) + '",'
+    rowStr = rowStr + '"TotalDonations":' + str(cand[1]) + ','
+    rowStr = rowStr + '"State":"' + str(cand[2]) + '",'
+    rowStr = rowStr + '"Party":"' + str(cand[3]) + '"}'
     return rowStr
 
 def formatWarchestRows(topTen):
-    topStr = '{\n'
+    topStr = '[\n'
     for cand in topTen[:-1]:
         topStr = topStr + formatWarchestRow(cand)
         topStr = topStr + ',\n'
     topStr = topStr + formatWarchestRow(topTen[-1])
-    topStr = topStr + '}'
+    topStr = topStr + ']'
     return topStr
 
 def formatWarchestRow(cand):
     rowStr = '{'
-    rowStr = rowStr + '"name":"' + str(cand[0]) + '",'
-    rowStr = rowStr + '"warchest":' + str(cand[1]) + ','
-    rowStr = rowStr + '"initials":"' + str(cand[2]) + '",'
-    rowStr = rowStr + '"party":"' + str(cand[3]) + '"}'
+    rowStr = rowStr + '"Name":"' + str(cand[0]) + '",'
+    rowStr = rowStr + '"Warchest":' + str(cand[1]) + ','
+    rowStr = rowStr + '"State":"' + str(cand[2]) + '",'
+    rowStr = rowStr + '"Party":"' + str(cand[3]) + '"}'
     return rowStr
 
 #testingTopTen = [("O'ROURKE, ROBERT (BETO)", 70243103.56, 'TX', 'DEM'), ('SCOTT, RICK GOV', 68801011.68, 'FL', 'REP'), ('MCCASKILL, CLAIRE', 33385760.03, 'MO', 'DEM'), ('OSSOFF, T. JONATHAN', 31552052.24, 'GA', 'DEM'), ('HUGIN, ROBERT', 30289561.23, 'NJ', 'REP'), ('CRUZ, RAFAEL EDWARD  TED', 29972337.2, 'TX', 'REP'), ('NELSON, BILL', 26594280.91, 'FL', 'DEM'), ('BALDWIN, TAMMY', 25844219.98, 'WI', 'DEM'), ('HEITKAMP, HEIDI', 25353646.63, 'ND', 'DEM'), ('JONES, DOUG', 25083351.65, 'AL', 'DEM')]

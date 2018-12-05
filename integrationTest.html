@@ -39,6 +39,29 @@ body {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+table {  
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 640px; 
+    border-collapse: 
+    collapse; border-spacing: 0; 
+}
+
+td, th {  
+    border: 1px solid transparent; /* No more visible border */
+    height: 30px; 
+    transition: all 0.3s;  /* Simple transition for hover effect */
+}
+
+th {  
+    background: #DFDFDF;  /* Darken header a bit */
+    font-weight: bold;
+}
+
+td {  
+    background: #FAFAFA;
+    text-align: center;
+}
 
 
 </style>
@@ -83,6 +106,8 @@ body {
       <br><br>
       <div id="bubbles_script" style="display: block" >
       </div>
+      <br>
+      <div id="tables_script" width=100vw height=100vh style="display:block"></div>
   </div>
 
   <div class="w3-center w3-padding-64" id="donation_table">
@@ -131,57 +156,1071 @@ maxRadius = 100,
 padding = 1.5;
 currentSortMode = 0,
 currentAscending = 1,
-data = [{"percentages": [{"value":55.9041545415},{"value":0.49319112139},{"value":43.6026543371}],"total":51460843.27,"initials":"AL"},
-{"percentages": [{"value":7.62092272691},{"value":54.0299072381},{"value":38.349170035}],"total":2738951.01,"initials":"AK"},
-{"percentages": [{"value":53.5404001662},{"value":1.12370169042},{"value":45.3358981433}],"total":69546864.32,"initials":"AZ"},
-{"percentages": [{"value":30.077329908},{"value":0.012180654035},{"value":69.910489438}],"total":9205499.12,"initials":"AR"},
-{"percentages": [{"value":74.7100775453},{"value":0.693065924937},{"value":24.5968565297}],"total":247669267.56,"initials":"CA"},
-{"percentages": [{"value":65.6110152562},{"value":0.66442164402},{"value":33.7245630997}],"total":22154725.29,"initials":"CO"},
-{"percentages": [{"value":93.4852001608},{"value":3.5527136788e-15},{"value":6.51479983922}],"total":21643057.42,"initials":"CT"},
-//{"percentages": [{"value":98.3985729733},{"value":-1.7763568394e-15},{"value":1.6014270267}],"total":537957.7,"initials":"DC"},
-{"percentages": [{"value":83.6636343978},{"value":1.06581410364e-14},{"value":16.3363656022}],"total":5306939.2,"initials":"DE"},
-{"percentages": [{"value":41.0955611873},{"value":0.78206800592},{"value":58.1223708067}],"total":181200896.76,"initials":"FL"},
-{"percentages": [{"value":64.859008481},{"value":0.0557061077614},{"value":35.0852854112}],"total":72068345.13,"initials":"GA"},
-{"percentages": [{"value":98.0356795254},{"value":5.3290705182e-15},{"value":1.96432047458}],"total":7311657.23,"initials":"HI"},
-{"percentages": [{"value":5.20537488163},{"value":0.0647751655889},{"value":94.7298499528}],"total":2968884.73,"initials":"ID"},
-{"percentages": [{"value":66.8196599433},{"value":0.465251925966},{"value":32.7150881308}],"total":70300102.32,"initials":"IL"},
-{"percentages": [{"value":39.1480800026},{"value":0.117117467355},{"value":60.7348025301}],"total":60663188.51,"initials":"IN"},
-{"percentages": [{"value":68.4826762539},{"value":-1.06581410364e-14},{"value":31.5173237461}],"total":21447446.06,"initials":"IA"},
-{"percentages": [{"value":54.2379935057},{"value":-7.1054273576e-15},{"value":45.7620064943}],"total":22309624.56,"initials":"KS"},
-{"percentages": [{"value":54.2292187019},{"value":-3.5527136788e-14},{"value":45.7707812981}],"total":20361383.17,"initials":"KY"},
-{"percentages": [{"value":13.5121669917},{"value":0.198935450679},{"value":86.2888975576}],"total":17413754.0,"initials":"LA"},
-{"percentages": [{"value":40.2298983708},{"value":29.9479737494},{"value":29.8221278799}],"total":16963417.3,"initials":"ME"},
-{"percentages": [{"value":88.1325705085},{"value":4.54753204009},{"value":7.31989745138}],"total":40913660.06,"initials":"MD"},
-{"percentages": [{"value":74.584181154},{"value":7.05379502057},{"value":18.3620238254}],"total":71231522.54,"initials":"MA"},
-{"percentages": [{"value":56.4414945434},{"value":0.314272145889},{"value":43.2442333108}],"total":76518696.66,"initials":"MI"},
-{"percentages": [{"value":41.330608044},{"value":26.5115157254},{"value":32.1578762306}],"total":56839596.71,"initials":"MN"},
-{"percentages": [{"value":29.0600804575},{"value":0.0},{"value":70.9399195425}],"total":19964860.45,"initials":"MS"},
-{"percentages": [{"value":61.8446953847},{"value":1.0209642809},{"value":37.1343403344}],"total":61758020.51,"initials":"MO"},
-{"percentages": [{"value":62.443641143},{"value":0.0419080184924},{"value":37.5144508385}],"total":46706312.31,"initials":"MT"},
-{"percentages": [{"value":37.2005855619},{"value":-2.13162820728e-14},{"value":62.7994144381}],"total":14190096.85,"initials":"NE"},
-{"percentages": [{"value":65.1251898999},{"value":0.00244456586083},{"value":34.8723655343}],"total":49088470.85,"initials":"NV"},
-{"percentages": [{"value":70.8371607616},{"value":-7.1054273576e-15},{"value":29.1628392384}],"total":11521716.19,"initials":"NH"},
-{"percentages": [{"value":52.17731251},{"value":0.0563036917992},{"value":47.7663837982}],"total":92834836.1,"initials":"NJ"},
-{"percentages": [{"value":80.2767005768},{"value":7.92893690647},{"value":11.7943625167}],"total":21282451.48,"initials":"NM"},
-{"percentages": [{"value":76.5181369716},{"value":0.466080199727},{"value":23.0157828287}],"total":115945753.61,"initials":"NY"},
-{"percentages": [{"value":42.1745397861},{"value":0.0855009566177},{"value":57.7399592572}],"total":37619836.4,"initials":"NC"},
-{"percentages": [{"value":75.7082442824},{"value":-3.5527136788e-15},{"value":24.2917557176}],"total":34650498.58,"initials":"ND"},
-{"percentages": [{"value":56.5762581954},{"value":0.0385231720993},{"value":43.3852186325}],"total":81644808.27,"initials":"OH"},
-{"percentages": [{"value":15.9959526867},{"value":0.120764599093},{"value":83.8832827142}],"total":11218395.21,"initials":"OK"},
-{"percentages": [{"value":58.1827653554},{"value":7.1054273576e-15},{"value":41.8172346446}],"total":12743272.35,"initials":"OR"},
-{"percentages": [{"value":65.4158636857},{"value":0.267200285115},{"value":34.3169360292}],"total":107603036.38,"initials":"PA"},
-{"percentages": [{"value":84.6122495137},{"value":0.17095326849},{"value":15.2167972178}],"total":8987783.7,"initials":"RI"},
-{"percentages": [{"value":34.2704005045},{"value":0.266839071538},{"value":65.4627604239}],"total":19934486.99,"initials":"SC"},
-{"percentages": [{"value":24.8506876265},{"value":0.577592738932},{"value":74.5717196346}],"total":3225456.06,"initials":"SD"},
-{"percentages": [{"value":38.2898855789},{"value":0.0161754333179},{"value":61.6939389878}],"total":53978584.86,"initials":"TN"},
-{"percentages": [{"value":56.9841384612},{"value":1.10755770233},{"value":41.9083038365}],"total":215729915.92,"initials":"TX"},
-{"percentages": [{"value":24.5671472198},{"value":3.74965489829},{"value":71.6831978819}],"total":21082588.97,"initials":"UT"},
-{"percentages": [{"value":8.46535296136},{"value":90.1697229852},{"value":1.36492405343}],"total":10264711.04,"initials":"VT"},
-{"percentages": [{"value":69.7657612226},{"value":0.119466600381},{"value":30.1147721771}],"total":72939566.14,"initials":"VA"},
-{"percentages": [{"value":71.8925427429},{"value":0.284749486776},{"value":27.8227077703}],"total":53979847.95,"initials":"WA"},
-{"percentages": [{"value":43.780063275},{"value":14.1436017636},{"value":42.0763349615}],"total":29465196.77,"initials":"WV"},
-{"percentages": [{"value":67.3623698422},{"value":0.00746587330634},{"value":32.6301642845}],"total":64640796.89,"initials":"WI"},
-{"percentages": [{"value":9.52099101069},{"value":0.00322280652816},{"value":90.4757861828}],"total":9308656.83,"initials":"WY"}];
+data = [
+    {"percentages": [{"value":55.904154541461324},{"value":0.4931911213898701},{"value":43.602654337148806}],"total":51460843.269999996,"top10Donees":[
+{"Name":"JONES, DOUG","TotalDonations":25083351.65,"State":"AL","Party":"DEM"},
+{"Name":"MOORE, ROY JUDGE","TotalDonations":6263667.0,"State":"AL","Party":"REP"},
+{"Name":"STRANGE, LUTHER J III","TotalDonations":5442899.0,"State":"AL","Party":"REP"},
+{"Name":"ROBY, MARTHA","TotalDonations":2506892.21,"State":"AL","Party":"REP"},
+{"Name":"SEWELL, TERRI A.","TotalDonations":1634558.47,"State":"AL","Party":"DEM"},
+{"Name":"ADERHOLT, ROBERT B. REP.","TotalDonations":1487007.71,"State":"AL","Party":"REP"},
+{"Name":"BROOKS, MO","TotalDonations":1474725.81,"State":"AL","Party":"REP"},
+{"Name":"BYRNE, BRADLEY ROBERTS","TotalDonations":1325142.12,"State":"AL","Party":"REP"},
+{"Name":"ROGERS, MICHAEL","TotalDonations":1219665.1,"State":"AL","Party":"REP"},
+{"Name":"PALMER, GARY","TotalDonations":1187161.71,"State":"AL","Party":"REP"}],"top10Warchests":[
+{"Name":"JONES, DOUG","Warchest":2167365.42,"Initials":"AL","Party":"DEM"},
+{"Name":"SEWELL, TERRI A.","Warchest":1570731.19,"Initials":"AL","Party":"DEM"},
+{"Name":"BYRNE, BRADLEY ROBERTS","Warchest":1108654.28,"Initials":"AL","Party":"REP"},
+{"Name":"ADERHOLT, ROBERT B. REP.","Warchest":1099494.04,"Initials":"AL","Party":"REP"},
+{"Name":"ROGERS, MICHAEL","Warchest":887447.58,"Initials":"AL","Party":"REP"},
+{"Name":"BROOKS, MO","Warchest":769423.0,"Initials":"AL","Party":"REP"},
+{"Name":"PALMER, GARY","Warchest":520548.75,"Initials":"AL","Party":"REP"},
+{"Name":"ROBY, MARTHA","Warchest":451536.47,"Initials":"AL","Party":"REP"},
+{"Name":"STRANGE, LUTHER J III","Warchest":124600.75,"Initials":"AL","Party":"REP"},
+{"Name":"KLINE, DANNER","Warchest":101605.36,"Initials":"AL","Party":"DEM"}],"initials":"AL"},
+{"percentages": [{"value":7.6209227269092334},{"value":54.02990723809989},{"value":38.349170034990884}],"total":2738951.01,"top10Donees":[
+{"Name":"GALVIN, ALYSE","TotalDonations":1479852.69,"State":"AK","Party":"IND"},
+{"Name":"YOUNG, DONALD E","TotalDonations":1041376.5,"State":"AK","Party":"REP"},
+{"Name":"SHEIN, DIMITRI","TotalDonations":208733.34,"State":"AK","Party":"DEM"},
+{"Name":"NELSON, THOMAS JOHN","TotalDonations":8988.48,"State":"AK","Party":"REP"},
+{"Name":"HAFNER, CAROL","TotalDonations":0.0,"State":"AK","Party":"DEM"},
+{"Name":"FITCH, GREGORY FITCH MR","TotalDonations":0.0,"State":"AK","Party":"NPA"},
+{"Name":"WHITTAKER, JED","TotalDonations":0.0,"State":"AK","Party":"REP"},
+{"Name":"HILL, SID","TotalDonations":0.0,"State":"AK","Party":"UN"},
+{"Name":"CUMINGS, CHRISTOPHER CHARLES","TotalDonations":0.0,"State":"AK","Party":"NPA"},
+{"Name":"HILL, SIDNEY I.","TotalDonations":0.0,"State":"AK","Party":"IND"}],"top10Warchests":[
+{"Name":"GALVIN, ALYSE","Warchest":186819.12,"Initials":"AK","Party":"IND"},
+{"Name":"YOUNG, DONALD E","Warchest":151165.08,"Initials":"AK","Party":"REP"},
+{"Name":"SHEIN, DIMITRI","Warchest":112889.8,"Initials":"AK","Party":"DEM"},
+{"Name":"NELSON, THOMAS JOHN","Warchest":1184.51,"Initials":"AK","Party":"REP"},
+{"Name":"HAFNER, CAROL","Warchest":0.0,"Initials":"AK","Party":"DEM"},
+{"Name":"FITCH, GREGORY FITCH MR","Warchest":0.0,"Initials":"AK","Party":"NPA"},
+{"Name":"WHITTAKER, JED","Warchest":0.0,"Initials":"AK","Party":"REP"},
+{"Name":"HILL, SID","Warchest":0.0,"Initials":"AK","Party":"UN"},
+{"Name":"CUMINGS, CHRISTOPHER CHARLES","Warchest":0.0,"Initials":"AK","Party":"NPA"},
+{"Name":"HILL, SIDNEY I.","Warchest":0.0,"Initials":"AK","Party":"IND"}],"initials":"AK"},
+{"percentages": [{"value":53.54040016624002},{"value":1.123701690422962},{"value":45.33589814333702}],"total":69546864.32,"top10Donees":[
+{"Name":"SINEMA, KYRSTEN","TotalDonations":19287249.58,"State":"AZ","Party":"DEM"},
+{"Name":"MCSALLY, MARTHA","TotalDonations":16211836.1,"State":"AZ","Party":"REP"},
+{"Name":"TIPIRNENI, HIRAL","TotalDonations":4113664.36,"State":"AZ","Party":"DEM"},
+{"Name":"KIRKPATRICK, ANN","TotalDonations":4087164.7,"State":"AZ","Party":"DEM"},
+{"Name":"WARD, KELLI","TotalDonations":3296782.37,"State":"AZ","Party":"REP"},
+{"Name":"O'HALLERAN, TOM","TotalDonations":2408828.76,"State":"AZ","Party":"DEM"},
+{"Name":"STANTON, GREG","TotalDonations":2317896.81,"State":"AZ","Party":"DEM"},
+{"Name":"LESKO, DEBBIE","TotalDonations":1906381.58,"State":"AZ","Party":"REP"},
+{"Name":"SCHWEIKERT, DAVID","TotalDonations":1687401.11,"State":"AZ","Party":"REP"},
+{"Name":"FERRARA, STEVE MD","TotalDonations":1476494.26,"State":"AZ","Party":"REP"}],"top10Warchests":[
+{"Name":"MCSALLY, MARTHA","Warchest":2523657.44,"Initials":"AZ","Party":"REP"},
+{"Name":"SINEMA, KYRSTEN","Warchest":1301542.09,"Initials":"AZ","Party":"DEM"},
+{"Name":"KIRKPATRICK, ANN","Warchest":811343.07,"Initials":"AZ","Party":"DEM"},
+{"Name":"GALLEGO, RUBEN","Warchest":484338.08,"Initials":"AZ","Party":"DEM"},
+{"Name":"O'HALLERAN, TOM","Warchest":403121.31,"Initials":"AZ","Party":"DEM"},
+{"Name":"LESKO, DEBBIE","Warchest":364412.01,"Initials":"AZ","Party":"REP"},
+{"Name":"BIGGS, ANDY MR.","Warchest":282645.57,"Initials":"AZ","Party":"UNK"},
+{"Name":"FERRARA, STEVE MD","Warchest":258396.62,"Initials":"AZ","Party":"REP"},
+{"Name":"SCHWEIKERT, DAVID","Warchest":243388.16,"Initials":"AZ","Party":"REP"},
+{"Name":"TIPIRNENI, HIRAL","Warchest":203520.23,"Initials":"AZ","Party":"DEM"}],"initials":"AZ"},
+{"percentages": [{"value":30.07732990799525},{"value":0.012180654034992244},{"value":69.91048943796976}],"total":9205499.120000001,"top10Donees":[
+{"Name":"HILL, JAMES FRENCH","TotalDonations":2724801.98,"State":"AR","Party":"REP"},
+{"Name":"TUCKER, EVERETT CLARKE IV","TotalDonations":1937604.19,"State":"AR","Party":"DEM"},
+{"Name":"WESTERMAN, BRUCE","TotalDonations":1574701.85,"State":"AR","Party":"REP"},
+{"Name":"WOMACK, STEVE","TotalDonations":1096644.55,"State":"AR","Party":"REP"},
+{"Name":"CRAWFORD, ERIC ALAN RICK","TotalDonations":974708.16,"State":"AR","Party":"REP"},
+{"Name":"SPENCER, PAUL JOHN MR.","TotalDonations":267832.94,"State":"AR","Party":"DEM"},
+{"Name":"MAHONY, JOSH","TotalDonations":232123.38,"State":"AR","Party":"DEM"},
+{"Name":"SHAMEL, HAYDEN CATHERINE","TotalDonations":145001.47,"State":"AR","Party":"DEM"},
+{"Name":"DESAI, CHINTAN","TotalDonations":117805.55,"State":"AR","Party":"DEM"},
+{"Name":"RYERSE, ROBERT","TotalDonations":50302.95,"State":"AR","Party":"REP"}],"top10Warchests":[
+{"Name":"WOMACK, STEVE","Warchest":1198894.18,"Initials":"AR","Party":"REP"},
+{"Name":"WESTERMAN, BRUCE","Warchest":958377.8,"Initials":"AR","Party":"REP"},
+{"Name":"HILL, JAMES FRENCH","Warchest":529729.52,"Initials":"AR","Party":"REP"},
+{"Name":"CRAWFORD, ERIC ALAN RICK","Warchest":467066.88,"Initials":"AR","Party":"REP"},
+{"Name":"TUCKER, EVERETT CLARKE IV","Warchest":143833.28,"Initials":"AR","Party":"DEM"},
+{"Name":"DESAI, CHINTAN","Warchest":25998.04,"Initials":"AR","Party":"DEM"},
+{"Name":"SHAMEL, HAYDEN CATHERINE","Warchest":23048.15,"Initials":"AR","Party":"DEM"},
+{"Name":"MAHONY, JOSH","Warchest":9458.73,"Initials":"AR","Party":"DEM"},
+{"Name":"RYERSE, ROBERT","Warchest":7357.92,"Initials":"AR","Party":"REP"},
+{"Name":"CALDWELL, RANDY","Warchest":4847.0,"Initials":"AR","Party":"REP"}],"initials":"AR"},
+{"percentages": [{"value":74.71007754531918},{"value":0.6930659249372226},{"value":24.596856529743597}],"total":247669267.56,"top10Donees":[
+{"Name":"FEINSTEIN, DIANNE","TotalDonations":16337924.75,"State":"CA","Party":"DEM"},
+{"Name":"NUNES, DEVIN GERALD","TotalDonations":11718172.38,"State":"CA","Party":"REP"},
+{"Name":"CISNEROS, GILBERT","TotalDonations":11147211.14,"State":"CA","Party":"DEM"},
+{"Name":"JANZ, ANDREW","TotalDonations":8327379.61,"State":"CA","Party":"DEM"},
+{"Name":"KERR, PAUL","TotalDonations":8129176.01,"State":"CA","Party":"DEM"},
+{"Name":"MCCARTHY, KEVIN","TotalDonations":7748222.54,"State":"CA","Party":"REP"},
+{"Name":"ROUDA, HARLEY E JR","TotalDonations":7368715.01,"State":"CA","Party":"DEM"},
+{"Name":"HILL, KATHERINE LAUREN","TotalDonations":7310758.77,"State":"CA","Party":"DEM"},
+{"Name":"HARDER, JOSH","TotalDonations":7051816.7,"State":"CA","Party":"DEM"},
+{"Name":"SCHIFF, ADAM","TotalDonations":5904773.53,"State":"CA","Party":"DEM"}],"top10Warchests":[
+{"Name":"NUNES, DEVIN GERALD","Warchest":4952478.35,"Initials":"CA","Party":"REP"},
+{"Name":"SCHIFF, ADAM","Warchest":4572199.12,"Initials":"CA","Party":"DEM"},
+{"Name":"FEINSTEIN, DIANNE","Warchest":4218374.76,"Initials":"CA","Party":"DEM"},
+{"Name":"CHU, JUDY","Warchest":2559221.12,"Initials":"CA","Party":"DEM"},
+{"Name":"BROWNLEY, JULIA","Warchest":2518994.02,"Initials":"CA","Party":"DEM"},
+{"Name":"PETERS, SCOTT","Warchest":2261788.83,"Initials":"CA","Party":"DEM"},
+{"Name":"MCCARTHY, KEVIN","Warchest":2162647.1,"Initials":"CA","Party":"REP"},
+{"Name":"SHERMAN, BRAD","Warchest":2071561.04,"Initials":"CA","Party":"DEM"},
+{"Name":"RUIZ, RAUL DR","Warchest":1903749.51,"Initials":"CA","Party":"DEM"},
+{"Name":"SPEIER, JACKIE","Warchest":1848214.0,"Initials":"CA","Party":"DEM"}],"initials":"CA"},
+{"percentages": [{"value":65.61101525624018},{"value":0.6644216440202868},{"value":33.724563099739534}],"total":22154725.289999995,"top10Donees":[
+{"Name":"CROW, JASON","TotalDonations":5102808.56,"State":"CO","Party":"DEM"},
+{"Name":"COFFMAN, MIKE REP.","TotalDonations":3470976.86,"State":"CO","Party":"REP"},
+{"Name":"PERLMUTTER, EDWIN G","TotalDonations":1789528.4,"State":"CO","Party":"DEM"},
+{"Name":"MITSCH BUSH, DIANE MS.","TotalDonations":1583113.44,"State":"CO","Party":"DEM"},
+{"Name":"TIPTON, SCOTT R.","TotalDonations":1469788.39,"State":"CO","Party":"REP"},
+{"Name":"DEGETTE, DIANA L.","TotalDonations":1215021.89,"State":"CO","Party":"DEM"},
+{"Name":"NEGUSE, JOSEPH","TotalDonations":1205532.44,"State":"CO","Party":"DEM"},
+{"Name":"MCCORMICK, KAREN A DVM","TotalDonations":816861.12,"State":"CO","Party":"DEM"},
+{"Name":"LAMBORN, DOUGLAS","TotalDonations":669736.17,"State":"CO","Party":"REP"},
+{"Name":"BUCK, KENNETH R","TotalDonations":589639.43,"State":"CO","Party":"REP"}],"top10Warchests":[
+{"Name":"PERLMUTTER, EDWIN G","Warchest":752231.44,"Initials":"CO","Party":"DEM"},
+{"Name":"CROW, JASON","Warchest":597518.39,"Initials":"CO","Party":"DEM"},
+{"Name":"BUCK, KENNETH R","Warchest":391772.8,"Initials":"CO","Party":"REP"},
+{"Name":"MITSCH BUSH, DIANE MS.","Warchest":260359.8,"Initials":"CO","Party":"DEM"},
+{"Name":"COFFMAN, MIKE REP.","Warchest":258034.56,"Initials":"CO","Party":"REP"},
+{"Name":"BAER, DAN","Warchest":250910.56,"Initials":"CO","Party":"DEM"},
+{"Name":"LAMBORN, DOUGLAS","Warchest":233588.65,"Initials":"CO","Party":"REP"},
+{"Name":"NEGUSE, JOSEPH","Warchest":229440.99,"Initials":"CO","Party":"DEM"},
+{"Name":"TIPTON, SCOTT R.","Warchest":203871.21,"Initials":"CO","Party":"REP"},
+{"Name":"MCCORMICK, KAREN A DVM","Warchest":195064.91,"Initials":"CO","Party":"DEM"}],"initials":"CO"},
+{"percentages": [{"value":93.4852001607821},{"value":-1.0658141036401503e-14},{"value":6.514799839217911}],"total":21643057.419999998,"top10Donees":[
+{"Name":"MURPHY, CHRISTOPHER S MR","TotalDonations":12077556.04,"State":"CT","Party":"DEM"},
+{"Name":"HIMES, JIM","TotalDonations":1919550.75,"State":"CT","Party":"DEM"},
+{"Name":"HAYES, JAHANA","TotalDonations":1608362.41,"State":"CT","Party":"DEM"},
+{"Name":"LARSON, JOHN B","TotalDonations":1568984.71,"State":"CT","Party":"DEM"},
+{"Name":"DELAURO, ROSA L","TotalDonations":1207122.94,"State":"CT","Party":"DEM"},
+{"Name":"COURTNEY, JOSEPH D","TotalDonations":1053661.49,"State":"CT","Party":"DEM"},
+{"Name":"ARORA, HARRY","TotalDonations":744965.37,"State":"CT","Party":"REP"},
+{"Name":"GLASSMAN, MARY","TotalDonations":574803.54,"State":"CT","Party":"DEM"},
+{"Name":"RAPINI, DOMINIC","TotalDonations":198123.57,"State":"CT","Party":"REP"},
+{"Name":"KULA, SHANNON","TotalDonations":135638.39,"State":"CT","Party":"DEM"}],"top10Warchests":[
+{"Name":"MURPHY, CHRISTOPHER S MR","Warchest":5413484.36,"Initials":"CT","Party":"DEM"},
+{"Name":"HIMES, JIM","Warchest":2604109.45,"Initials":"CT","Party":"DEM"},
+{"Name":"COURTNEY, JOSEPH D","Warchest":825667.06,"Initials":"CT","Party":"DEM"},
+{"Name":"HAYES, JAHANA","Warchest":807399.73,"Initials":"CT","Party":"DEM"},
+{"Name":"LARSON, JOHN B","Warchest":484889.19,"Initials":"CT","Party":"DEM"},
+{"Name":"ARORA, HARRY","Warchest":292097.38,"Initials":"CT","Party":"REP"},
+{"Name":"DELAURO, ROSA L","Warchest":80847.29,"Initials":"CT","Party":"DEM"},
+{"Name":"COREY, MATTHEW MCKINNON","Warchest":65034.97,"Initials":"CT","Party":"REP"},
+{"Name":"KULA, SHANNON","Warchest":31069.1,"Initials":"CT","Party":"DEM"},
+{"Name":"RAPINI, DOMINIC","Warchest":29981.22,"Initials":"CT","Party":"REP"}],"initials":"CT"},
+{"percentages": [{"value":98.39857297330255},{"value":-1.7763568394002505e-15},{"value":1.6014270266974524}],"total":537957.7,"top10Donees":[
+{"Name":"NORTON, ELEANOR HOLMES","TotalDonations":379163.91,"State":"DC","Party":"DEM"},
+{"Name":"FORD, KIM R.","TotalDonations":132152.79,"State":"DC","Party":"DEM"},
+{"Name":"DEMARCO, ADAM 1985","TotalDonations":18026.0,"State":"DC","Party":"DEM"},
+{"Name":"RIMENSNYDER, NELSON FREDERICK","TotalDonations":8615.0,"State":"DC","Party":"REP"},
+{"Name":"CHEEKS, JOHN C","TotalDonations":0.0,"State":"DC","Party":"IAP"},
+{"Name":"MATHUR, SUMATI","TotalDonations":0.0,"State":"DC","Party":"DEM"},
+{"Name":"SMITH, CRAIG ALLEN","TotalDonations":0.0,"State":"DC","Party":"REP"},
+{"Name":"STRACUZZI, NATALE N.","TotalDonations":0.0,"State":"DC","Party":"GRE"},
+{"Name":"MAJORS, BRUCE","TotalDonations":0.0,"State":"DC","Party":"LIB"}],"top10Warchests":[
+{"Name":"NORTON, ELEANOR HOLMES","Warchest":74697.09,"Initials":"DC","Party":"DEM"},
+{"Name":"RIMENSNYDER, NELSON FREDERICK","Warchest":8570.24,"Initials":"DC","Party":"REP"},
+{"Name":"DEMARCO, ADAM 1985","Warchest":1.0,"Initials":"DC","Party":"DEM"},
+{"Name":"FORD, KIM R.","Warchest":0.0,"Initials":"DC","Party":"DEM"},
+{"Name":"STRACUZZI, NATALE N.","Warchest":0.0,"Initials":"DC","Party":"GRE"},
+{"Name":"SMITH, CRAIG ALLEN","Warchest":0.0,"Initials":"DC","Party":"REP"},
+{"Name":"CHEEKS, JOHN C","Warchest":0.0,"Initials":"DC","Party":"IAP"},
+{"Name":"MATHUR, SUMATI","Warchest":0.0,"Initials":"DC","Party":"DEM"}],"initials":"DC"},
+{"percentages": [{"value":83.66363439777112},{"value":1.0658141036401503e-14},{"value":16.33636560222887}],"total":5306939.2,"top10Donees":[
+{"Name":"CARPER, THOMAS R","TotalDonations":3037553.68,"State":"DE","Party":"DEM"},
+{"Name":"BLUNT ROCHESTER, LISA","TotalDonations":1204313.97,"State":"DE","Party":"DEM"},
+{"Name":"BOYCE, HENRY CHARLES  'CHUCK'  JR","TotalDonations":381647.0,"State":"DE","Party":"REP"},
+{"Name":"TRUONO, EUGENE (GENE) J JR","TotalDonations":277064.99,"State":"DE","Party":"REP"},
+{"Name":"HARRIS, KERRI EVELYN","TotalDonations":179522.56,"State":"DE","Party":"DEM"},
+{"Name":"ARLETT, ROB","TotalDonations":173810.0,"State":"DE","Party":"REP"},
+{"Name":"MURPHY, LEE H","TotalDonations":19439.0,"State":"DE","Party":"REP"},
+{"Name":"IZZO, ROSE","TotalDonations":18588.0,"State":"DE","Party":"DEM"},
+{"Name":"DE LA FUENTE, ROQUE ROCKY","TotalDonations":15000.0,"State":"DE","Party":"REP"},
+{"Name":"THEODOROPOULOS, DEMITRI GEORGE","TotalDonations":0.0,"State":"DE","Party":"GRE"}],"top10Warchests":[
+{"Name":"CARPER, THOMAS R","Warchest":752708.57,"Initials":"DE","Party":"DEM"},
+{"Name":"BLUNT ROCHESTER, LISA","Warchest":361117.35,"Initials":"DE","Party":"DEM"},
+{"Name":"HARRIS, KERRI EVELYN","Warchest":15323.18,"Initials":"DE","Party":"DEM"},
+{"Name":"ARLETT, ROB","Warchest":13995.62,"Initials":"DE","Party":"REP"},
+{"Name":"MOCKERMAN, CHRISTOPHER WILLIAM","Warchest":300.0,"Initials":"DE","Party":"IND"},
+{"Name":"TRUONO, EUGENE (GENE) J JR","Warchest":287.04,"Initials":"DE","Party":"REP"},
+{"Name":"DE LA FUENTE, ROQUE ROCKY","Warchest":0.0,"Initials":"DE","Party":"REP"},
+{"Name":"BOOKER, TYKIEM","Warchest":0.0,"Initials":"DE","Party":"DEM"},
+{"Name":"WALKER, SCOTT","Warchest":0.0,"Initials":"DE","Party":"REP"},
+{"Name":"IZZO, ROSE","Warchest":0.0,"Initials":"DE","Party":"DEM"}],"initials":"DE"},
+{"percentages": [{"value":41.095561187331946},{"value":0.7820680059199532},{"value":58.1223708067481}],"total":181200896.76,"top10Donees":[
+{"Name":"SCOTT, RICK GOV","TotalDonations":68801011.68,"State":"FL","Party":"REP"},
+{"Name":"NELSON, BILL","TotalDonations":26594280.91,"State":"FL","Party":"DEM"},
+{"Name":"MAST, BRIAN","TotalDonations":5373899.46,"State":"FL","Party":"REP"},
+{"Name":"CURBELO, CARLOS MR.","TotalDonations":4814575.35,"State":"FL","Party":"REP"},
+{"Name":"BAER, LAUREN","TotalDonations":3987524.47,"State":"FL","Party":"DEM"},
+{"Name":"MUCARSEL-POWELL, DEBBIE","TotalDonations":3767708.38,"State":"FL","Party":"DEM"},
+{"Name":"SHALALA, DONNA","TotalDonations":3659882.62,"State":"FL","Party":"DEM"},
+{"Name":"CRIST, CHARLIE JOSEPH","TotalDonations":3309509.4,"State":"FL","Party":"DEM"},
+{"Name":"MURPHY, STEPHANIE","TotalDonations":3046536.26,"State":"FL","Party":"DEM"},
+{"Name":"SODERBERG, NANCY","TotalDonations":2860213.22,"State":"FL","Party":"DEM"}],"top10Warchests":[
+{"Name":"NELSON, BILL","Warchest":3806614.61,"Initials":"FL","Party":"DEM"},
+{"Name":"SCOTT, RICK GOV","Warchest":2304762.74,"Initials":"FL","Party":"REP"},
+{"Name":"CRIST, CHARLIE JOSEPH","Warchest":1928261.59,"Initials":"FL","Party":"DEM"},
+{"Name":"FRANKEL, LOIS J.","Warchest":972626.96,"Initials":"FL","Party":"DEM"},
+{"Name":"GRAYSON, ALAN MARK","Warchest":920871.76,"Initials":"FL","Party":"DEM"},
+{"Name":"MAST, BRIAN","Warchest":911019.03,"Initials":"FL","Party":"REP"},
+{"Name":"MURPHY, STEPHANIE","Warchest":752598.69,"Initials":"FL","Party":"DEM"},
+{"Name":"CASTOR, KATHY","Warchest":732183.42,"Initials":"FL","Party":"DEM"},
+{"Name":"DIAZ-BALART, MARIO","Warchest":694278.89,"Initials":"FL","Party":"REP"},
+{"Name":"CURBELO, CARLOS MR.","Warchest":640163.83,"Initials":"FL","Party":"REP"}],"initials":"FL"},
+{"percentages": [{"value":64.85900848102352},{"value":0.0557061077614307},{"value":35.08528541121505}],"total":72068345.13,"top10Donees":[
+{"Name":"OSSOFF, T. JONATHAN","TotalDonations":31552052.24,"State":"GA","Party":"DEM"},
+{"Name":"HANDEL, KAREN CHRISTINE","TotalDonations":8476377.42,"State":"GA","Party":"REP"},
+{"Name":"LEWIS, JOHN R.","TotalDonations":3376243.71,"State":"GA","Party":"DEM"},
+{"Name":"MOODY, DAN","TotalDonations":3207231.28,"State":"GA","Party":"REP"},
+{"Name":"BOURDEAUX, CAROLYN","TotalDonations":2415053.07,"State":"GA","Party":"DEM"},
+{"Name":"GRAVES, JOHN THOMAS MR. JR.","TotalDonations":1977425.65,"State":"GA","Party":"REP"},
+{"Name":"CARTER, EARL LEROY","TotalDonations":1924734.88,"State":"GA","Party":"REP"},
+{"Name":"MCBATH, LUCIA KAY MS.","TotalDonations":1803443.48,"State":"GA","Party":"DEM"},
+{"Name":"KIM, DAVID","TotalDonations":1499900.68,"State":"GA","Party":"DEM"},
+{"Name":"COLLINS, DOUGLAS ALLEN","TotalDonations":1311898.96,"State":"GA","Party":"REP"}],"top10Warchests":[
+{"Name":"GRAVES, JOHN THOMAS MR. JR.","Warchest":1977662.29,"Initials":"GA","Party":"REP"},
+{"Name":"LEWIS, JOHN R.","Warchest":1824332.4,"Initials":"GA","Party":"DEM"},
+{"Name":"CARTER, EARL LEROY","Warchest":1303684.13,"Initials":"GA","Party":"REP"},
+{"Name":"COLLINS, DOUGLAS ALLEN","Warchest":896350.97,"Initials":"GA","Party":"REP"},
+{"Name":"BOURDEAUX, CAROLYN","Warchest":684825.88,"Initials":"GA","Party":"DEM"},
+{"Name":"SCOTT, JAMES AUSTIN","Warchest":622285.63,"Initials":"GA","Party":"REP"},
+{"Name":"MCBATH, LUCIA KAY MS.","Warchest":564822.15,"Initials":"GA","Party":"DEM"},
+{"Name":"WOODALL, ROB REP.","Warchest":489242.64,"Initials":"GA","Party":"REP"},
+{"Name":"SCOTT, DAVID ALBERT","Warchest":431756.5,"Initials":"GA","Party":"DEM"},
+{"Name":"HANDEL, KAREN CHRISTINE","Warchest":402107.95,"Initials":"GA","Party":"REP"}],"initials":"GA"},
+{"percentages": [{"value":98.03567952541998},{"value":5.329070518200751e-15},{"value":1.9643204745800151}],"total":7311657.23,"top10Donees":[
+{"Name":"HIRONO, MAZIE K","TotalDonations":3082774.75,"State":"HI","Party":"DEM"},
+{"Name":"GABBARD, TULSI","TotalDonations":1337927.66,"State":"HI","Party":"DEM"},
+{"Name":"KIM, DONNA MERCADO","TotalDonations":721399.31,"State":"HI","Party":"DEM"},
+{"Name":"CHIN, DOUG","TotalDonations":598230.6,"State":"HI","Party":"DEM"},
+{"Name":"CASE, ED","TotalDonations":504510.39,"State":"HI","Party":"DEM"},
+{"Name":"ING, MARK KANIELA","TotalDonations":410418.88,"State":"HI","Party":"DEM"},
+{"Name":"MARTIN, ERNEST YORIHIKO","TotalDonations":393973.0,"State":"HI","Party":"DEM"},
+{"Name":"CAVASSO, CAMPBELL","TotalDonations":118894.42,"State":"HI","Party":"REP"},
+{"Name":"FUKUMOTO, BETH","TotalDonations":86895.26,"State":"HI","Party":"DEM"},
+{"Name":"ALU CAMPAGNA, SHERYL FRANCYS","TotalDonations":31248.0,"State":"HI","Party":"DEM"}],"top10Warchests":[
+{"Name":"GABBARD, TULSI","Warchest":2090989.48,"Initials":"HI","Party":"DEM"},
+{"Name":"HIRONO, MAZIE K","Warchest":1499014.59,"Initials":"HI","Party":"DEM"},
+{"Name":"CASE, ED","Warchest":80387.29,"Initials":"HI","Party":"DEM"},
+{"Name":"CAVASSO, CAMPBELL","Warchest":16552.05,"Initials":"HI","Party":"REP"},
+{"Name":"ING, MARK KANIELA","Warchest":13203.56,"Initials":"HI","Party":"DEM"},
+{"Name":"KIM, DONNA MERCADO","Warchest":5142.51,"Initials":"HI","Party":"DEM"},
+{"Name":"CURTIS , RON","Warchest":2420.0,"Initials":"HI","Party":"REP"},
+{"Name":"CHIN, DOUG","Warchest":2169.66,"Initials":"HI","Party":"DEM"},
+{"Name":"FUKUMOTO, BETH","Warchest":915.83,"Initials":"HI","Party":"DEM"},
+{"Name":"ALU CAMPAGNA, SHERYL FRANCYS","Warchest":200.0,"Initials":"HI","Party":"DEM"}],"initials":"HI"},
+{"percentages": [{"value":5.205374881631056},{"value":0.06477516558886975},{"value":94.72984995278007}],"total":2968884.73,"top10Donees":[
+{"Name":"SIMPSON, MICHAEL","TotalDonations":1042019.95,"State":"ID","Party":"REP"},
+{"Name":"FULCHER, RUSS","TotalDonations":848688.3,"State":"ID","Party":"REP"},
+{"Name":"LEROY, DAVID H","TotalDonations":362407.68,"State":"ID","Party":"REP"},
+{"Name":"MALEK, LUCAS TODD","TotalDonations":299909.72,"State":"ID","Party":"REP"},
+{"Name":"SNYDER, MICHAEL","TotalDonations":142729.36,"State":"ID","Party":"REP"},
+{"Name":"SWISHER, CARLTON AARON","TotalDonations":119603.22,"State":"ID","Party":"DEM"},
+{"Name":"GALLEGOS, ALEXANDER","TotalDonations":82935.59,"State":"ID","Party":"REP"},
+{"Name":"PERRY, CHRISTY","TotalDonations":31792.0,"State":"ID","Party":"REP"},
+{"Name":"VANDERMAAS, JAMES","TotalDonations":19204.87,"State":"ID","Party":"DEM"},
+{"Name":"MCNEIL, ANA","TotalDonations":15733.49,"State":"ID","Party":"DEM"}],"top10Warchests":[
+{"Name":"SIMPSON, MICHAEL","Warchest":301465.99,"Initials":"ID","Party":"REP"},
+{"Name":"MALEK, LUCAS TODD","Warchest":39238.98,"Initials":"ID","Party":"REP"},
+{"Name":"SWISHER, CARLTON AARON","Warchest":14755.23,"Initials":"ID","Party":"DEM"},
+{"Name":"FULCHER, RUSS","Warchest":12344.5,"Initials":"ID","Party":"REP"},
+{"Name":"MCNEIL, ANA","Warchest":6425.91,"Initials":"ID","Party":"DEM"},
+{"Name":"SNYDER, MICHAEL","Warchest":1908.38,"Initials":"ID","Party":"REP"},
+{"Name":"HENDERSON, NICHOLAS","Warchest":685.0,"Initials":"ID","Party":"REP"},
+{"Name":"PERRY, CHRISTY","Warchest":129.55,"Initials":"ID","Party":"REP"},
+{"Name":"HOWARD, WILLIAM","Warchest":35.16,"Initials":"ID","Party":"LIB"},
+{"Name":"LIFE, PRO","Warchest":0.0,"Initials":"ID","Party":"CON"}],"initials":"ID"},
+{"percentages": [{"value":66.81965994327732},{"value":0.4652519259661787},{"value":32.715088130756506}],"total":70300102.32,"top10Donees":[
+{"Name":"ROSKAM, PETER","TotalDonations":6437506.64,"State":"IL","Party":"REP"},
+{"Name":"CASTEN, SEAN","TotalDonations":5424489.31,"State":"IL","Party":"DEM"},
+{"Name":"KRISHNAMOORTHI, S. RAJA","TotalDonations":5132480.49,"State":"IL","Party":"DEM"},
+{"Name":"SCHNEIDER, BRADLEY SCOTT","TotalDonations":4295011.96,"State":"IL","Party":"DEM"},
+{"Name":"UNDERWOOD, LAUREN A","TotalDonations":4018305.12,"State":"IL","Party":"DEM"},
+{"Name":"BUSTOS, CHERI","TotalDonations":3655890.1,"State":"IL","Party":"DEM"},
+{"Name":"LONDRIGAN, BETSY DIRKSEN","TotalDonations":3643244.71,"State":"IL","Party":"DEM"},
+{"Name":"KELLY, BRENDAN","TotalDonations":3382283.01,"State":"IL","Party":"DEM"},
+{"Name":"DAVIS, RODNEY L","TotalDonations":3237280.1,"State":"IL","Party":"REP"},
+{"Name":"BOST, MICHAEL","TotalDonations":2608187.17,"State":"IL","Party":"REP"}],"top10Warchests":[
+{"Name":"KRISHNAMOORTHI, S. RAJA","Warchest":4331220.99,"Initials":"IL","Party":"DEM"},
+{"Name":"FOSTER, G. WILLIAM (BILL)","Warchest":3283736.09,"Initials":"IL","Party":"DEM"},
+{"Name":"BUSTOS, CHERI","Warchest":2409849.61,"Initials":"IL","Party":"DEM"},
+{"Name":"LAHOOD, DARIN MCKAY","Warchest":1836769.8,"Initials":"IL","Party":"REP"},
+{"Name":"SCHNEIDER, BRADLEY SCOTT","Warchest":1260312.44,"Initials":"IL","Party":"DEM"},
+{"Name":"KINZINGER, ADAM","Warchest":1211151.36,"Initials":"IL","Party":"REP"},
+{"Name":"CASTEN, SEAN","Warchest":1199276.95,"Initials":"IL","Party":"DEM"},
+{"Name":"UNDERWOOD, LAUREN A","Warchest":1171188.72,"Initials":"IL","Party":"DEM"},
+{"Name":"SHIMKUS, JOHN M","Warchest":1158378.38,"Initials":"IL","Party":"REP"},
+{"Name":"DUCKWORTH, L TAMMY","Warchest":1132746.07,"Initials":"IL","Party":"DEM"}],"initials":"IL"},
+{"percentages": [{"value":39.14808000256233},{"value":0.11711746735550577},{"value":60.73480253008216}],"total":60663188.510000005,"top10Donees":[
+{"Name":"BRAUN, MIKE","TotalDonations":16964706.15,"State":"IN","Party":"REP"},
+{"Name":"DONNELLY, JOSEPH S","TotalDonations":13433431.41,"State":"IN","Party":"DEM"},
+{"Name":"HALL, MEL","TotalDonations":3467330.07,"State":"IN","Party":"DEM"},
+{"Name":"MESSER, ALLEN LUCAS","TotalDonations":3056793.0,"State":"IN","Party":"REP"},
+{"Name":"ROKITA, THEODORE EDWARD","TotalDonations":2924402.07,"State":"IN","Party":"REP"},
+{"Name":"WALORSKI SWIHART, JACKIE","TotalDonations":2684249.23,"State":"IN","Party":"REP"},
+{"Name":"PENCE, GREGORY J.","TotalDonations":2486054.68,"State":"IN","Party":"REP"},
+{"Name":"WATSON, LIZ","TotalDonations":2158730.27,"State":"IN","Party":"DEM"},
+{"Name":"HOLLINGSWORTH, TREY","TotalDonations":1418211.11,"State":"IN","Party":"REP"},
+{"Name":"BROOKS, SUSAN MRS.","TotalDonations":1354475.47,"State":"IN","Party":"REP"}],"top10Warchests":[
+{"Name":"DONNELLY, JOSEPH S","Warchest":2321981.84,"Initials":"IN","Party":"DEM"},
+{"Name":"BRAUN, MIKE","Warchest":1387861.32,"Initials":"IN","Party":"REP"},
+{"Name":"BROOKS, SUSAN MRS.","Warchest":1272343.48,"Initials":"IN","Party":"REP"},
+{"Name":"CARSON, ANDRE","Warchest":879645.46,"Initials":"IN","Party":"DEM"},
+{"Name":"VISCLOSKY, PETER J.","Warchest":554347.33,"Initials":"IN","Party":"DEM"},
+{"Name":"HALL, MEL","Warchest":505403.23,"Initials":"IN","Party":"DEM"},
+{"Name":"WALORSKI SWIHART, JACKIE","Warchest":478733.46,"Initials":"IN","Party":"REP"},
+{"Name":"HOLLINGSWORTH, TREY","Warchest":439270.42,"Initials":"IN","Party":"REP"},
+{"Name":"PENCE, GREGORY J.","Warchest":398340.48,"Initials":"IN","Party":"REP"},
+{"Name":"BUCSHON, LARRY D.","Warchest":250197.14,"Initials":"IN","Party":"REP"}],"initials":"IN"},
+{"percentages": [{"value":68.48267625390174},{"value":-2.842170943040401e-14},{"value":31.517323746098285}],"total":21447446.059999995,"top10Donees":[
+{"Name":"AXNE, CINDY","TotalDonations":4347206.74,"State":"IA","Party":"DEM"},
+{"Name":"FINKENAUER, ABBY","TotalDonations":3891565.57,"State":"IA","Party":"DEM"},
+{"Name":"YOUNG, DAVID","TotalDonations":2599772.62,"State":"IA","Party":"REP"},
+{"Name":"BLUM, RODNEY","TotalDonations":2526104.03,"State":"IA","Party":"REP"},
+{"Name":"LOEBSACK, DAVID WAYNE","TotalDonations":1975342.39,"State":"IA","Party":"DEM"},
+{"Name":"SCHOLTEN, JAMES D.","TotalDonations":1735671.47,"State":"IA","Party":"DEM"},
+{"Name":"PETERS, CHRISTOPHER","TotalDonations":797955.64,"State":"IA","Party":"REP"},
+{"Name":"MAURO, EDDIE J.","TotalDonations":793982.45,"State":"IA","Party":"DEM"},
+{"Name":"KING, STEVE MR.","TotalDonations":739553.57,"State":"IA","Party":"REP"},
+{"Name":"GREENFIELD, THERESA","TotalDonations":404105.82,"State":"IA","Party":"DEM"}],"top10Warchests":[
+{"Name":"LOEBSACK, DAVID WAYNE","Warchest":1288748.65,"Initials":"IA","Party":"DEM"},
+{"Name":"BLUM, RODNEY","Warchest":1072269.3,"Initials":"IA","Party":"REP"},
+{"Name":"AXNE, CINDY","Warchest":904294.61,"Initials":"IA","Party":"DEM"},
+{"Name":"YOUNG, DAVID","Warchest":747223.34,"Initials":"IA","Party":"REP"},
+{"Name":"FINKENAUER, ABBY","Warchest":561286.67,"Initials":"IA","Party":"DEM"},
+{"Name":"SCHOLTEN, JAMES D.","Warchest":316358.92,"Initials":"IA","Party":"DEM"},
+{"Name":"KING, STEVE MR.","Warchest":176311.72,"Initials":"IA","Party":"REP"},
+{"Name":"PETERS, CHRISTOPHER","Warchest":92535.8,"Initials":"IA","Party":"REP"},
+{"Name":"GREENFIELD, THERESA","Warchest":40394.4,"Initials":"IA","Party":"DEM"},
+{"Name":"MAURO, EDDIE J.","Warchest":27845.11,"Initials":"IA","Party":"DEM"}],"initials":"IA"},
+{"percentages": [{"value":54.23799350570514},{"value":7.105427357601002e-15},{"value":45.76200649429485}],"total":22309624.56,"top10Donees":[
+{"Name":"YODER, KEVIN","TotalDonations":4187514.24,"State":"KS","Party":"REP"},
+{"Name":"DAVIDS, SHARICE","TotalDonations":3981776.39,"State":"KS","Party":"DEM"},
+{"Name":"DAVIS, PAUL T.","TotalDonations":3396998.53,"State":"KS","Party":"DEM"},
+{"Name":"ESTES, RON","TotalDonations":1693354.59,"State":"KS","Party":"REP"},
+{"Name":"THOMPSON, JAMES A MR.","TotalDonations":1393994.39,"State":"KS","Party":"DEM"},
+{"Name":"MARSHALL, ROGER W","TotalDonations":1310751.01,"State":"KS","Party":"REP"},
+{"Name":"WATKINS, STEVE","TotalDonations":1069280.03,"State":"KS","Party":"REP"},
+{"Name":"WELDER, BRENT","TotalDonations":995947.23,"State":"KS","Party":"DEM"},
+{"Name":"NIERMANN, TOM","TotalDonations":810073.47,"State":"KS","Party":"DEM"},
+{"Name":"TYSON, CARYN","TotalDonations":629680.01,"State":"KS","Party":"REP"}],"top10Warchests":[
+{"Name":"YODER, KEVIN","Warchest":804494.82,"Initials":"KS","Party":"REP"},
+{"Name":"MARSHALL, ROGER W","Warchest":733323.37,"Initials":"KS","Party":"REP"},
+{"Name":"DAVIDS, SHARICE","Warchest":532449.94,"Initials":"KS","Party":"DEM"},
+{"Name":"ESTES, RON","Warchest":455673.67,"Initials":"KS","Party":"REP"},
+{"Name":"DAVIS, PAUL T.","Warchest":375245.6,"Initials":"KS","Party":"DEM"},
+{"Name":"TYSON, CARYN","Warchest":304760.67,"Initials":"KS","Party":"REP"},
+{"Name":"WATKINS, STEVE","Warchest":219833.96,"Initials":"KS","Party":"REP"},
+{"Name":"RAMSEY, ANDREA","Warchest":91047.49,"Initials":"KS","Party":"DEM"},
+{"Name":"HUELSKAMP, TIMOTHY A REP.","Warchest":65177.46,"Initials":"KS","Party":"REP"},
+{"Name":"THOMPSON, JAMES A MR.","Warchest":33192.74,"Initials":"KS","Party":"DEM"}],"initials":"KS"},
+{"percentages": [{"value":54.22921870194344},{"value":-2.1316282072803006e-14},{"value":45.77078129805658}],"total":20361383.169999994,"top10Donees":[
+{"Name":"MCGRATH, AMY","TotalDonations":7806264.58,"State":"KY","Party":"DEM"},
+{"Name":"BARR, GARLAND ANDY","TotalDonations":4818291.97,"State":"KY","Party":"REP"},
+{"Name":"GUTHRIE, S. BRETT HON.","TotalDonations":1883755.59,"State":"KY","Party":"REP"},
+{"Name":"GRAY, JAMES P.","TotalDonations":1701825.26,"State":"KY","Party":"DEM"},
+{"Name":"ROGERS, HAROLD DALLAS","TotalDonations":860227.85,"State":"KY","Party":"REP"},
+{"Name":"YARMUTH, JOHN A","TotalDonations":833089.58,"State":"KY","Party":"DEM"},
+{"Name":"GLISSON, VICKIE YATES BROWN","TotalDonations":723198.26,"State":"KY","Party":"REP"},
+{"Name":"COMER, JAMES","TotalDonations":688171.1,"State":"KY","Party":"REP"},
+{"Name":"THOMAS, REGINALD LEONARD 'REGGIE'","TotalDonations":351512.73,"State":"KY","Party":"DEM"},
+{"Name":"MASSIE, THOMAS H.","TotalDonations":315939.39,"State":"KY","Party":"REP"}],"top10Warchests":[
+{"Name":"GUTHRIE, S. BRETT HON.","Warchest":2243422.82,"Initials":"KY","Party":"REP"},
+{"Name":"MCGRATH, AMY","Warchest":1668142.02,"Initials":"KY","Party":"DEM"},
+{"Name":"ROGERS, HAROLD DALLAS","Warchest":1044431.62,"Initials":"KY","Party":"REP"},
+{"Name":"BARR, GARLAND ANDY","Warchest":872018.31,"Initials":"KY","Party":"REP"},
+{"Name":"YARMUTH, JOHN A","Warchest":601538.75,"Initials":"KY","Party":"DEM"},
+{"Name":"COMER, JAMES","Warchest":434553.25,"Initials":"KY","Party":"REP"},
+{"Name":"GLISSON, VICKIE YATES BROWN","Warchest":254769.46,"Initials":"KY","Party":"REP"},
+{"Name":"MASSIE, THOMAS H.","Warchest":235301.66,"Initials":"KY","Party":"REP"},
+{"Name":"LINDERMAN, HANK","Warchest":26392.84,"Initials":"KY","Party":"DEM"},
+{"Name":"WALKER, PAUL","Warchest":15805.08,"Initials":"KY","Party":"DEM"}],"initials":"KY"},
+{"percentages": [{"value":13.512166991677956},{"value":0.19893545067881746},{"value":86.28889755764322}],"total":17413754.0,"top10Donees":[
+{"Name":"SCALISE, STEVE MR","TotalDonations":9592807.23,"State":"LA","Party":"REP"},
+{"Name":"GRAVES, GARRET","TotalDonations":2254597.42,"State":"LA","Party":"REP"},
+{"Name":"RICHMOND, CEDRIC L.","TotalDonations":1488719.2,"State":"LA","Party":"DEM"},
+{"Name":"JOHNSON, JAMES MICHAEL","TotalDonations":1151099.1,"State":"LA","Party":"REP"},
+{"Name":"ABRAHAM, RALPH LEE DR. JR.","TotalDonations":883315.1,"State":"LA","Party":"REP"},
+{"Name":"HIGGINS, CLAY CAPTAIN","TotalDonations":816348.5,"State":"LA","Party":"REP"},
+{"Name":"GUILLORY, JOSHUA S","TotalDonations":327969.0,"State":"LA","Party":"REP"},
+{"Name":"METHVIN, MIMI","TotalDonations":234978.47,"State":"LA","Party":"DEM"},
+{"Name":"SAVOIE, TAMMY MARIE DR","TotalDonations":233600.33,"State":"LA","Party":"DEM"},
+{"Name":"CONNER, PHILLIP DR","TotalDonations":183994.26,"State":"LA","Party":"DEM"}],"top10Warchests":[
+{"Name":"GRAVES, GARRET","Warchest":2058214.77,"Initials":"LA","Party":"REP"},
+{"Name":"SCALISE, STEVE MR","Warchest":1956147.68,"Initials":"LA","Party":"REP"},
+{"Name":"RICHMOND, CEDRIC L.","Warchest":761276.36,"Initials":"LA","Party":"DEM"},
+{"Name":"JOHNSON, JAMES MICHAEL","Warchest":493289.99,"Initials":"LA","Party":"REP"},
+{"Name":"ABRAHAM, RALPH LEE DR. JR.","Warchest":170305.2,"Initials":"LA","Party":"REP"},
+{"Name":"SAVOIE, TAMMY MARIE DR","Warchest":115067.5,"Initials":"LA","Party":"DEM"},
+{"Name":"HIGGINS, CLAY CAPTAIN","Warchest":94984.6,"Initials":"LA","Party":"REP"},
+{"Name":"METHVIN, MIMI","Warchest":43273.64,"Initials":"LA","Party":"DEM"},
+{"Name":"GUILLORY, JOSHUA S","Warchest":22057.99,"Initials":"LA","Party":"REP"},
+{"Name":"SCHMIDT, JESSE","Warchest":12065.62,"Initials":"LA","Party":"NPA"}],"initials":"LA"},
+{"percentages": [{"value":40.22989837077227},{"value":29.947973749369464},{"value":29.822127879858268}],"total":16963417.299999997,"top10Donees":[
+{"Name":"KING, ANGUS STANLEY JR","TotalDonations":4726140.27,"State":"ME","Party":"IND"},
+{"Name":"GOLDEN, JARED","TotalDonations":4662579.35,"State":"ME","Party":"DEM"},
+{"Name":"POLIQUIN, BRUCE L","TotalDonations":3914226.9,"State":"ME","Party":"REP"},
+{"Name":"BRAKEY, ERIC","TotalDonations":805999.94,"State":"ME","Party":"REP"},
+{"Name":"PINGREE, CHELLIE M","TotalDonations":720316.01,"State":"ME","Party":"DEM"},
+{"Name":"ST. CLAIR, LUCAS","TotalDonations":709835.37,"State":"ME","Party":"DEM"},
+{"Name":"RINGELSTEIN, ZACKARY (ZAK)","TotalDonations":359369.64,"State":"ME","Party":"DEM"},
+{"Name":"GROHMAN, MARTIN JAMES","TotalDonations":354034.49,"State":"ME","Party":"IND"},
+{"Name":"LINN, MAX","TotalDonations":249886.0,"State":"ME","Party":"REP"},
+{"Name":"FULFORD, JONATHAN STEVEN","TotalDonations":179073.97,"State":"ME","Party":"DEM"}],"top10Warchests":[
+{"Name":"KING, ANGUS STANLEY JR","Warchest":970519.99,"Initials":"ME","Party":"IND"},
+{"Name":"POLIQUIN, BRUCE L","Warchest":738481.02,"Initials":"ME","Party":"REP"},
+{"Name":"GOLDEN, JARED","Warchest":449718.03,"Initials":"ME","Party":"DEM"},
+{"Name":"PINGREE, CHELLIE M","Warchest":278882.51,"Initials":"ME","Party":"DEM"},
+{"Name":"GROHMAN, MARTIN JAMES","Warchest":97322.1,"Initials":"ME","Party":"IND"},
+{"Name":"BRAKEY, ERIC","Warchest":85953.22,"Initials":"ME","Party":"REP"},
+{"Name":"HOLBROOK, MARK IRVING DR","Warchest":52669.55,"Initials":"ME","Party":"REP"},
+{"Name":"RINGELSTEIN, ZACKARY (ZAK)","Warchest":32028.55,"Initials":"ME","Party":"DEM"},
+{"Name":"ST. CLAIR, LUCAS","Warchest":15277.06,"Initials":"ME","Party":"DEM"},
+{"Name":"RICH, TIMOTHY A","Warchest":5208.0,"Initials":"ME","Party":"DEM"}],"initials":"ME"},
+{"percentages": [{"value":88.13257050853055},{"value":4.547532040085092},{"value":7.319897451384359}],"total":40913660.059999995,"top10Donees":[
+{"Name":"TRONE, DAVID","TotalDonations":16527889.78,"State":"MD","Party":"DEM"},
+{"Name":"CARDIN, BENJAMIN L","TotalDonations":3912650.92,"State":"MD","Party":"DEM"},
+{"Name":"HOYER, STENY","TotalDonations":3910860.01,"State":"MD","Party":"DEM"},
+{"Name":"SIMON, NEAL","TotalDonations":1822212.28,"State":"MD","Party":"IND"},
+{"Name":"COLVIN, JESSE","TotalDonations":1703659.55,"State":"MD","Party":"DEM"},
+{"Name":"SEGAL, JEROME","TotalDonations":1695401.0,"State":"MD","Party":"DEM"},
+{"Name":"HARRIS, ANDREW P","TotalDonations":1587487.46,"State":"MD","Party":"REP"},
+{"Name":"MILLER, ARUNA","TotalDonations":1471031.06,"State":"MD","Party":"DEM"},
+{"Name":"RASKIN, JAMIE","TotalDonations":1125007.35,"State":"MD","Party":"DEM"},
+{"Name":"RUPPERSBERGER, C.A. DUTCH","TotalDonations":947661.16,"State":"MD","Party":"DEM"}],"top10Warchests":[
+{"Name":"HOWARD, ALBERT BINYAHMIN","Warchest":15000000.0,"Initials":"MD","Party":"REP"},
+{"Name":"CARDIN, BENJAMIN L","Warchest":1586764.98,"Initials":"MD","Party":"DEM"},
+{"Name":"RUPPERSBERGER, C.A. DUTCH","Warchest":1182299.81,"Initials":"MD","Party":"DEM"},
+{"Name":"SARBANES, JOHN P. MR.","Warchest":1168827.2,"Initials":"MD","Party":"DEM"},
+{"Name":"HARRIS, ANDREW P","Warchest":1129605.21,"Initials":"MD","Party":"REP"},
+{"Name":"CUMMINGS, ELIJAH E","Warchest":847733.69,"Initials":"MD","Party":"DEM"},
+{"Name":"HOYER, STENY","Warchest":755536.51,"Initials":"MD","Party":"DEM"},
+{"Name":"COLVIN, JESSE","Warchest":661269.11,"Initials":"MD","Party":"DEM"},
+{"Name":"TRONE, DAVID","Warchest":658058.4,"Initials":"MD","Party":"DEM"},
+{"Name":"RASKIN, JAMIE","Warchest":648556.25,"Initials":"MD","Party":"DEM"}],"initials":"MD"},
+{"percentages": [{"value":74.58418115401973},{"value":7.0537950205661915},{"value":18.362023825414077}],"total":71231522.53999999,"top10Donees":[
+{"Name":"WARREN, ELIZABETH","TotalDonations":25029345.02,"State":"MA","Party":"DEM"},
+{"Name":"KINGSTON, JOHN MR","TotalDonations":6587763.89,"State":"MA","Party":"REP"},
+{"Name":"AYYADURAI, SHIVA  DR","TotalDonations":5002179.34,"State":"MA","Party":"IND"},
+{"Name":"KENNEDY, JOSEPH P III","TotalDonations":4319955.42,"State":"MA","Party":"DEM"},
+{"Name":"KOH, DANIEL ARRIGG","TotalDonations":3205214.0,"State":"MA","Party":"DEM"},
+{"Name":"NEAL, RICHARD E MR.","TotalDonations":3144384.28,"State":"MA","Party":"DEM"},
+{"Name":"DIEHL, GEOFF","TotalDonations":2738736.47,"State":"MA","Party":"REP"},
+{"Name":"GIFFORD, RUFUS","TotalDonations":2345004.77,"State":"MA","Party":"DEM"},
+{"Name":"MOULTON, SETH","TotalDonations":2324874.17,"State":"MA","Party":"DEM"},
+{"Name":"TRAHAN, LORI","TotalDonations":2031966.41,"State":"MA","Party":"DEM"}],"top10Warchests":[
+{"Name":"WARREN, ELIZABETH","Warchest":13934572.34,"Initials":"MA","Party":"DEM"},
+{"Name":"KENNEDY, JOSEPH P III","Warchest":4341973.55,"Initials":"MA","Party":"DEM"},
+{"Name":"NEAL, RICHARD E MR.","Warchest":3163215.03,"Initials":"MA","Party":"DEM"},
+{"Name":"KEATING, WILLIAM RICHARD","Warchest":1514560.49,"Initials":"MA","Party":"DEM"},
+{"Name":"LYNCH, STEPHEN","Warchest":1460923.92,"Initials":"MA","Party":"DEM"},
+{"Name":"CLARK, KATHERINE","Warchest":1209858.58,"Initials":"MA","Party":"DEM"},
+{"Name":"MOULTON, SETH","Warchest":900615.44,"Initials":"MA","Party":"DEM"},
+{"Name":"MCGOVERN, JAMES P. MR.","Warchest":524065.13,"Initials":"MA","Party":"DEM"},
+{"Name":"DIEHL, GEOFF","Warchest":319388.28,"Initials":"MA","Party":"REP"},
+{"Name":"TRAHAN, LORI","Warchest":315701.17,"Initials":"MA","Party":"DEM"}],"initials":"MA"},
+{"percentages": [{"value":56.44149454335468},{"value":0.31427214588939734},{"value":43.244233310755924}],"total":76518696.66,"top10Donees":[
+{"Name":"STABENOW, DEBBIE","TotalDonations":13022615.71,"State":"MI","Party":"DEM"},
+{"Name":"JAMES, JOHN","TotalDonations":9838137.84,"State":"MI","Party":"REP"},
+{"Name":"SLOTKIN, ELISSA","TotalDonations":6239603.42,"State":"MI","Party":"DEM"},
+{"Name":"PENSLER, SANDY","TotalDonations":5235246.9,"State":"MI","Party":"REP"},
+{"Name":"STEVENS, HALEY","TotalDonations":3585805.69,"State":"MI","Party":"DEM"},
+{"Name":"BISHOP, MIKE","TotalDonations":3170727.17,"State":"MI","Party":"REP"},
+{"Name":"UPTON, FREDERICK STEPHEN","TotalDonations":2922153.56,"State":"MI","Party":"REP"},
+{"Name":"DRISKELL, GRETCHEN","TotalDonations":2428363.1,"State":"MI","Party":"DEM"},
+{"Name":"EPSTEIN, LENA ROSE","TotalDonations":2264867.95,"State":"MI","Party":"REP"},
+{"Name":"WALBERG, TIMOTHY L REP","TotalDonations":2043766.98,"State":"MI","Party":"REP"}],"top10Warchests":[
+{"Name":"STABENOW, DEBBIE","Warchest":2842613.58,"Initials":"MI","Party":"DEM"},
+{"Name":"JAMES, JOHN","Warchest":1884735.02,"Initials":"MI","Party":"REP"},
+{"Name":"SLOTKIN, ELISSA","Warchest":999757.22,"Initials":"MI","Party":"DEM"},
+{"Name":"DRISKELL, GRETCHEN","Warchest":922142.4,"Initials":"MI","Party":"DEM"},
+{"Name":"WALBERG, TIMOTHY L REP","Warchest":850766.56,"Initials":"MI","Party":"REP"},
+{"Name":"UPTON, FREDERICK STEPHEN","Warchest":819277.82,"Initials":"MI","Party":"REP"},
+{"Name":"BISHOP, MIKE","Warchest":782883.42,"Initials":"MI","Party":"REP"},
+{"Name":"KILDEE, DANIEL T.","Warchest":648345.11,"Initials":"MI","Party":"DEM"},
+{"Name":"LAWRENCE, BRENDA LULENAR","Warchest":586132.67,"Initials":"MI","Party":"DEM"},
+{"Name":"DINGELL, DEBBIE","Warchest":514338.54,"Initials":"MI","Party":"DEM"}],"initials":"MI"},
+{"percentages": [{"value":41.33060804399926},{"value":26.511515725354975},{"value":32.15787623064576}],"total":56839596.71,"top10Donees":[
+{"Name":"SMITH, TINA","TotalDonations":8237522.22,"State":"MN","Party":"DEM"},
+{"Name":"KLOBUCHAR, AMY","TotalDonations":7412107.14,"State":"MN","Party":"DEM"},
+{"Name":"PAULSEN, ERIK MR.","TotalDonations":5403207.09,"State":"MN","Party":"REP"},
+{"Name":"PHILLIPS, DEAN","TotalDonations":5276215.54,"State":"MN","Party":"DFL"},
+{"Name":"CRAIG, ANGELA DAWN","TotalDonations":4692494.91,"State":"MN","Party":"DEM"},
+{"Name":"HOUSLEY, KARIN","TotalDonations":4049032.91,"State":"MN","Party":"REP"},
+{"Name":"FEEHAN, DANIEL","TotalDonations":3594534.91,"State":"MN","Party":"DFL"},
+{"Name":"LEWIS, JASON MARK MR.","TotalDonations":2626845.7,"State":"MN","Party":"REP"},
+{"Name":"EMMER, THOMAS EARL JR.","TotalDonations":2123378.08,"State":"MN","Party":"REP"},
+{"Name":"RADINOVICH, JOSEPH","TotalDonations":2023497.6,"State":"MN","Party":"DFL"}],"top10Warchests":[
+{"Name":"KLOBUCHAR, AMY","Warchest":5086325.48,"Initials":"MN","Party":"DEM"},
+{"Name":"CRAIG, ANGELA DAWN","Warchest":1077991.4,"Initials":"MN","Party":"DEM"},
+{"Name":"PAULSEN, ERIK MR.","Warchest":1042931.03,"Initials":"MN","Party":"REP"},
+{"Name":"SMITH, TINA","Warchest":928730.95,"Initials":"MN","Party":"DEM"},
+{"Name":"FEEHAN, DANIEL","Warchest":820358.47,"Initials":"MN","Party":"DFL"},
+{"Name":"PETERSON, COLLIN CLARK","Warchest":754143.59,"Initials":"MN","Party":"DEM"},
+{"Name":"LEWIS, JASON MARK MR.","Warchest":613195.03,"Initials":"MN","Party":"REP"},
+{"Name":"EMMER, THOMAS EARL JR.","Warchest":393047.51,"Initials":"MN","Party":"REP"},
+{"Name":"RADINOVICH, JOSEPH","Warchest":379672.38,"Initials":"MN","Party":"DFL"},
+{"Name":"STAUBER, PETE","Warchest":369778.58,"Initials":"MN","Party":"REP"}],"initials":"MN"},
+{"percentages": [{"value":29.06008045751204},{"value":0.0},{"value":70.93991954248796}],"total":19964860.45,"top10Donees":[
+{"Name":"WICKER, ROGER F","TotalDonations":5928579.47,"State":"MS","Party":"REP"},
+{"Name":"HYDE-SMITH, CINDY","TotalDonations":3908771.01,"State":"MS","Party":"REP"},
+{"Name":"ESPY, MICHAEL","TotalDonations":2459673.4,"State":"MS","Party":"DEM"},
+{"Name":"SHERMAN, HOWARD","TotalDonations":1207911.0,"State":"MS","Party":"DEM"},
+{"Name":"THOMPSON, BENNIE G.","TotalDonations":887310.5,"State":"MS","Party":"DEM"},
+{"Name":"GUEST, MICHAEL PATRICK","TotalDonations":876086.2,"State":"MS","Party":"REP"},
+{"Name":"KELLY, JOHN TRENT TRENT","TotalDonations":873424.82,"State":"MS","Party":"REP"},
+{"Name":"BARIA, DAVID WAYNE","TotalDonations":781291.21,"State":"MS","Party":"DEM"},
+{"Name":"PALAZZO, STEVEN MCCARTY","TotalDonations":710157.75,"State":"MS","Party":"REP"},
+{"Name":"MCDANIEL, CHRISTOPHER BRIAN","TotalDonations":583102.92,"State":"MS","Party":"REP"}],"top10Warchests":[
+{"Name":"WICKER, ROGER F","Warchest":2560758.2,"Initials":"MS","Party":"REP"},
+{"Name":"THOMPSON, BENNIE G.","Warchest":1378797.89,"Initials":"MS","Party":"DEM"},
+{"Name":"PALAZZO, STEVEN MCCARTY","Warchest":355196.91,"Initials":"MS","Party":"REP"},
+{"Name":"ESPY, MICHAEL","Warchest":248210.85,"Initials":"MS","Party":"DEM"},
+{"Name":"HYDE-SMITH, CINDY","Warchest":204459.62,"Initials":"MS","Party":"REP"},
+{"Name":"KELLY, JOHN TRENT TRENT","Warchest":187190.17,"Initials":"MS","Party":"REP"},
+{"Name":"PARKER, PERRY MR.","Warchest":151765.76,"Initials":"MS","Party":"REP"},
+{"Name":"BARIA, DAVID WAYNE","Warchest":79594.29,"Initials":"MS","Party":"DEM"},
+{"Name":"MCDANIEL, CHRISTOPHER BRIAN","Warchest":70585.74,"Initials":"MS","Party":"REP"},
+{"Name":"GUEST, MICHAEL PATRICK","Warchest":51994.24,"Initials":"MS","Party":"REP"}],"initials":"MS"},
+{"percentages": [{"value":61.84469538465135},{"value":1.020964280903236},{"value":37.13434033444541}],"total":61758020.510000005,"top10Donees":[
+{"Name":"MCCASKILL, CLAIRE","TotalDonations":33385760.03,"State":"MO","Party":"DEM"},
+{"Name":"HAWLEY, JOSHUA DAVID","TotalDonations":10221143.05,"State":"MO","Party":"REP"},
+{"Name":"WAGNER, ANN L.","TotalDonations":2908318.4,"State":"MO","Party":"REP"},
+{"Name":"LUETKEMEYER, W BLAINE","TotalDonations":2254127.85,"State":"MO","Party":"REP"},
+{"Name":"SMITH, JASON T","TotalDonations":1908102.5,"State":"MO","Party":"REP"},
+{"Name":"VANOSTRAN, CORT","TotalDonations":1905391.11,"State":"MO","Party":"DEM"},
+{"Name":"GRAVES, SAMUEL B JR 'SAM'","TotalDonations":1657527.0,"State":"MO","Party":"REP"},
+{"Name":"LONG, BILLY MR.","TotalDonations":1442816.84,"State":"MO","Party":"REP"},
+{"Name":"HARTZLER, VICKY","TotalDonations":1168612.13,"State":"MO","Party":"REP"},
+{"Name":"CLEAVER, EMANUEL II","TotalDonations":1042423.92,"State":"MO","Party":"DEM"}],"top10Warchests":[
+{"Name":"HAWLEY, JOSHUA DAVID","Warchest":2844933.22,"Initials":"MO","Party":"REP"},
+{"Name":"LUETKEMEYER, W BLAINE","Warchest":2269176.82,"Initials":"MO","Party":"REP"},
+{"Name":"WAGNER, ANN L.","Warchest":1901805.92,"Initials":"MO","Party":"REP"},
+{"Name":"MCCASKILL, CLAIRE","Warchest":1789381.71,"Initials":"MO","Party":"DEM"},
+{"Name":"SMITH, JASON T","Warchest":1216649.9,"Initials":"MO","Party":"REP"},
+{"Name":"LONG, BILLY MR.","Warchest":725609.46,"Initials":"MO","Party":"REP"},
+{"Name":"CLEAVER, EMANUEL II","Warchest":666821.83,"Initials":"MO","Party":"DEM"},
+{"Name":"GRAVES, SAMUEL B JR 'SAM'","Warchest":646631.04,"Initials":"MO","Party":"REP"},
+{"Name":"HARTZLER, VICKY","Warchest":623109.24,"Initials":"MO","Party":"REP"},
+{"Name":"VANOSTRAN, CORT","Warchest":238846.49,"Initials":"MO","Party":"DEM"}],"initials":"MO"},
+{"percentages": [{"value":62.443641143031606},{"value":0.04190801849242831},{"value":37.514450838475966}],"total":46706312.31,"top10Donees":[
+{"Name":"TESTER, JON","TotalDonations":16942925.27,"State":"MT","Party":"DEM"},
+{"Name":"GIANFORTE, GREG","TotalDonations":9426247.52,"State":"MT","Party":"REP"},
+{"Name":"QUIST, ROBERT E.","TotalDonations":6710492.54,"State":"MT","Party":"DEM"},
+{"Name":"ROSENDALE, MATT","TotalDonations":5034075.45,"State":"MT","Party":"REP"},
+{"Name":"WILLIAMS, KATHLEEN","TotalDonations":3330511.48,"State":"MT","Party":"DEM"},
+{"Name":"DOWNING, TROY","TotalDonations":1495357.0,"State":"MT","Party":"REP"},
+{"Name":"FAGG, RUSSELL C","TotalDonations":1209961.0,"State":"MT","Party":"REP"},
+{"Name":"HEENAN, JOHN","TotalDonations":1104281.99,"State":"MT","Party":"DEM"},
+{"Name":"KIER, GRANT","TotalDonations":842507.79,"State":"MT","Party":"DEM"},
+{"Name":"OLSZEWSKI, ALBERT DAVID","TotalDonations":326245.0,"State":"MT","Party":"REP"}],"top10Warchests":[
+{"Name":"TESTER, JON","Warchest":1612530.01,"Initials":"MT","Party":"DEM"},
+{"Name":"GIANFORTE, GREG","Warchest":644219.26,"Initials":"MT","Party":"REP"},
+{"Name":"ROSENDALE, MATT","Warchest":524379.05,"Initials":"MT","Party":"REP"},
+{"Name":"WILLIAMS, KATHLEEN","Warchest":421989.27,"Initials":"MT","Party":"DEM"},
+{"Name":"SWANSON, ELINOR","Warchest":14817.43,"Initials":"MT","Party":"LIB"},
+{"Name":"DOWNING, TROY","Warchest":10625.81,"Initials":"MT","Party":"REP"},
+{"Name":"WICKS, MARK L","Warchest":1684.52,"Initials":"MT","Party":"LIB"},
+{"Name":"WEST, DAN","Warchest":538.21,"Initials":"MT","Party":"DEM"},
+{"Name":"MURRAY, RONALD","Warchest":106.0,"Initials":"MT","Party":"REP"},
+{"Name":"MILLER, KEN","Warchest":0.0,"Initials":"MT","Party":"REP"}],"initials":"MT"},
+{"percentages": [{"value":37.200585561894876},{"value":7.105427357601002e-15},{"value":62.79941443810512}],"total":14190096.850000001,"top10Donees":[
+{"Name":"FISCHER, DEBRA S","TotalDonations":4312940.42,"State":"NE","Party":"REP"},
+{"Name":"BACON, DONALD J","TotalDonations":2511377.99,"State":"NE","Party":"REP"},
+{"Name":"EASTMAN, KARA","TotalDonations":2361776.72,"State":"NE","Party":"DEM"},
+{"Name":"RAYBOULD, JANE MICHELE","TotalDonations":2003294.75,"State":"NE","Party":"DEM"},
+{"Name":"SMITH, ADRIAN","TotalDonations":1171030.41,"State":"NE","Party":"REP"},
+{"Name":"FORTENBERRY, JEFFREY L. HONORABLE","TotalDonations":729526.41,"State":"NE","Party":"REP"},
+{"Name":"ASHFORD, BRAD","TotalDonations":640016.12,"State":"NE","Party":"DEM"},
+{"Name":"PENNER, KIRK MR.","TotalDonations":93499.5,"State":"NE","Party":"REP"},
+{"Name":"THEOBALD, PAUL GILBERT","TotalDonations":77034.33,"State":"NE","Party":"DEM"},
+{"Name":"WATSON, TODD","TotalDonations":64323.0,"State":"NE","Party":"REP"}],"top10Warchests":[
+{"Name":"FORTENBERRY, JEFFREY L. HONORABLE","Warchest":1889894.24,"Initials":"NE","Party":"REP"},
+{"Name":"FISCHER, DEBRA S","Warchest":1300090.64,"Initials":"NE","Party":"REP"},
+{"Name":"SMITH, ADRIAN","Warchest":818913.43,"Initials":"NE","Party":"REP"},
+{"Name":"BACON, DONALD J","Warchest":668888.31,"Initials":"NE","Party":"REP"},
+{"Name":"EASTMAN, KARA","Warchest":397338.71,"Initials":"NE","Party":"DEM"},
+{"Name":"RAYBOULD, JANE MICHELE","Warchest":163983.66,"Initials":"NE","Party":"DEM"},
+{"Name":"SVOBODA, FRANK B","Warchest":47146.0,"Initials":"NE","Party":"DEM"},
+{"Name":"THEOBALD, PAUL GILBERT","Warchest":29165.07,"Initials":"NE","Party":"DEM"},
+{"Name":"MCCLURE, JESSICA","Warchest":2590.61,"Initials":"NE","Party":"DEM"},
+{"Name":"PENNER, KIRK MR.","Warchest":228.2,"Initials":"NE","Party":"REP"}],"initials":"NE"},
+{"percentages": [{"value":65.12518989986017},{"value":0.002444565860812986},{"value":34.87236553427901}],"total":49088470.849999994,"top10Donees":[
+{"Name":"ROSEN, JACKY","TotalDonations":21571221.76,"State":"NV","Party":"DEM"},
+{"Name":"HELLER, DEAN","TotalDonations":11896633.27,"State":"NV","Party":"REP"},
+{"Name":"LEE, SUSIE","TotalDonations":4592880.74,"State":"NV","Party":"DEM"},
+{"Name":"TARKANIAN, DANNY","TotalDonations":2198033.91,"State":"NV","Party":"REP"},
+{"Name":"SBAIH, JESSE","TotalDonations":2157538.0,"State":"NV","Party":"DEM"},
+{"Name":"HORSFORD, STEVEN ALEXZANDER","TotalDonations":1862881.64,"State":"NV","Party":"DEM"},
+{"Name":"AMODEI, MARK EUGENE EUGENE","TotalDonations":1182248.58,"State":"NV","Party":"REP"},
+{"Name":"HARDY, CRESENT","TotalDonations":779458.15,"State":"NV","Party":"REP"},
+{"Name":"TITUS, DINA","TotalDonations":651692.6,"State":"NV","Party":"DEM"},
+{"Name":"HAMMOND, SCOTT","TotalDonations":290689.03,"State":"NV","Party":"REP"}],"top10Warchests":[
+{"Name":"HELLER, DEAN","Warchest":2211457.5,"Initials":"NV","Party":"REP"},
+{"Name":"ROSEN, JACKY","Warchest":768851.93,"Initials":"NV","Party":"DEM"},
+{"Name":"HORSFORD, STEVEN ALEXZANDER","Warchest":388252.4,"Initials":"NV","Party":"DEM"},
+{"Name":"AMODEI, MARK EUGENE EUGENE","Warchest":366495.38,"Initials":"NV","Party":"REP"},
+{"Name":"TITUS, DINA","Warchest":246168.05,"Initials":"NV","Party":"DEM"},
+{"Name":"LEE, SUSIE","Warchest":219683.39,"Initials":"NV","Party":"DEM"},
+{"Name":"HARDY, CRESENT","Warchest":59048.86,"Initials":"NV","Party":"REP"},
+{"Name":"STEPHENS, ALLISON A","Warchest":19631.27,"Initials":"NV","Party":"DEM"},
+{"Name":"TARKANIAN, DANNY","Warchest":18147.93,"Initials":"NV","Party":"REP"},
+{"Name":"ANGLE, SHARRON E","Warchest":17568.45,"Initials":"NV","Party":"REP"}],"initials":"NV"},
+{"percentages": [{"value":70.83716076155144},{"value":0.0},{"value":29.162839238448555}],"total":11521716.19,"top10Donees":[
+{"Name":"KUSTER, ANN MCLANE","TotalDonations":3212463.52,"State":"NH","Party":"DEM"},
+{"Name":"SULLIVAN, MAURA CORBY","TotalDonations":2017132.45,"State":"NH","Party":"DEM"},
+{"Name":"PAPPAS, CHRIS","TotalDonations":1873093.75,"State":"NH","Party":"DEM"},
+{"Name":"EDWARDS, EDDIE","TotalDonations":1000568.0,"State":"NH","Party":"REP"},
+{"Name":"SANBORN, ANDY","TotalDonations":888179.67,"State":"NH","Party":"REP"},
+{"Name":"LEVENSON, STEWART","TotalDonations":514562.19,"State":"NH","Party":"REP"},
+{"Name":"NEGRON, STEVE","TotalDonations":431157.57,"State":"NH","Party":"REP"},
+{"Name":"CROCHETIERE, BRUCE","TotalDonations":329036.95,"State":"NH","Party":"REP"},
+{"Name":"MACKENZIE, MARK S","TotalDonations":326984.05,"State":"NH","Party":"DEM"},
+{"Name":"MCEACHERN, DEAGLAN","TotalDonations":268348.07,"State":"NH","Party":"DEM"}],"top10Warchests":[
+{"Name":"KUSTER, ANN MCLANE","Warchest":1505550.71,"Initials":"NH","Party":"DEM"},
+{"Name":"PAPPAS, CHRIS","Warchest":658587.85,"Initials":"NH","Party":"DEM"},
+{"Name":"EDWARDS, EDDIE","Warchest":199161.85,"Initials":"NH","Party":"REP"},
+{"Name":"LEVENSON, STEWART","Warchest":78332.25,"Initials":"NH","Party":"REP"},
+{"Name":"SANBORN, ANDY","Warchest":55739.4,"Initials":"NH","Party":"REP"},
+{"Name":"SULLIVAN, MAURA CORBY","Warchest":42311.93,"Initials":"NH","Party":"DEM"},
+{"Name":"NEGRON, STEVE","Warchest":20517.37,"Initials":"NH","Party":"REP"},
+{"Name":"CROCHETIERE, BRUCE","Warchest":16402.56,"Initials":"NH","Party":"REP"},
+{"Name":"SOLDATI, LINCOLN T.","Warchest":7070.92,"Initials":"NH","Party":"DEM"},
+{"Name":"BLANKENBEKER, LYNNE","Warchest":3661.41,"Initials":"NH","Party":"REP"}],"initials":"NH"},
+{"percentages": [{"value":52.17731250995335},{"value":0.05630369179917949},{"value":47.76638379824747}],"total":92834836.10000001,"top10Donees":[
+{"Name":"HUGIN, ROBERT","TotalDonations":30289561.23,"State":"NJ","Party":"REP"},
+{"Name":"MENENDEZ, ROBERT","TotalDonations":8753360.02,"State":"NJ","Party":"DEM"},
+{"Name":"SHERRILL, REBECCA MICHELLE","TotalDonations":7645693.87,"State":"NJ","Party":"DEM"},
+{"Name":"GOTTHEIMER, JOSH","TotalDonations":6536859.83,"State":"NJ","Party":"DEM"},
+{"Name":"MALINOWSKI, TOM","TotalDonations":5267828.03,"State":"NJ","Party":"DEM"},
+{"Name":"KIM, ANDY","TotalDonations":5222896.99,"State":"NJ","Party":"DEM"},
+{"Name":"MACARTHUR, THOMAS","TotalDonations":4459709.16,"State":"NJ","Party":"REP"},
+{"Name":"PALLONE, FRANK JR","TotalDonations":2516750.96,"State":"NJ","Party":"DEM"},
+{"Name":"LANCE, LEONARD","TotalDonations":2347201.81,"State":"NJ","Party":"REP"},
+{"Name":"NORCROSS, DONALD W","TotalDonations":2032454.88,"State":"NJ","Party":"DEM"}],"top10Warchests":[
+{"Name":"GOTTHEIMER, JOSH","Warchest":4838769.19,"Initials":"NJ","Party":"DEM"},
+{"Name":"HUGIN, ROBERT","Warchest":2575238.77,"Initials":"NJ","Party":"REP"},
+{"Name":"PALLONE, FRANK JR","Warchest":2227403.15,"Initials":"NJ","Party":"DEM"},
+{"Name":"MENENDEZ, ROBERT","Warchest":1832385.81,"Initials":"NJ","Party":"DEM"},
+{"Name":"SHERRILL, REBECCA MICHELLE","Warchest":1730518.44,"Initials":"NJ","Party":"DEM"},
+{"Name":"PASCRELL, WILLIAM J. JR.","Warchest":1704913.11,"Initials":"NJ","Party":"DEM"},
+{"Name":"NORCROSS, DONALD W","Warchest":863822.07,"Initials":"NJ","Party":"DEM"},
+{"Name":"MALINOWSKI, TOM","Warchest":834275.11,"Initials":"NJ","Party":"DEM"},
+{"Name":"WILDES, MICHAEL","Warchest":777078.83,"Initials":"NJ","Party":"DEM"},
+{"Name":"KIM, ANDY","Warchest":754070.99,"Initials":"NJ","Party":"DEM"}],"initials":"NJ"},
+{"percentages": [{"value":80.27670057678897},{"value":7.928936906473371},{"value":11.79436251673766}],"total":21282451.480000004,"top10Donees":[
+{"Name":"HEINRICH, MARTIN TREVOR","TotalDonations":6139208.57,"State":"NM","Party":"DEM"},
+{"Name":"TORRES SMALL, XOCHITL","TotalDonations":3813000.04,"State":"NM","Party":"DEM"},
+{"Name":"HAALAND, DEBRA","TotalDonations":1940182.53,"State":"NM","Party":"DEM"},
+{"Name":"LUJAN, BEN R MR.","TotalDonations":1861319.72,"State":"NM","Party":"DEM"},
+{"Name":"HERRELL, STELLA YVETTE","TotalDonations":1238624.84,"State":"NM","Party":"UNK"},
+{"Name":"SEDILLO LOPEZ, ANTOINETTE","TotalDonations":1066521.17,"State":"NM","Party":"DEM"},
+{"Name":"RICH, MICK","TotalDonations":903856.05,"State":"NM","Party":"REP"},
+{"Name":"NEWMAN, MONTY","TotalDonations":883783.38,"State":"NM","Party":"REP"},
+{"Name":"MARTINEZ, DAMON P","TotalDonations":756556.82,"State":"NM","Party":"DEM"},
+{"Name":"LARA, DAMIAN","TotalDonations":477889.7,"State":"NM","Party":"DEM"}],"top10Warchests":[
+{"Name":"HEINRICH, MARTIN TREVOR","Warchest":1322003.33,"Initials":"NM","Party":"DEM"},
+{"Name":"TORRES SMALL, XOCHITL","Warchest":1003193.66,"Initials":"NM","Party":"DEM"},
+{"Name":"LUJAN, BEN R MR.","Warchest":565857.94,"Initials":"NM","Party":"DEM"},
+{"Name":"HERRELL, STELLA YVETTE","Warchest":406459.34,"Initials":"NM","Party":"UNK"},
+{"Name":"HAALAND, DEBRA","Warchest":143028.49,"Initials":"NM","Party":"DEM"},
+{"Name":"RICH, MICK","Warchest":115572.03,"Initials":"NM","Party":"REP"},
+{"Name":"JOHNSON, GARY","Warchest":56737.4,"Initials":"NM","Party":"LIB"},
+{"Name":"ARNOLD-JONES, JANICE E","Warchest":30104.31,"Initials":"NM","Party":"REP"},
+{"Name":"HILDEBRANDT, LORI MADELINE","Warchest":6485.07,"Initials":"NM","Party":"DEM"},
+{"Name":"SEDILLO LOPEZ, ANTOINETTE","Warchest":2581.31,"Initials":"NM","Party":"DEM"}],"initials":"NM"},
+{"percentages": [{"value":76.51813697155374},{"value":0.46608019972658},{"value":23.015782828719676}],"total":115945753.61,"top10Donees":[
+{"Name":"GILLIBRAND, KIRSTEN ELIZABETH","TotalDonations":17518096.74,"State":"NY","Party":"DEM"},
+{"Name":"DELGADO, ANTONIO","TotalDonations":7926995.02,"State":"NY","Party":"DEM"},
+{"Name":"GERSHON, PERRY","TotalDonations":4562681.37,"State":"NY","Party":"DEM"},
+{"Name":"ZELDIN, LEE M","TotalDonations":4232957.32,"State":"NY","Party":"REP"},
+{"Name":"ROSE, MAX","TotalDonations":4149832.07,"State":"NY","Party":"DEM"},
+{"Name":"CROWLEY, JOSEPH","TotalDonations":3964385.74,"State":"NY","Party":"DEM"},
+{"Name":"BRINDISI, ANTHONY","TotalDonations":3832016.73,"State":"NY","Party":"DEM"},
+{"Name":"FASO, JOHN J. MR.","TotalDonations":3664186.32,"State":"NY","Party":"REP"},
+{"Name":"REED, THOMAS W","TotalDonations":3316386.37,"State":"NY","Party":"REP"},
+{"Name":"TENNEY, CLAUDIA","TotalDonations":2922211.72,"State":"NY","Party":"REP"}],"top10Warchests":[
+{"Name":"GILLIBRAND, KIRSTEN ELIZABETH","Warchest":10644610.97,"Initials":"NY","Party":"DEM"},
+{"Name":"KING, PETE","Warchest":2277786.2,"Initials":"NY","Party":"REP"},
+{"Name":"SUOZZI, THOMAS","Warchest":1583060.56,"Initials":"NY","Party":"DEM"},
+{"Name":"ZELDIN, LEE M","Warchest":1425661.09,"Initials":"NY","Party":"REP"},
+{"Name":"JEFFRIES, HAKEEM","Warchest":1315468.65,"Initials":"NY","Party":"DEM"},
+{"Name":"STEFANIK, ELISE M.","Warchest":1259390.39,"Initials":"NY","Party":"REP"},
+{"Name":"ROSE, MAX","Warchest":1058655.79,"Initials":"NY","Party":"DEM"},
+{"Name":"HIGGINS, BRIAN","Warchest":981574.71,"Initials":"NY","Party":"DEM"},
+{"Name":"LOWEY, NITA M","Warchest":941099.23,"Initials":"NY","Party":"DEM"},
+{"Name":"MENG, GRACE","Warchest":937005.6,"Initials":"NY","Party":"DEM"}],"initials":"NY"},
+{"percentages": [{"value":42.17453978614326},{"value":0.08550095661763635},{"value":57.73995925723911}],"total":37619836.39999999,"top10Donees":[
+{"Name":"MCCREADY, DANIEL","TotalDonations":4881775.46,"State":"NC","Party":"DEM"},
+{"Name":"MANNING, KATHY","TotalDonations":3590096.2,"State":"NC","Party":"DEM"},
+{"Name":"MCHENRY, PATRICK","TotalDonations":3520535.11,"State":"NC","Party":"REP"},
+{"Name":"HOLDING, GEORGE E MR.","TotalDonations":2746846.4,"State":"NC","Party":"REP"},
+{"Name":"HUDSON, RICHARD L. JR.","TotalDonations":2342393.13,"State":"NC","Party":"REP"},
+{"Name":"FOXX, VIRGINIA ANN","TotalDonations":2106249.13,"State":"NC","Party":"REP"},
+{"Name":"BUDD, THEODORE P.","TotalDonations":2095216.04,"State":"NC","Party":"REP"},
+{"Name":"HARRIS, MARK","TotalDonations":1845135.91,"State":"NC","Party":"REP"},
+{"Name":"MEADOWS, MARK R","TotalDonations":1756477.84,"State":"NC","Party":"REP"},
+{"Name":"ROUZER, DAVID CHESTON","TotalDonations":1463396.92,"State":"NC","Party":"REP"}],"top10Warchests":[
+{"Name":"FOXX, VIRGINIA ANN","Warchest":2836255.34,"Initials":"NC","Party":"REP"},
+{"Name":"MCHENRY, PATRICK","Warchest":1580412.36,"Initials":"NC","Party":"REP"},
+{"Name":"ROUZER, DAVID CHESTON","Warchest":1243090.82,"Initials":"NC","Party":"REP"},
+{"Name":"MEADOWS, MARK R","Warchest":906104.34,"Initials":"NC","Party":"REP"},
+{"Name":"HUDSON, RICHARD L. JR.","Warchest":845086.99,"Initials":"NC","Party":"REP"},
+{"Name":"WALKER, BRADLEY MARK MR.","Warchest":829269.33,"Initials":"NC","Party":"REP"},
+{"Name":"MANNING, KATHY","Warchest":708803.62,"Initials":"NC","Party":"DEM"},
+{"Name":"BUTTERFIELD, G. K.","Warchest":560415.61,"Initials":"NC","Party":"DEM"},
+{"Name":"BUDD, THEODORE P.","Warchest":526263.2,"Initials":"NC","Party":"REP"},
+{"Name":"COLEMAN, LINDA","Warchest":372042.66,"Initials":"NC","Party":"DEM"}],"initials":"NC"},
+{"percentages": [{"value":75.70824428235399},{"value":-3.552713678800501e-15},{"value":24.291755717646016}],"total":34650498.58,"top10Donees":[
+{"Name":"HEITKAMP, HEIDI","TotalDonations":25353646.63,"State":"ND","Party":"DEM"},
+{"Name":"CRAMER, KEVIN MR.","TotalDonations":5584357.5,"State":"ND","Party":"REP"},
+{"Name":"ARMSTRONG, KELLY","TotalDonations":1631797.1,"State":"ND","Party":"REP"},
+{"Name":"CAMPBELL, TOM","TotalDonations":1201059.87,"State":"ND","Party":"REP"},
+{"Name":"SCHNEIDER, MAC SCHNEIDER","TotalDonations":718857.99,"State":"ND","Party":"DEM"},
+{"Name":"HANSON, BEN","TotalDonations":160779.49,"State":"ND","Party":"DEM"},
+{"Name":"O''NEILL, THOMAS E.","TotalDonations":0.0,"State":"ND","Party":"REP"},
+{"Name":"SCHAFNER, PAUL","TotalDonations":0.0,"State":"ND","Party":"REP"},
+{"Name":"CAMPBELL, TOM","TotalDonations":0.0,"State":"ND","Party":"REP"},
+{"Name":"TUTTLE, CHARLES","TotalDonations":0.0,"State":"ND","Party":"IND"}],"top10Warchests":[
+{"Name":"HEITKAMP, HEIDI","Warchest":11142250.74,"Initials":"ND","Party":"DEM"},
+{"Name":"CRAMER, KEVIN MR.","Warchest":976045.55,"Initials":"ND","Party":"REP"},
+{"Name":"ARMSTRONG, KELLY","Warchest":196216.8,"Initials":"ND","Party":"REP"},
+{"Name":"CAMPBELL, TOM","Warchest":177382.84,"Initials":"ND","Party":"REP"},
+{"Name":"SCHNEIDER, MAC SCHNEIDER","Warchest":83656.5,"Initials":"ND","Party":"DEM"},
+{"Name":"HANSON, BEN","Warchest":0.0,"Initials":"ND","Party":"DEM"},
+{"Name":"CAMPBELL, TOM","Warchest":0.0,"Initials":"ND","Party":"REP"},
+{"Name":"HENDRICKSON, DUWAYNE","Warchest":0.0,"Initials":"ND","Party":"REP"},
+{"Name":"ABENTROTH, TIFFANY","Warchest":0.0,"Initials":"ND","Party":"REP"},
+{"Name":"SCHAFNER, PAUL","Warchest":0.0,"Initials":"ND","Party":"REP"}],"initials":"ND"},
+{"percentages": [{"value":56.57625819543124},{"value":0.03852317209931755},{"value":43.385218632469446}],"total":81644808.27000001,"top10Donees":[
+{"Name":"BROWN, SHERROD","TotalDonations":21831966.77,"State":"OH","Party":"DEM"},
+{"Name":"RENACCI, JAMES B.","TotalDonations":7824910.38,"State":"OH","Party":"REP"},
+{"Name":"O'CONNOR, DANIEL JAY","TotalDonations":7567424.79,"State":"OH","Party":"DEM"},
+{"Name":"STIVERS, STEVE MR.","TotalDonations":3887192.76,"State":"OH","Party":"REP"},
+{"Name":"PUREVAL, AFTAB","TotalDonations":3488392.18,"State":"OH","Party":"DEM"},
+{"Name":"GIBBONS, MICHAEL","TotalDonations":3321812.0,"State":"OH","Party":"REP"},
+{"Name":"HARBAUGH, KENNETH","TotalDonations":2744339.43,"State":"OH","Party":"DEM"},
+{"Name":"BALDERSON, TROY","TotalDonations":2312129.96,"State":"OH","Party":"REP"},
+{"Name":"JOYCE, DAVID P","TotalDonations":2259222.25,"State":"OH","Party":"REP"},
+{"Name":"RADER, ELIZABETH ANNE","TotalDonations":1952194.83,"State":"OH","Party":"DEM"}],"top10Warchests":[
+{"Name":"BROWN, SHERROD","Warchest":5842331.88,"Initials":"OH","Party":"DEM"},
+{"Name":"RENACCI, JAMES B.","Warchest":4464397.88,"Initials":"OH","Party":"REP"},
+{"Name":"STIVERS, STEVE MR.","Warchest":1514430.69,"Initials":"OH","Party":"REP"},
+{"Name":"BEATTY, JOYCE","Warchest":1354160.02,"Initials":"OH","Party":"DEM"},
+{"Name":"LATTA, ROBERT EDWARD","Warchest":996581.31,"Initials":"OH","Party":"REP"},
+{"Name":"JORDAN, JAMES D.","Warchest":975568.45,"Initials":"OH","Party":"REP"},
+{"Name":"JOHNSON, BILL","Warchest":956963.84,"Initials":"OH","Party":"REP"},
+{"Name":"FUDGE, MARCIA L","Warchest":948596.15,"Initials":"OH","Party":"DEM"},
+{"Name":"O'CONNOR, DANIEL JAY","Warchest":879369.27,"Initials":"OH","Party":"DEM"},
+{"Name":"WENSTRUP, BRAD","Warchest":817370.57,"Initials":"OH","Party":"REP"}],"initials":"OH"},
+{"percentages": [{"value":15.99595268671231},{"value":0.12076459909276593},{"value":83.88328271419492}],"total":11218395.209999999,"top10Donees":[
+{"Name":"HERN, KEVIN R","TotalDonations":2827047.08,"State":"OK","Party":"REP"},
+{"Name":"COLE, TOM","TotalDonations":1811753.57,"State":"OK","Party":"REP"},
+{"Name":"MULLIN, MARKWAYNE MR.","TotalDonations":1466395.14,"State":"OK","Party":"REP"},
+{"Name":"LUCAS, FRANK D.","TotalDonations":1032288.77,"State":"OK","Party":"REP"},
+{"Name":"HORN, KENDRA","TotalDonations":1015994.6,"State":"OK","Party":"DEM"},
+{"Name":"RUSSELL, STEVEN DANE","TotalDonations":850074.49,"State":"OK","Party":"REP"},
+{"Name":"HARRIS, TIM","TotalDonations":487474.05,"State":"OK","Party":"REP"},
+{"Name":"COLEMAN, ANDY","TotalDonations":412018.14,"State":"OK","Party":"REP"},
+{"Name":"GILPIN, TIM","TotalDonations":335148.65,"State":"OK","Party":"DEM"},
+{"Name":"JACKSON, JARRIN DALE","TotalDonations":184498.53,"State":"OK","Party":"REP"}],"top10Warchests":[
+{"Name":"COLE, TOM","Warchest":1277815.05,"Initials":"OK","Party":"REP"},
+{"Name":"LUCAS, FRANK D.","Warchest":581388.99,"Initials":"OK","Party":"REP"},
+{"Name":"RUSSELL, STEVEN DANE","Warchest":469501.12,"Initials":"OK","Party":"REP"},
+{"Name":"MULLIN, MARKWAYNE MR.","Warchest":269397.05,"Initials":"OK","Party":"REP"},
+{"Name":"HERN, KEVIN R","Warchest":162461.28,"Initials":"OK","Party":"REP"},
+{"Name":"HORN, KENDRA","Warchest":98699.26,"Initials":"OK","Party":"DEM"},
+{"Name":"GILPIN, TIM","Warchest":75521.26,"Initials":"OK","Party":"DEM"},
+{"Name":"NICHOLS, JASON","Warchest":24371.13,"Initials":"OK","Party":"DEM"},
+{"Name":"COLEMAN, ANDY","Warchest":20595.52,"Initials":"OK","Party":"REP"},
+{"Name":"HARRIS, TIM","Warchest":10276.28,"Initials":"OK","Party":"REP"}],"initials":"OK"},
+{"percentages": [{"value":58.18276535539947},{"value":1.4210854715202004e-14},{"value":41.81723464460052}],"total":12743272.350000001,"top10Donees":[
+{"Name":"WALDEN, GREGORY P. MR.","TotalDonations":5118559.34,"State":"OR","Party":"REP"},
+{"Name":"SCHRADER, KURT","TotalDonations":1961504.64,"State":"OR","Party":"DEM"},
+{"Name":"DEFAZIO, PETER A","TotalDonations":1647388.6,"State":"OR","Party":"DEM"},
+{"Name":"BLUMENAUER, EARL","TotalDonations":1394634.7,"State":"OR","Party":"DEM"},
+{"Name":"MCLEOD-SKINNER, JAMIE","TotalDonations":1063156.02,"State":"OR","Party":"DEM"},
+{"Name":"BONAMICI, SUZANNE MS.","TotalDonations":999843.6,"State":"OR","Party":"DEM"},
+{"Name":"NEAHRING, JENNIFER","TotalDonations":175768.13,"State":"OR","Party":"DEM"},
+{"Name":"ROBINSON, ART DR.","TotalDonations":162021.38,"State":"OR","Party":"REP"},
+{"Name":"BURNETTE, ERIC","TotalDonations":75202.0,"State":"OR","Party":"DEM"},
+{"Name":"CRARY, JAMES 'JIM'","TotalDonations":68778.3,"State":"OR","Party":"DEM"}],"top10Warchests":[
+{"Name":"SCHRADER, KURT","Warchest":2361570.98,"Initials":"OR","Party":"DEM"},
+{"Name":"WALDEN, GREGORY P. MR.","Warchest":2191445.87,"Initials":"OR","Party":"REP"},
+{"Name":"DEFAZIO, PETER A","Warchest":1319518.6,"Initials":"OR","Party":"DEM"},
+{"Name":"BLUMENAUER, EARL","Warchest":960233.5,"Initials":"OR","Party":"DEM"},
+{"Name":"BONAMICI, SUZANNE MS.","Warchest":619420.01,"Initials":"OR","Party":"DEM"},
+{"Name":"MCLEOD-SKINNER, JAMIE","Warchest":91949.19,"Initials":"OR","Party":"DEM"},
+{"Name":"ROBINSON, ART DR.","Warchest":76776.33,"Initials":"OR","Party":"REP"},
+{"Name":"CALLAHAN, MARK ALLEN","Warchest":10143.85,"Initials":"OR","Party":"REP"},
+{"Name":"PERKINS, JO RAE","Warchest":3567.12,"Initials":"OR","Party":"REP"},
+{"Name":"HARRISON, THOMAS S IV","Warchest":585.8,"Initials":"OR","Party":"REP"}],"initials":"OR"},
+{"percentages": [{"value":65.41586368568609},{"value":0.26720028511521576},{"value":34.31693602919869}],"total":107603036.38,"top10Donees":[
+{"Name":"CASEY, ROBERT P JR","TotalDonations":17294129.94,"State":"PA","Party":"DEM"},
+{"Name":"WALLACE, HENRY SCOTT","TotalDonations":13930718.56,"State":"PA","Party":"DEM"},
+{"Name":"LAMB, CONOR","TotalDonations":8888155.13,"State":"PA","Party":"DEM"},
+{"Name":"BARLETTA, LOU","TotalDonations":6811656.94,"State":"PA","Party":"REP"},
+{"Name":"HOULAHAN, CHRISSY","TotalDonations":4038052.11,"State":"PA","Party":"DEM"},
+{"Name":"FITZPATRICK, BRIAN","TotalDonations":3117260.67,"State":"PA","Party":"REP"},
+{"Name":"ROTHFUS, KEITH MR.","TotalDonations":2908955.4,"State":"PA","Party":"REP"},
+{"Name":"WILD, SUSAN","TotalDonations":2870250.83,"State":"PA","Party":"DEM"},
+{"Name":"KELLY, GEORGE J JR","TotalDonations":2390964.65,"State":"PA","Party":"REP"},
+{"Name":"CARTWRIGHT, MATT","TotalDonations":2280641.19,"State":"PA","Party":"DEM"}],"top10Warchests":[
+{"Name":"CASEY, ROBERT P JR","Warchest":4497606.78,"Initials":"PA","Party":"DEM"},
+{"Name":"WALLACE, HENRY SCOTT","Warchest":2165055.92,"Initials":"PA","Party":"DEM"},
+{"Name":"HOULAHAN, CHRISSY","Warchest":1669832.08,"Initials":"PA","Party":"DEM"},
+{"Name":"BARLETTA, LOU","Warchest":1024222.95,"Initials":"PA","Party":"REP"},
+{"Name":"KELLY, GEORGE J JR","Warchest":869328.1,"Initials":"PA","Party":"REP"},
+{"Name":"CARTWRIGHT, MATT","Warchest":846674.27,"Initials":"PA","Party":"DEM"},
+{"Name":"LAMB, CONOR","Warchest":726995.76,"Initials":"PA","Party":"DEM"},
+{"Name":"BOYLE, BRENDAN F","Warchest":599798.05,"Initials":"PA","Party":"DEM"},
+{"Name":"WILD, SUSAN","Warchest":518305.25,"Initials":"PA","Party":"DEM"},
+{"Name":"PERRY, SCOTT","Warchest":454345.41,"Initials":"PA","Party":"REP"}],"initials":"PA"},
+{"percentages": [{"value":84.61224951374831},{"value":0.17095326849043246},{"value":15.216797217761258}],"total":8987783.700000001,"top10Donees":[
+{"Name":"WHITEHOUSE, SHELDON II","TotalDonations":4998424.98,"State":"RI","Party":"DEM"},
+{"Name":"CICILLINE, DAVID N","TotalDonations":1535524.41,"State":"RI","Party":"DEM"},
+{"Name":"FLANDERS, ROBERT MR","TotalDonations":1131604.82,"State":"RI","Party":"REP"},
+{"Name":"LANGEVIN, JAMES R. HONORABLE","TotalDonations":1070816.58,"State":"RI","Party":"DEM"},
+{"Name":"NARDOLILLO, ROBERT ANTHONY III","TotalDonations":129258.0,"State":"RI","Party":"REP"},
+{"Name":"DE LA FUENTE, ROQUE ROCKY","TotalDonations":100000.0,"State":"RI","Party":"REP"},
+{"Name":"COSTA, MICHAEL","TotalDonations":15364.91,"State":"RI","Party":"IND"},
+{"Name":"CAIOZZO, SALVATORE","TotalDonations":4960.0,"State":"RI","Party":"REP"},
+{"Name":"WYSOCKI, FREDERICK J","TotalDonations":1830.0,"State":"RI","Party":"REP"},
+{"Name":"MCKAY, RAYMOND T","TotalDonations":0.0,"State":"RI","Party":"IND"}],"top10Warchests":[
+{"Name":"WHITEHOUSE, SHELDON II","Warchest":2047493.97,"Initials":"RI","Party":"DEM"},
+{"Name":"LANGEVIN, JAMES R. HONORABLE","Warchest":1026543.57,"Initials":"RI","Party":"DEM"},
+{"Name":"CICILLINE, DAVID N","Warchest":938781.45,"Initials":"RI","Party":"DEM"},
+{"Name":"FLANDERS, ROBERT MR","Warchest":58391.22,"Initials":"RI","Party":"REP"},
+{"Name":"DE LA FUENTE, ROQUE ROCKY","Warchest":52238.86,"Initials":"RI","Party":"REP"},
+{"Name":"WYSOCKI, FREDERICK J","Warchest":1830.0,"Initials":"RI","Party":"REP"},
+{"Name":"CAIOZZO, SALVATORE","Warchest":1371.0,"Initials":"RI","Party":"REP"},
+{"Name":"COSTA, MICHAEL","Warchest":110.01,"Initials":"RI","Party":"IND"},
+{"Name":"NARDOLILLO, ROBERT ANTHONY III","Warchest":10.0,"Initials":"RI","Party":"REP"},
+{"Name":"MCKAY, RAYMOND T","Warchest":0.0,"Initials":"RI","Party":"IND"}],"initials":"RI"},
+{"percentages": [{"value":34.27040050454793},{"value":0.2668390715381008},{"value":65.46276042391398}],"total":19934486.99,"top10Donees":[
+{"Name":"NORMAN, RALPH W. JR.","TotalDonations":2492659.43,"State":"SC","Party":"REP"},
+{"Name":"PARNELL, ARCHIE","TotalDonations":2025253.72,"State":"SC","Party":"DEM"},
+{"Name":"CUNNINGHAM, JOE","TotalDonations":1926220.81,"State":"SC","Party":"DEM"},
+{"Name":"CLYBURN, JAMES E.","TotalDonations":1827684.22,"State":"SC","Party":"DEM"},
+{"Name":"TIMMONS, WILLIAM R. IV","TotalDonations":1770707.42,"State":"SC","Party":"REP"},
+{"Name":"RICE, TOM","TotalDonations":1508015.41,"State":"SC","Party":"REP"},
+{"Name":"ARRINGTON, KATHERINE ELIZABETH","TotalDonations":1412832.79,"State":"SC","Party":"REP"},
+{"Name":"WILSON, JOE THE HON.","TotalDonations":1105819.63,"State":"SC","Party":"REP"},
+{"Name":"SANFORD, MARSHALL C. HON.","TotalDonations":919271.0,"State":"SC","Party":"REP"},
+{"Name":"DUNCAN, JEFFREY D MR.","TotalDonations":825828.46,"State":"SC","Party":"REP"}],"top10Warchests":[
+{"Name":"SANFORD, MARSHALL C. HON.","Warchest":1328393.5,"Initials":"SC","Party":"REP"},
+{"Name":"RICE, TOM","Warchest":1120235.91,"Initials":"SC","Party":"REP"},
+{"Name":"CLYBURN, JAMES E.","Warchest":1044060.18,"Initials":"SC","Party":"DEM"},
+{"Name":"NORMAN, RALPH W. JR.","Warchest":786379.34,"Initials":"SC","Party":"REP"},
+{"Name":"WILSON, JOE THE HON.","Warchest":298574.1,"Initials":"SC","Party":"REP"},
+{"Name":"CUNNINGHAM, JOE","Warchest":298095.78,"Initials":"SC","Party":"DEM"},
+{"Name":"DUNCAN, JEFFREY D MR.","Warchest":254718.4,"Initials":"SC","Party":"REP"},
+{"Name":"PARNELL, ARCHIE","Warchest":133532.75,"Initials":"SC","Party":"DEM"},
+{"Name":"ARRINGTON, KATHERINE ELIZABETH","Warchest":130260.34,"Initials":"SC","Party":"REP"},
+{"Name":"TIMMONS, WILLIAM R. IV","Warchest":75378.04,"Initials":"SC","Party":"REP"}],"initials":"SC"},
+{"percentages": [{"value":24.850687626480948},{"value":0.5775927389319406},{"value":74.57171963458711}],"total":3225456.06,"top10Donees":[
+{"Name":"JOHNSON, DUSTY","TotalDonations":1538101.9,"State":"SD","Party":"REP"},
+{"Name":"BJORKMAN, TIMOTHY W MR.","TotalDonations":801548.01,"State":"SD","Party":"DEM"},
+{"Name":"KREBS, SHANTEL","TotalDonations":685166.15,"State":"SD","Party":"REP"},
+{"Name":"TAPIO, NEAL","TotalDonations":182010.0,"State":"SD","Party":"REP"},
+{"Name":"WIECZOREK, RONALD LEE","TotalDonations":18630.0,"State":"SD","Party":"IND"},
+{"Name":"MARTIAN, CHRISTOPHER JAMES","TotalDonations":0.0,"State":"SD","Party":"DEM"},
+{"Name":"HENDRICKSON, GEORGE","TotalDonations":0.0,"State":"SD","Party":"LIB"},
+{"Name":"TERRELL, ERIC BRAND NEW","TotalDonations":0.0,"State":"SD","Party":"REP"}],"top10Warchests":[
+{"Name":"JOHNSON, DUSTY","Warchest":375453.84,"Initials":"SD","Party":"REP"},
+{"Name":"BJORKMAN, TIMOTHY W MR.","Warchest":159082.17,"Initials":"SD","Party":"DEM"},
+{"Name":"KREBS, SHANTEL","Warchest":40403.65,"Initials":"SD","Party":"REP"},
+{"Name":"WIECZOREK, RONALD LEE","Warchest":546.0,"Initials":"SD","Party":"IND"},
+{"Name":"MARTIAN, CHRISTOPHER JAMES","Warchest":0.0,"Initials":"SD","Party":"DEM"},
+{"Name":"HENDRICKSON, GEORGE","Warchest":0.0,"Initials":"SD","Party":"LIB"},
+{"Name":"TAPIO, NEAL","Warchest":0.0,"Initials":"SD","Party":"REP"},
+{"Name":"TERRELL, ERIC BRAND NEW","Warchest":0.0,"Initials":"SD","Party":"REP"}],"initials":"SD"},
+{"percentages": [{"value":38.28988557889364},{"value":0.016175433317926036},{"value":61.693938987788435}],"total":53978584.85999999,"top10Donees":[
+{"Name":"BREDESEN, PHILIP","TotalDonations":16406597.53,"State":"TN","Party":"DEM"},
+{"Name":"BLACKBURN, MARSHA MRS.","TotalDonations":12918036.94,"State":"TN","Party":"REP"},
+{"Name":"ROSE, JOHN W.","TotalDonations":4892627.21,"State":"TN","Party":"REP"},
+{"Name":"FLINN, GEORGE S DR JR","TotalDonations":3109850.0,"State":"TN","Party":"REP"},
+{"Name":"GREEN, MARK DR.","TotalDonations":2329116.7,"State":"TN","Party":"REP"},
+{"Name":"KUSTOFF, DAVID","TotalDonations":1743678.97,"State":"TN","Party":"REP"},
+{"Name":"FINCHER, STEPHEN","TotalDonations":1534691.71,"State":"TN","Party":"REP"},
+{"Name":"CORLEW, BOB","TotalDonations":1520974.91,"State":"TN","Party":"REP"},
+{"Name":"FLEISCHMANN, CHARLES J","TotalDonations":1180808.05,"State":"TN","Party":"REP"},
+{"Name":"MACKLER, JAMES","TotalDonations":980898.0,"State":"TN","Party":"DEM"}],"top10Warchests":[
+{"Name":"BLACKBURN, MARSHA MRS.","Warchest":3389458.24,"Initials":"TN","Party":"REP"},
+{"Name":"FINCHER, STEPHEN","Warchest":1745403.15,"Initials":"TN","Party":"REP"},
+{"Name":"FLEISCHMANN, CHARLES J","Warchest":1283819.13,"Initials":"TN","Party":"REP"},
+{"Name":"COHEN, STEPHEN IRA","Warchest":1090211.71,"Initials":"TN","Party":"DEM"},
+{"Name":"BREDESEN, PHILIP","Warchest":1029962.48,"Initials":"TN","Party":"DEM"},
+{"Name":"COOPER, JAMES H.S.","Warchest":681096.03,"Initials":"TN","Party":"DEM"},
+{"Name":"DESJARLAIS, SCOTT HON.","Warchest":412827.32,"Initials":"TN","Party":"REP"},
+{"Name":"GREEN, MARK DR.","Warchest":374880.41,"Initials":"TN","Party":"REP"},
+{"Name":"ROE, DAVID PHILLIP DR.","Warchest":346686.66,"Initials":"TN","Party":"REP"},
+{"Name":"KUSTOFF, DAVID","Warchest":217199.06,"Initials":"TN","Party":"REP"}],"initials":"TN"},
+{"percentages": [{"value":56.98413846116147},{"value":1.1075577023290677},{"value":41.90830383650946}],"total":215729915.92000002,"top10Donees":[
+{"Name":"O'ROURKE, ROBERT (BETO)","TotalDonations":70243103.56,"State":"TX","Party":"DEM"},
+{"Name":"CRUZ, RAFAEL EDWARD  TED","TotalDonations":29972337.2,"State":"TX","Party":"REP"},
+{"Name":"WALL, KATHALEEN MRS.","TotalDonations":6213448.49,"State":"TX","Party":"REP"},
+{"Name":"JONES, GINA ORTIZ","TotalDonations":5470259.54,"State":"TX","Party":"DEM"},
+{"Name":"FLETCHER, ELIZABETH","TotalDonations":5343502.73,"State":"TX","Party":"DEM"},
+{"Name":"BRADY, KEVIN","TotalDonations":5092876.48,"State":"TX","Party":"REP"},
+{"Name":"ALLRED, COLIN","TotalDonations":4955159.33,"State":"TX","Party":"DEM"},
+{"Name":"HURD, WILLIAM","TotalDonations":4755676.03,"State":"TX","Party":"REP"},
+{"Name":"SESSIONS, PETE MR.","TotalDonations":4416949.18,"State":"TX","Party":"REP"},
+{"Name":"TAYLOR, NICHOLAS V.","TotalDonations":4289769.34,"State":"TX","Party":"REP"}],"top10Warchests":[
+{"Name":"O'ROURKE, ROBERT (BETO)","Warchest":10336213.79,"Initials":"TX","Party":"DEM"},
+{"Name":"CRUZ, RAFAEL EDWARD  TED","Warchest":6702089.67,"Initials":"TX","Party":"REP"},
+{"Name":"DOGGETT, LLOYD","Warchest":4237650.44,"Initials":"TX","Party":"DEM"},
+{"Name":"CUELLAR, HENRY R.","Warchest":2532471.84,"Initials":"TX","Party":"DEM"},
+{"Name":"TAYLOR, NICHOLAS V.","Warchest":1756832.22,"Initials":"TX","Party":"REP"},
+{"Name":"MARCHANT, KENNY E MR.","Warchest":1752600.61,"Initials":"TX","Party":"REP"},
+{"Name":"SESSIONS, PETE MR.","Warchest":1592793.53,"Initials":"TX","Party":"REP"},
+{"Name":"CONAWAY, MICHAEL HONORABLE","Warchest":1394886.61,"Initials":"TX","Party":"REP"},
+{"Name":"ALLRED, COLIN","Warchest":1385827.27,"Initials":"TX","Party":"DEM"},
+{"Name":"BRADY, KEVIN","Warchest":1296108.74,"Initials":"TX","Party":"REP"}],"initials":"TX"},
+{"percentages": [{"value":24.567147219775258},{"value":3.749654898290231},{"value":71.68319788193452}],"total":21082588.97,"top10Donees":[
+{"Name":"ROMNEY, MITT WILLARD MR","TotalDonations":5186308.28,"State":"UT","Party":"REP"},
+{"Name":"LOVE, MIA","TotalDonations":4805706.01,"State":"UT","Party":"REP"},
+{"Name":"MCADAMS, BEN","TotalDonations":2855778.56,"State":"UT","Party":"DEM"},
+{"Name":"CURTIS, JOHN","TotalDonations":1596305.14,"State":"UT","Party":"REP"},
+{"Name":"BISHOP, ROBERT","TotalDonations":1132138.9,"State":"UT","Party":"REP"},
+{"Name":"WILSON, JENNY","TotalDonations":919193.43,"State":"UT","Party":"DEM"},
+{"Name":"STEWART, CHRIS","TotalDonations":913910.53,"State":"UT","Party":"REP"},
+{"Name":"ALLEN, KATHRY","TotalDonations":869873.36,"State":"UT","Party":"DEM"},
+{"Name":"KENNEDY, MIKE","TotalDonations":752498.82,"State":"UT","Party":"REP"},
+{"Name":"GHORBANI, SHIREEN SARAH","TotalDonations":368445.75,"State":"UT","Party":"DEM"}],"top10Warchests":[
+{"Name":"ROMNEY, MITT WILLARD MR","Warchest":493605.04,"Initials":"UT","Party":"REP"},
+{"Name":"MATHESON, JAMES DAVID","Warchest":438932.75,"Initials":"UT","Party":"DEM"},
+{"Name":"BISHOP, ROBERT","Warchest":413983.74,"Initials":"UT","Party":"REP"},
+{"Name":"LOVE, MIA","Warchest":323274.55,"Initials":"UT","Party":"REP"},
+{"Name":"MCADAMS, BEN","Warchest":237960.88,"Initials":"UT","Party":"DEM"},
+{"Name":"STEWART, CHRIS","Warchest":193696.19,"Initials":"UT","Party":"REP"},
+{"Name":"CURTIS, JOHN","Warchest":179809.3,"Initials":"UT","Party":"REP"},
+{"Name":"GHORBANI, SHIREEN SARAH","Warchest":144809.22,"Initials":"UT","Party":"DEM"},
+{"Name":"WILSON, JENNY","Warchest":89732.26,"Initials":"UT","Party":"DEM"},
+{"Name":"ELIASON, ERIC R","Warchest":66085.79,"Initials":"UT","Party":"UNI"}],"initials":"UT"},
+{"percentages": [{"value":8.46535296136305},{"value":90.16972298520739},{"value":1.3649240534295644}],"total":10264711.040000001,"top10Donees":[
+{"Name":"SANDERS, BERNARD","TotalDonations":9247352.51,"State":"VT","Party":"IND"},
+{"Name":"WELCH, PETER","TotalDonations":806625.64,"State":"VT","Party":"DEM"},
+{"Name":"ZUPAN, LAWRENCE","TotalDonations":130675.51,"State":"VT","Party":"REP"},
+{"Name":"FREILICH, DANIEL ADAM","TotalDonations":62318.38,"State":"VT","Party":"DEM"},
+{"Name":"TYNIO, NATASHA ANYA","TotalDonations":9430.0,"State":"VT","Party":"REP"},
+{"Name":"PEACOCK, BRAD JOSEPH","TotalDonations":8309.0,"State":"VT","Party":"IND"},
+{"Name":"ERICSON, CRIS","TotalDonations":0.0,"State":"VT","Party":"IND"},
+{"Name":"ADELUOLA, FOLASADE","TotalDonations":0.0,"State":"VT","Party":"DEM"},
+{"Name":"PAIGE, H. BROOKE","TotalDonations":0.0,"State":"VT","Party":"REP"},
+{"Name":"SVITAVSKY, JON","TotalDonations":0.0,"State":"VT","Party":"DEM"}],"top10Warchests":[
+{"Name":"SANDERS, BERNARD","Warchest":8577149.76,"Initials":"VT","Party":"IND"},
+{"Name":"WELCH, PETER","Warchest":2105906.57,"Initials":"VT","Party":"DEM"},
+{"Name":"ZUPAN, LAWRENCE","Warchest":64904.74,"Initials":"VT","Party":"REP"},
+{"Name":"TYNIO, NATASHA ANYA","Warchest":3134.6,"Initials":"VT","Party":"REP"},
+{"Name":"PEACOCK, BRAD JOSEPH","Warchest":2727.0,"Initials":"VT","Party":"IND"},
+{"Name":"PAIGE, H. BROOKE","Warchest":0.0,"Initials":"VT","Party":"REP"},
+{"Name":"SVITAVSKY, JON","Warchest":0.0,"Initials":"VT","Party":"DEM"},
+{"Name":"DE LA FUENTE, ROQUE 'ROCKY'","Warchest":0.0,"Initials":"VT","Party":"REP"},
+{"Name":"PANNU, JASDEEP","Warchest":0.0,"Initials":"VT","Party":"REP"},
+{"Name":"MITCHELL, BENJAMIN L MFA","Warchest":0.0,"Initials":"VT","Party":"DEM"}],"initials":"VT"},
+{"percentages": [{"value":69.76576122255501},{"value":0.11946660038086776},{"value":30.11477217706412}],"total":72939566.14000002,"top10Donees":[
+{"Name":"KAINE, TIMOTHY MICHAEL","TotalDonations":16214775.36,"State":"VA","Party":"DEM"},
+{"Name":"SPANBERGER, ABIGAIL","TotalDonations":5943112.99,"State":"VA","Party":"DEM"},
+{"Name":"COMSTOCK, BARBARA","TotalDonations":5822188.03,"State":"VA","Party":"REP"},
+{"Name":"WEXTON, JENNIFER","TotalDonations":5415460.12,"State":"VA","Party":"DEM"},
+{"Name":"TAYLOR, SCOTT W. MR.","TotalDonations":3651856.95,"State":"VA","Party":"REP"},
+{"Name":"LURIA, ELAINE","TotalDonations":3611756.58,"State":"VA","Party":"DEM"},
+{"Name":"COCKBURN, LESLIE","TotalDonations":2771530.58,"State":"VA","Party":"DEM"},
+{"Name":"BRAT, DAVID ALAN MR.","TotalDonations":2751354.32,"State":"VA","Party":"REP"},
+{"Name":"FRIEDMAN, ALISON","TotalDonations":2498696.22,"State":"VA","Party":"DEM"},
+{"Name":"STEWART, COREY ALAN","TotalDonations":2395399.23,"State":"VA","Party":"REP"}],"top10Warchests":[
+{"Name":"KAINE, TIMOTHY MICHAEL","Warchest":4831557.17,"Initials":"VA","Party":"DEM"},
+{"Name":"CONNOLLY, GERALD EDWARD","Warchest":3222623.73,"Initials":"VA","Party":"DEM"},
+{"Name":"WEXTON, JENNIFER","Warchest":1130491.74,"Initials":"VA","Party":"DEM"},
+{"Name":"BEYER, DONALD STERNOFF HONORABLE JR.","Warchest":982102.76,"Initials":"VA","Party":"DEM"},
+{"Name":"BRAT, DAVID ALAN MR.","Warchest":978003.52,"Initials":"VA","Party":"REP"},
+{"Name":"LURIA, ELAINE","Warchest":914307.57,"Initials":"VA","Party":"DEM"},
+{"Name":"STEWART, COREY ALAN","Warchest":713902.48,"Initials":"VA","Party":"REP"},
+{"Name":"WITTMAN, ROBERT J MR.","Warchest":699943.42,"Initials":"VA","Party":"REP"},
+{"Name":"COCKBURN, LESLIE","Warchest":699372.92,"Initials":"VA","Party":"DEM"},
+{"Name":"SPANBERGER, ABIGAIL","Warchest":590536.96,"Initials":"VA","Party":"DEM"}],"initials":"VA"},
+{"percentages": [{"value":71.89254274288855},{"value":0.28474948677583},{"value":27.82270777033562}],"total":53979847.949999996,"top10Donees":[
+{"Name":"CANTWELL, MARIA","TotalDonations":9188096.48,"State":"WA","Party":"DEM"},
+{"Name":"SCHRIER, KIM DR.","TotalDonations":6937042.54,"State":"WA","Party":"DEM"},
+{"Name":"MCMORRIS RODGERS, CATHY","TotalDonations":5502066.0,"State":"WA","Party":"REP"},
+{"Name":"BROWN, LISA","TotalDonations":5296502.34,"State":"WA","Party":"DEM"},
+{"Name":"ROSSI, DINO","TotalDonations":4418817.0,"State":"WA","Party":"REP"},
+{"Name":"LONG, CAROLYN N.","TotalDonations":3255853.16,"State":"WA","Party":"DEM"},
+{"Name":"KILMER, DEREK","TotalDonations":2274180.9,"State":"WA","Party":"DEM"},
+{"Name":"HERRERA BEUTLER, JAIME","TotalDonations":2271712.83,"State":"WA","Party":"REP"},
+{"Name":"JAYAPAL, PRAMILA","TotalDonations":2064543.56,"State":"WA","Party":"DEM"},
+{"Name":"DELBENE, SUZAN K","TotalDonations":2007785.44,"State":"WA","Party":"DEM"}],"top10Warchests":[
+{"Name":"CANTWELL, MARIA","Warchest":3996230.33,"Initials":"WA","Party":"DEM"},
+{"Name":"KILMER, DEREK","Warchest":3020411.13,"Initials":"WA","Party":"DEM"},
+{"Name":"SCHRIER, KIM DR.","Warchest":1563372.82,"Initials":"WA","Party":"DEM"},
+{"Name":"HECK, DENNIS","Warchest":1241952.44,"Initials":"WA","Party":"DEM"},
+{"Name":"DELBENE, SUZAN K","Warchest":1149548.98,"Initials":"WA","Party":"DEM"},
+{"Name":"JAYAPAL, PRAMILA","Warchest":774601.71,"Initials":"WA","Party":"DEM"},
+{"Name":"LONG, CAROLYN N.","Warchest":702233.95,"Initials":"WA","Party":"DEM"},
+{"Name":"BROWN, LISA","Warchest":660694.81,"Initials":"WA","Party":"DEM"},
+{"Name":"MCMORRIS RODGERS, CATHY","Warchest":551473.0,"Initials":"WA","Party":"REP"},
+{"Name":"ROSSI, DINO","Warchest":511781.09,"Initials":"WA","Party":"REP"}],"initials":"WA"},
+{"percentages": [{"value":43.78006327496859},{"value":14.143601763566295},{"value":42.076334961465115}],"total":29465196.769999996,"top10Donees":[
+{"Name":"MANCHIN III, JOE","TotalDonations":8105199.71,"State":"WV","Party":"DEM"},
+{"Name":"MORRISEY, PATRICK MR","TotalDonations":5401020.15,"State":"WV","Party":"REP"},
+{"Name":"BLANKENSHIP, DON","TotalDonations":4165210.09,"State":"WV","Party":"CON"},
+{"Name":"OJEDA, RICHARD NEECE SENATOR II","TotalDonations":2242457.96,"State":"WV","Party":"DEM"},
+{"Name":"MOONEY, ALEXANDER XAVIER","TotalDonations":1734441.11,"State":"WV","Party":"REP"},
+{"Name":"MILLER, CAROL DEVINE","TotalDonations":1648101.32,"State":"WV","Party":"REP"},
+{"Name":"JENKINS, EVAN H","TotalDonations":1573189.05,"State":"WV","Party":"REP"},
+{"Name":"MCKINLEY, DAVID B. MR.","TotalDonations":1213409.64,"State":"WV","Party":"REP"},
+{"Name":"SERGENT, TALLEY","TotalDonations":668057.31,"State":"WV","Party":"DEM"},
+{"Name":"BAXTER, RALPH","TotalDonations":652907.14,"State":"WV","Party":"DEM"}],"top10Warchests":[
+{"Name":"MANCHIN III, JOE","Warchest":3193174.55,"Initials":"WV","Party":"DEM"},
+{"Name":"MOONEY, ALEXANDER XAVIER","Warchest":1292843.41,"Initials":"WV","Party":"REP"},
+{"Name":"MORRISEY, PATRICK MR","Warchest":1126829.72,"Initials":"WV","Party":"REP"},
+{"Name":"MCKINLEY, DAVID B. MR.","Warchest":842150.37,"Initials":"WV","Party":"REP"},
+{"Name":"MILLER, CAROL DEVINE","Warchest":275583.87,"Initials":"WV","Party":"REP"},
+{"Name":"OJEDA, RICHARD NEECE SENATOR II","Warchest":226324.35,"Initials":"WV","Party":"DEM"},
+{"Name":"SERGENT, TALLEY","Warchest":198372.09,"Initials":"WV","Party":"DEM"},
+{"Name":"SCHEINBERG, AARON","Warchest":62904.21,"Initials":"WV","Party":"DEM"},
+{"Name":"WILLIAMS, STEVE","Warchest":53060.89,"Initials":"WV","Party":"DEM"},
+{"Name":"GEARHEART, MARTY","Warchest":51964.61,"Initials":"WV","Party":"REP"}],"initials":"WV"},
+{"percentages": [{"value":67.36236984221993},{"value":0.007465873306315984},{"value":32.63016428447375}],"total":64640796.89,"top10Donees":[
+{"Name":"BALDWIN, TAMMY","TotalDonations":25844219.98,"State":"WI","Party":"DEM"},
+{"Name":"BRYCE, RANDY","TotalDonations":7904006.75,"State":"WI","Party":"DEM"},
+{"Name":"VUKMIR, LEAH","TotalDonations":5327268.11,"State":"WI","Party":"REP"},
+{"Name":"NICHOLSON, KEVIN","TotalDonations":3862601.57,"State":"WI","Party":"REP"},
+{"Name":"DUFFY, SEAN","TotalDonations":3427803.98,"State":"WI","Party":"REP"},
+{"Name":"KOHL, DAN","TotalDonations":2851377.82,"State":"WI","Party":"DEM"},
+{"Name":"GALLAGHER, MICHAEL JOHN","TotalDonations":2745770.45,"State":"WI","Party":"REP"},
+{"Name":"KIND, RONALD JAMES","TotalDonations":2208190.42,"State":"WI","Party":"DEM"},
+{"Name":"STEIL, BRYAN GEORGE","TotalDonations":1868953.11,"State":"WI","Party":"REP"},
+{"Name":"GROTHMAN, GLENN S.","TotalDonations":1866521.29,"State":"WI","Party":"REP"}],"top10Warchests":[
+{"Name":"KIND, RONALD JAMES","Warchest":2644174.27,"Initials":"WI","Party":"DEM"},
+{"Name":"BALDWIN, TAMMY","Warchest":2473579.51,"Initials":"WI","Party":"DEM"},
+{"Name":"DUFFY, SEAN","Warchest":1801940.47,"Initials":"WI","Party":"REP"},
+{"Name":"VUKMIR, LEAH","Warchest":1100091.95,"Initials":"WI","Party":"REP"},
+{"Name":"GALLAGHER, MICHAEL JOHN","Warchest":938470.79,"Initials":"WI","Party":"REP"},
+{"Name":"GROTHMAN, GLENN S.","Warchest":611248.58,"Initials":"WI","Party":"REP"},
+{"Name":"POCAN, MARK","Warchest":583139.6,"Initials":"WI","Party":"DEM"},
+{"Name":"JOHNSON, RONALD HAROLD","Warchest":409020.51,"Initials":"WI","Party":"REP"},
+{"Name":"SENSENBRENNER, F. JAMES JR.","Warchest":381737.57,"Initials":"WI","Party":"REP"},
+{"Name":"BRYCE, RANDY","Warchest":360415.91,"Initials":"WI","Party":"DEM"}],"initials":"WI"},
+{"percentages": [{"value":9.520991010686984},{"value":0.0032228065281429963},{"value":90.47578618278487}],"total":9308656.83,"top10Donees":[
+{"Name":"BARRASSO, JOHN A","TotalDonations":5491202.71,"State":"WY","Party":"REP"},
+{"Name":"DODSON, DAVID","TotalDonations":2093962.57,"State":"WY","Party":"REP"},
+{"Name":"TRAUNER, GARY","TotalDonations":844226.7,"State":"WY","Party":"DEM"},
+{"Name":"CHENEY, ELIZABETH MRS.","TotalDonations":822462.17,"State":"WY","Party":"REP"},
+{"Name":"HUNTER, GREG","TotalDonations":42049.68,"State":"WY","Party":"DEM"},
+{"Name":"HARDY, CHARLES E","TotalDonations":8633.0,"State":"WY","Party":"REP"},
+{"Name":"STANLEY, BLAKE","TotalDonations":5820.0,"State":"WY","Party":"REP"},
+{"Name":"CUMMINGS, DANIEL CLYDE","TotalDonations":300.0,"State":"WY","Party":"CON"},
+{"Name":"MILLER, ROD","TotalDonations":0.0,"State":"WY","Party":"REP"},
+{"Name":"HOLTZ, JOHN","TotalDonations":0.0,"State":"WY","Party":"REP"}],"top10Warchests":[
+{"Name":"BARRASSO, JOHN A","Warchest":4227113.26,"Initials":"WY","Party":"REP"},
+{"Name":"CHENEY, ELIZABETH MRS.","Warchest":243527.93,"Initials":"WY","Party":"REP"},
+{"Name":"TRAUNER, GARY","Warchest":186975.13,"Initials":"WY","Party":"DEM"},
+{"Name":"DODSON, DAVID","Warchest":33558.0,"Initials":"WY","Party":"REP"},
+{"Name":"STANLEY, BLAKE","Warchest":1505.0,"Initials":"WY","Party":"REP"},
+{"Name":"CUMMINGS, DANIEL CLYDE","Warchest":1079.0,"Initials":"WY","Party":"CON"},
+{"Name":"HUNTER, GREG","Warchest":165.12,"Initials":"WY","Party":"DEM"},
+{"Name":"HARDY, CHARLES E","Warchest":156.0,"Initials":"WY","Party":"REP"},
+{"Name":"HELM, TRAVIS","Warchest":0.0,"Initials":"WY","Party":"DEM"},
+{"Name":"HOLTZ, JOHN","Warchest":0.0,"Initials":"WY","Party":"REP"}],"initials":"WY"}];
 String.prototype.format = function () {
         var args = [].slice.call(arguments);
         return this.replace(/(\{\d+\})/g, function (a){
@@ -223,6 +1262,8 @@ for(state = 0; state < numStates; state++) {
         anchor.y = 0.5*height;
     data.push(anchor);
     links.push({"source":  state, "target":  numStates + state});
+    tabulate(data[state].top10Donees, ["Name","TotalDonations","State","Party"], "tables_script", "top10Donees_" + data[state].initials);
+    tabulate(data[state].top10Warchests, ["Name","Warchest","State","Party"], "tables_script", "top10Warchests_" + data[state].initials);
 
 }
 //alert(JSON.stringify(links))
@@ -331,11 +1372,53 @@ arcs.append("svg:path")
            if(d.anchor) return "none";
            return "block";
        })
+
+function tabulate(data, columns, targetDivName, newDivName) {
+	var newDiv = d3.select('#' + targetDivName)
+		.append('div')
+		.attr("id", newDivName)
+		.attr("style", "display:none")
+	var table = newDiv
+		.append('table')
+		.attr("style", "margin:auto")
+	var thead = table.append('thead')
+	var	tbody = table.append('tbody');
+
+	// append the header row
+	thead.append('tr')
+	  .selectAll('th')
+	  .data(columns).enter()
+	  .append('th')
+	    .text(function (column) { return column; });
+
+	// create a row for each object in the data
+	var rows = tbody.selectAll('tr')
+	  .data(data)
+	  .enter()
+	  .append('tr');
+
+	// create a cell in each row for each column
+	var cells = rows.selectAll('td')
+	  .data(function (row) {
+	    return columns.map(function (column) {
+	      return {column: column, value: row[column]};
+	    });
+	  })
+	  .enter()
+	  .append('td')
+	    .text(function (d) { return d.value; });
+	newDiv.append('br');
+
+  return table;
+}
+
 bubbles_script_global.link = link;
 bubbles_script_global.node = node;
 bubbles_script_global.data = data;
 bubbles_script_global.maxRadius = maxRadius;
 bubbles_script_global.padding = padding;
+bubbles_script_global.currentClickedInitials = "AB";
+showCurrentStateTopTen();
 })();
 
 function sortByDominance(data, ascending) {
@@ -358,41 +1441,26 @@ function sortByInitials(data, ascending) {
     });
 }
 
-function sortByTotals(data, ascending) {
-    data.sort(function(a,b) { return ascending * (a.total - b.total); });
+function setCurrentStateTopTen(initials) {
+    hideCurrentStateTopTen();
+    bubbles_script_global.currentClickedInitials = initials;
+    showCurrentStateTopTen();
 }
 
-
-function switchSortMode(newSortMode){
-    if(newSortMode != currentSortMode) setCurrentSorting(newSortMode, 1);
-    else toggleAscending();
+function hideCurrentStateTopTen() {
+  d3.select("#top10Donees_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:none");
+  d3.select("#top10Warchests_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:none");
 }
 
-function toggleAscending() {
-    setCurrentSorting(currentSortMode, currentAscending * -1);
+function showCurrentStateTopTen() {
+  d3.select("#top10Donees_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:block");
+  d3.select("#top10Warchests_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:block");
 }
 
-function setCurrentSorting(newSortMode, newAscending) {
-    hideCurrent();
-    currentSortMode = newSortMode;
-    currentAscending = newAscending;
-    showCurrent();
-}
-
-function hideCurrent() {
-    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
-    pieCharts.style.display = "none";
-}
-
-function showCurrent() {
-    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
-    pieCharts.style.display = "block";
-}
-
-
-function getTranslateByRadius(d) { 
-    return "translate({0},{0})".format(d.radius); 
-}
 function tick() {
     bubbles_script_global.link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
@@ -403,14 +1471,16 @@ function tick() {
     bubbles_script_global.node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 }
 
+
 function dblclick(d) {
   d3.select(this).classed("fixed", d.fixed = false);
 }
 
 function dragstart(d) {
-  //d3.select(this).classed("selected", d.selected = true);
+  setCurrentStateTopTen(d.initials);
 }
- 
+
+
  // Resolves collisions between d and all other circles.
  // adapted from https://bl.ocks.org/mbostock/1748247
 function collide(alpha) {
@@ -441,83 +1511,7 @@ function collide(alpha) {
   };
 }
 
-
-    </script>
-
-<script>
-(function() {
-var color = "steelblue";
-var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
-// Generate a 1000 data points using normal distribution with mean=20, deviation=5
-var values = randomData;
-//d3.values(stateData, function(d) {return stateData.total})
-//d3.range(1000).map(d3.random.normal(20, 5));
-
-// A formatter for counts.
-var formatCount = d3.format(",.0f");
-
-var margin = {top: 20, right: 30, bottom: 30, left: 30},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-var max = d3.max(values);
-var min = d3.min(values);
-var x = d3.scale.linear()
-      .domain([min, max])
-      .range([0, width]);
-
-// Generate a histogram using twenty uniformly-spaced bins.
-var data = d3.layout.histogram()
-    .bins(x.ticks(20))
-    (values);
-
-var yMax = d3.max(data, function(d){return d.length});
-var yMin = d3.min(data, function(d){return d.length});
-var colorScale = d3.scale.linear()
-            .domain([yMin, yMax])
-            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
-
-var y = d3.scale.linear()
-    .domain([0, yMax])
-    .range([height, 0]);
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-var svg = d3.select("#donation_script").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-var bar = svg.selectAll(".bar")
-    .data(data)
-  .enter().append("g")
-    .attr("class", "bar")
-    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-
-bar.append("rect")
-    .attr("x", 1)
-    .attr("width", (x(data[0].dx) - x(0)) - 1)
-    .attr("height", function(d) { return height - y(d.y); })
-    .attr("fill", function(d) { return colorScale(d.y) });
-
-bar.append("text")
-    .attr("dy", ".75em")
-    .attr("y", -12)
-    .attr("x", (x(data[0].dx) - x(0)) / 2)
-    .attr("text-anchor", "middle")
-    .text(function(d) { return formatCount(d.y); });
-
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
-})();
-
 </script>
-
 <script>
 (function() {
 var color = "steelblue";
@@ -634,6 +1628,80 @@ var xAxis = d3.svg.axis()
     .orient("bottom");
 
 var svg = d3.select("#histogram_script").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("height", function(d) { return height - y(d.y); })
+    .attr("fill", function(d) { return colorScale(d.y) });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -12)
+    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+})();
+
+</script>
+
+<script>
+(function() {
+var color = "steelblue";
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
+// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var values = randomData;
+//d3.values(stateData, function(d) {return stateData.total})
+//d3.range(1000).map(d3.random.normal(20, 5));
+
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
+
+var margin = {top: 20, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var max = d3.max(values);
+var min = d3.min(values);
+var x = d3.scale.linear()
+      .domain([min, max])
+      .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+var yMax = d3.max(data, function(d){return d.length});
+var yMin = d3.min(data, function(d){return d.length});
+var colorScale = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+var y = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var svg = d3.select("#donation_script").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
