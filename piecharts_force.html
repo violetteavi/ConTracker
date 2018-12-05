@@ -20,6 +20,8 @@
     <br>
     <div id="bubbles_script" width=100vw height=100vh style="display:block"></div>
     
+
+   
 <script type="text/javascript">
     // Adapted from http://bl.ocks.org/enjalot/1203641   
 var bubbles_script_global = {};  
@@ -143,7 +145,8 @@ var drag = force.drag()
 
 var svg = d3.select("#bubbles_script").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("style", "border:solid;display:block;margin:auto");
 
 var link = svg.selectAll(".link"),
     node = svg.selectAll(".node");
@@ -287,61 +290,6 @@ function showCurrent() {
     var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
     pieCharts.style.display = "block";
 }
-
-
-function getTranslateByRadius(d) { 
-    return "translate({0},{0})".format(d.radius); 
-}
-function tick() {
-    bubbles_script_global.link.attr("x1", function(d) { return d.source.x; })
-      .attr("y1", function(d) { return d.source.y; })
-      .attr("x2", function(d) { return d.target.x; })
-      .attr("y2", function(d) { return d.target.y; });
-
-    bubbles_script_global.node.each(collide(0.5));
-    bubbles_script_global.node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-}
-
-function dblclick(d) {
-  d3.select(this).classed("fixed", d.fixed = false);
-}
-
-function dragstart(d) {
-  //d3.select(this).classed("selected", d.selected = true);
-}
- 
- // Resolves collisions between d and all other circles.
- // adapted from https://bl.ocks.org/mbostock/1748247
-function collide(alpha) {
-  var quadtree = d3.geom.quadtree(bubbles_script_global.data.filter(function(d){return !d.fixed}));
-  return function(d) {
-    if(d.anchor) return true;
-    var r = d.radius + bubbles_script_global.maxRadius + bubbles_script_global.padding,
-        nx1 = d.x - r,
-        nx2 = d.x + r,
-        ny1 = d.y - r,
-        ny2 = d.y + r;
-    quadtree.visit(function(quad, x1, y1, x2, y2) {
-      if (quad.point && (quad.point !== d)) {
-        var x = d.x - quad.point.x,
-            y = d.y - quad.point.y,
-            l = Math.sqrt(x * x + y * y),
-            r = d.radius + quad.point.radius + bubbles_script_global.padding;
-        if (l < r) {
-          l = (l - r) / l * alpha;
-          d.x -= x *= l;
-          d.y -= y *= l;
-          quad.point.x += x;
-          quad.point.y += y;
-        }
-      }
-      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-    });
-  };
-}
-
-
-    </script>
 
   </body>
 </html>

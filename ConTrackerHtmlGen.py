@@ -5,9 +5,9 @@ def generateHtmlBegin():
     htmlBegin = """<!DOCTYPE html>
 <meta charset='utf-8'>
 <!-- saved from url=(0064)https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>W3.CSS Template</title>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ConTracker</title>
 
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src='https://d3js.org/d3.v3.js'></script>
 <!--
 <script type='text/javascript' src='script.js'></script>
 -->
@@ -51,22 +51,21 @@ body {
 
 </head><body>
 
-<script type='text/javascript' src='script.js'></script>
 
 
 <div class="w3-top">
   <div class="w3-row w3-large w3-light-grey">
     <div class="w3-col s3">
-      <a href="W3.CSS Template.html" class="w3-button w3-block">Home</a>
+      <a href="integrationTest.html" class="w3-button w3-block">Home</a>
     </div>
     <div class="w3-col s3">
-      <a href="#donation table" class="w3-button w3-block">Donation Table</a>
+      <a href="#donation_table" class="w3-button w3-block">Donation Table</a>
     </div>
     <div class="w3-col s3">
-      <a href="#warchest table" class="w3-button w3-block">Warchest Table</a>
+      <a href="#warchest_table" class="w3-button w3-block">Warchest Table</a>
     </div>
     <div class="w3-col s3">
-      <a href="#Histogram" class="w3-button w3-block">Histogram</a>
+      <a href="#Histogram" class="w3-button w3-block">State Donation Totals</a>
     </div>
   </div>
 </div>
@@ -75,27 +74,35 @@ body {
 <!-- Content -->
 <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
-  <div class="w3-panel">
-    <h1><b>ConTracker</b></h1>
+  <div class="w3-center">
+    <h1 ><b>ConTracker</b></h1>
   </div>
 
 
 
-  <div class="bubbles">
-      <div id="pieCharts" style="display: block">
+  <div class="w3-center w3-padding-64" id="bubblechart">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Party Campaign Contributions by State</span>
+      <br><br>
+      <br><br>
+      <br><br>
+      <div id="bubbles_script" style="display: block" >
       </div>
   </div>
 
-  <div class="w3-center w3-padding-64" id="donation table">
-      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Donation Table</span>
+  <div class="w3-center w3-padding-64" id="donation_table">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Candidate Total Donation Dollars</span>
+      <br><br>
+      <br><br>
       <div id="donation_script" style="display: block">
       </div>
   </div>
  
 
     
-  <div class="w3-center w3-padding-64" id="warchest table">
-      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Warchest Table</span>
+  <div class="w3-center w3-padding-64" id="warchest_table">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Candidate Total Warchest Dollars</span>
+      <br><br>
+      <br><br>
       <div id="warchest_script" style="display: block">
       </div>
 
@@ -108,11 +115,13 @@ body {
   </div>
   <div class="w3-row-padding" id="Histogram">
     <div class="w3-center w3-padding-64">
-      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Donations by State (magnitude)</span>
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">State Total Donation Dollars</span>
+      <br><br>
+      <br><br>
     <div id="histogram_script" style="display: block">
-      
     </div>
     </div>
+
  """ 
     return htmlBegin
 
@@ -168,19 +177,10 @@ def generateHtmlEnd():
     return htmlEnd
 
 def generatePieChartHtmlBegin():
-    pieBegin = """<script src='https://d3js.org/d3.v3.js'></script>
-    <script type="text/javascript">
-    </script>
-    <button onclick="switchSortMode(0)">Party</button>
-    <button onclick="switchSortMode(1)">Total</button>
-    <button onclick="switchSortMode(2)">Initials</button>
-    <br>
-    <br>
-    <br>
-    <div id="pieCharts" width=100vw height=100vh style="display:block"></div>
-    
-    <script type="text/javascript">
-    // Adapted from http://bl.ocks.org/enjalot/1203641     
+    pieBegin = """<script type="text/javascript">
+    // Adapted from http://bl.ocks.org/enjalot/1203641   
+var bubbles_script_global = {};  
+(function() {
 var color = ["#98AFC7", "#B6B6B4", "#FB8885"],
 width = 960,
 height = 500,
@@ -193,7 +193,7 @@ data = [
     return pieBegin
 
 def generatePieChartHtmlEnd():
-    pieBegin = """];
+    pieEnd = """];
 String.prototype.format = function () {
         var args = [].slice.call(arguments);
         return this.replace(/(\{\d+\})/g, function (a){
@@ -209,13 +209,14 @@ for(state = 0; state < numStates; state++) {
     //alert(radius);
     xStart = (radius/maxRadius);
     if(currentSortMode == 0) 
-    xStart = (data[state].percentages[0].value - data[state].percentages[2].value) / 100;
+	xStart = (data[state].percentages[0].value - data[state].percentages[2].value + 100) / 200;
     if(currentSortMode == 2) {
         firstInitialInt = data[state].initials.charAt(0) - 'A';
         secondInitialInt = data[state].initials.charAt(1) - 'A';
         xStart = (firstInitialInt * 26 + secondInitialInt) / 26 / 26;
     }
-    
+    if(xStart < 0) alert(xStart);
+	
     if(currentAscending == -1) xStart = (1 - xStart);
     xStart = xStart * width
     var yStart = (-0.015+.03*Math.random() + 0.5)*height;
@@ -231,6 +232,7 @@ for(state = 0; state < numStates; state++) {
         anchor.percentages[0].anchor = true;
         anchor.percentages[1].anchor = true;
         anchor.percentages[2].anchor = true;
+        anchor.y = 0.5*height;
     data.push(anchor);
     links.push({"source":  state, "target":  numStates + state});
 
@@ -243,17 +245,18 @@ for(state = 0; state < numStates; state++) {
 var force = d3.layout.force()
     .size([width, height])
     .charge(0)
-    .gravity(0)
+	.gravity(0)
     .linkDistance(1)
-    .linkStrength(0.5)
+    .linkStrength(0.3)
     .on("tick", tick);
 
 var drag = force.drag()
     .on("dragstart", dragstart);
 
-var svg = d3.select("#pieCharts").append("svg")
+var svg = d3.select("#bubbles_script").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("style", "border:solid;display:block;margin:auto");
 
 var link = svg.selectAll(".link"),
     node = svg.selectAll(".node");
@@ -274,9 +277,9 @@ node = nodeOnEnter
      .attr("height", function(d) { return 2*d.radius; })
      .attr("class", "node")
      .attr("r", function(node){
-    if(node.fixed === true) return 0;
+ 	if(node.fixed === true) return 0;
          return node.radius;
-    })
+ 	})
      .on("dblclick", dblclick)
      .call(drag)  
 /*
@@ -284,9 +287,9 @@ circles = nodeOnEnter
     .append("circle")
     .attr("class", "node")
     .attr("r", function(node){
-        if(node.fixed === true) return 0;
+		if(node.fixed === true) return 0;
         return node.radius;
-    })
+	})
     .on("dblclick", dblclick)
     .call(drag);
 */
@@ -316,16 +319,19 @@ var arcs = arcContainers.selectAll("g.slice")
        .attr("class", "slice");
 
 arcs.append("svg:path")
-   .attr("fill", function(d, i) { return color[i]; } ) 
+   .attr("fill", function(d, i) { return color[i]; } )
+    .attr("transform", function(d) { 
+        return "translate({0},{0})".format(-d.data.radius); 
+    })    
    .attr("d", arc);       
 
 //alert(JSON.stringify(arcContainers.data()))
    arcContainers.append("svg:text")
        .data(data)                             
        .attr("text-anchor", "middle")
-       .attr("transform", function(d){ 
-            return "translate(0," + 0.35*d.radius + ")";
-       })
+       .attr("transform", function(d) { 
+          return "translate({0},{1})".format(-d.radius, -d.radius + 0.35*d.radius); 
+       })    
        .attr("font-family", "Times")
        .attr("font-size", function(d) { 
            return 2*(Math.floor(0.4*d.radius ))+"pt";
@@ -337,7 +343,12 @@ arcs.append("svg:path")
            if(d.anchor) return "none";
            return "block";
        })
-
+bubbles_script_global.link = link;
+bubbles_script_global.node = node;
+bubbles_script_global.data = data;
+bubbles_script_global.maxRadius = maxRadius;
+bubbles_script_global.padding = padding;
+})();
 
 function sortByDominance(data, ascending) {
     // sort the data by rep, dem
@@ -395,13 +406,13 @@ function getTranslateByRadius(d) {
     return "translate({0},{0})".format(d.radius); 
 }
 function tick() {
-    link.attr("x1", function(d) { return d.source.x; })
+    bubbles_script_global.link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
 
-    node.each(collide(0.5));
-    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    bubbles_script_global.node.each(collide(0.5));
+    bubbles_script_global.node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 }
 
 function dblclick(d) {
@@ -415,10 +426,10 @@ function dragstart(d) {
  // Resolves collisions between d and all other circles.
  // adapted from https://bl.ocks.org/mbostock/1748247
 function collide(alpha) {
-  var quadtree = d3.geom.quadtree(data.filter(function(d){return !d.fixed}));
+  var quadtree = d3.geom.quadtree(bubbles_script_global.data.filter(function(d){return !d.fixed}));
   return function(d) {
     if(d.anchor) return true;
-    var r = d.radius + maxRadius + padding,
+    var r = d.radius + bubbles_script_global.maxRadius + bubbles_script_global.padding,
         nx1 = d.x - r,
         nx2 = d.x + r,
         ny1 = d.y - r,
@@ -428,7 +439,7 @@ function collide(alpha) {
         var x = d.x - quad.point.x,
             y = d.y - quad.point.y,
             l = Math.sqrt(x * x + y * y),
-            r = d.radius + quad.point.radius + padding;
+            r = d.radius + quad.point.radius + bubbles_script_global.padding;
         if (l < r) {
           l = (l - r) / l * alpha;
           d.x -= x *= l;
@@ -444,22 +455,21 @@ function collide(alpha) {
 
 
     </script>
+
     """
-    return pieBegin
+    return pieEnd
 
 def generateHistogramBegin():
-    pieBegin = """<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
+    histogramBegin = """<script>
+(function() {
 var color = "steelblue";
 var randomData =
     """
-    return pieBegin
+    return histogramBegin
 
 def generateHistorgramEnd(targetDiv):
-    pieBegin = """
+    histogramEnd = """
 var values = randomData;
-//d3.values(stateData, function(d) {return stateData.total})
-//d3.range(1000).map(d3.random.normal(20, 5));
 
 // A formatter for counts.
 var formatCount = d3.format(",.0f");
@@ -470,7 +480,7 @@ var margin = {top: 20, right: 30, bottom: 30, left: 30},
 
 var max = d3.max(values);
 var min = d3.min(values);
-var x = d3.scale.linear()
+var x = d3.scale.log()
       .domain([min, max])
       .range([0, width]);
 
@@ -478,7 +488,6 @@ var x = d3.scale.linear()
 var data = d3.layout.histogram()
     .bins(x.ticks(20))
     (values);
-
 var yMax = d3.max(data, function(d){return d.length});
 var yMin = d3.min(data, function(d){return d.length});
 var colorScale = d3.scale.linear()
@@ -493,7 +502,7 @@ var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
 
-var svg = d3.select("#""" + targetDiv + """").append("svg")
+var svg = d3.select("#""" + targetDiv+"""").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -507,14 +516,14 @@ var bar = svg.selectAll(".bar")
 
 bar.append("rect")
     .attr("x", 1)
-    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("width", width/23.5 - 1)
     .attr("height", function(d) { return height - y(d.y); })
     .attr("fill", function(d) { return colorScale(d.y) });
 
 bar.append("text")
     .attr("dy", ".75em")
     .attr("y", -12)
-    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("x", (width/23.5 -1) / 2)
     .attr("text-anchor", "middle")
     .text(function(d) { return formatCount(d.y); });
 
@@ -522,52 +531,8 @@ svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
-
-/*
-* Adding refresh method to reload new data
-*/
-function refresh(values){
-  // var values = d3.range(1000).map(d3.random.normal(20, 5));
-  var data = d3.layout.histogram()
-    .bins(x.ticks(20))
-    (values);
-
-  // Reset y domain using new data
-  var yMax = d3.max(data, function(d){return d.length});
-  var yMin = d3.min(data, function(d){return d.length});
-  y.domain([0, yMax]);
-  var colorScale = d3.scale.linear()
-              .domain([yMin, yMax])
-              .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
-
-  var bar = svg.selectAll(".bar").data(data);
-
-  // Remove object with data
-  bar.exit().remove();
-
-  bar.transition()
-    .duration(1000)
-    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-
-  bar.select("rect")
-      .transition()
-      .duration(1000)
-      .attr("height", function(d) { return height - y(d.y); })
-      .attr("fill", function(d) { return colorScale(d.y) });
-
-  bar.select("text")
-      .transition()
-      .duration(1000)
-      .text(function(d) { return formatCount(d.y); });
-
-}
-
-// Calling refresh repeatedly.
-setInterval(function() {
-  //var values = randomData
-  //refresh(values);
-}, 2000);
+})();
 
 </script>
     """
-    return pieBegin
+    return histogramEnd

@@ -23,15 +23,6 @@ states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
 
 def writeHTMLforStates():
     htmlContent = generateHtmlBegin()
-    htmlContent = htmlContent + generateHistogramBegin();
-    htmlContent = htmlContent + str(listOfContributions())
-    htmlContent = htmlContent + generateHistorgramEnd("donations_script");
-    htmlContent = htmlContent + generateHistogramBegin();
-    htmlContent = htmlContent + str(listOfContributions())
-    htmlContent = htmlContent + generateHistorgramEnd("warchest_script");
-    htmlContent = htmlContent + generateHistogramBegin();
-    htmlContent = htmlContent + str(listOfContributions())
-    htmlContent = htmlContent + generateHistorgramEnd("histogram_script");
     htmlContent = htmlContent + generatePieChartHtmlBegin()
     stateContributions = []
     for state in states:
@@ -42,6 +33,15 @@ def writeHTMLforStates():
             htmlContent = htmlContent + ",\n"
         else:
             htmlContent = htmlContent + generatePieChartHtmlEnd()
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(listOfContributions())
+    htmlContent = htmlContent + generateHistorgramEnd("donation_script");
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(listOfWarchests())
+    htmlContent = htmlContent + generateHistorgramEnd("warchest_script");
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(stateContributions)
+    htmlContent = htmlContent + generateHistorgramEnd("histogram_script");
     htmlContent = htmlContent + generateHtmlEnd();
     return htmlContent
 

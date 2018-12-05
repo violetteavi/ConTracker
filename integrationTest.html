@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset='utf-8'>
 <!-- saved from url=(0064)https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>W3.CSS Template</title>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ConTracker</title>
 
     <script src='https://d3js.org/d3.v3.js'></script>
 <!--
@@ -52,16 +52,16 @@ body {
 <div class="w3-top">
   <div class="w3-row w3-large w3-light-grey">
     <div class="w3-col s3">
-      <a href="W3.CSS Template.html" class="w3-button w3-block">Home</a>
+      <a href="integrationTest.html" class="w3-button w3-block">Home</a>
     </div>
     <div class="w3-col s3">
-      <a href="#donation table" class="w3-button w3-block">Donation Table</a>
+      <a href="#donation_table" class="w3-button w3-block">Donation Table</a>
     </div>
     <div class="w3-col s3">
-      <a href="#warchest table" class="w3-button w3-block">Warchest Table</a>
+      <a href="#warchest_table" class="w3-button w3-block">Warchest Table</a>
     </div>
     <div class="w3-col s3">
-      <a href="#Histogram" class="w3-button w3-block">Histogram</a>
+      <a href="#Histogram" class="w3-button w3-block">State Donation Totals</a>
     </div>
   </div>
 </div>
@@ -76,14 +76,16 @@ body {
 
 
 
-  <div class="bubbles">
+  <div class="w3-center w3-padding-64" id="bubblechart">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Party Campaign Contributions by State</span>
+      <br><br>
       <br><br>
       <br><br>
       <div id="bubbles_script" style="display: block" >
       </div>
   </div>
 
-  <div class="w3-center w3-padding-64" id="donation table">
+  <div class="w3-center w3-padding-64" id="donation_table">
       <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Candidate Total Donation Dollars</span>
       <br><br>
       <br><br>
@@ -93,7 +95,7 @@ body {
  
 
     
-  <div class="w3-center w3-padding-64" id="warchest table">
+  <div class="w3-center w3-padding-64" id="warchest_table">
       <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Candidate Total Warchest Dollars</span>
       <br><br>
       <br><br>

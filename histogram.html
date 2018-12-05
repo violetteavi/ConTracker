@@ -26,11 +26,8 @@ body {
 <script>
 (function() {
 var color = "steelblue";
-var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
-// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22, 200, 2000, 200000, 352, 4000, 561]
 var values = randomData;
-//d3.values(stateData, function(d) {return stateData.total})
-//d3.range(1000).map(d3.random.normal(20, 5));
 
 // A formatter for counts.
 var formatCount = d3.format(",.0f");
@@ -41,7 +38,7 @@ var margin = {top: 20, right: 30, bottom: 30, left: 30},
 
 var max = d3.max(values);
 var min = d3.min(values);
-var x = d3.scale.linear()
+var x = d3.scale.log()
       .domain([min, max])
       .range([0, width]);
 
@@ -49,7 +46,6 @@ var x = d3.scale.linear()
 var data = d3.layout.histogram()
     .bins(x.ticks(20))
     (values);
-
 var yMax = d3.max(data, function(d){return d.length});
 var yMin = d3.min(data, function(d){return d.length});
 var colorScale = d3.scale.linear()
@@ -78,14 +74,14 @@ var bar = svg.selectAll(".bar")
 
 bar.append("rect")
     .attr("x", 1)
-    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("width", width/23.5 - 1)
     .attr("height", function(d) { return height - y(d.y); })
     .attr("fill", function(d) { return colorScale(d.y) });
 
 bar.append("text")
     .attr("dy", ".75em")
     .attr("y", -12)
-    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("x", (width/23.5 -1) / 2)
     .attr("text-anchor", "middle")
     .text(function(d) { return formatCount(d.y); });
 
