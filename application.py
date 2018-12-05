@@ -56,7 +56,7 @@ html_file.write("%s" % writeHTMLforStates())
 html_file.close()
 """
 Error404 = "<h1> You encountered a 404 error. Here is a patriotic puppy, do you see that? </h1><br><img src=\"/static/PatrioticPuppy.jpg\"> "
-
+"""
 application = Flask(__name__)
 
 @application.route("/")
@@ -78,3 +78,5 @@ def test():
 if __name__ == "__main__":
 	#application.debug = True
 	application.run()
+"""
+print(writeHTMLforStates())

@@ -26,6 +26,7 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 .w3-tag, .fa {cursor:pointer}
 .w3-tag {height:15px;width:15px;padding:0;margin-top:6px}
 
+
 body {
   font: 10px sans-serif;
 }
@@ -42,6 +43,29 @@ body {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+table {  
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 640px; 
+    border-collapse: 
+    collapse; border-spacing: 0; 
+}
+
+td, th {  
+    border: 1px solid transparent; /* No more visible border */
+    height: 30px; 
+    transition: all 0.3s;  /* Simple transition for hover effect */
+}
+
+th {  
+    background: #DFDFDF;  /* Darken header a bit */
+    font-weight: bold;
+}
+
+td {  
+    background: #FAFAFA;
+    text-align: center;
 }
 
 
@@ -86,6 +110,9 @@ body {
       <br><br>
       <br><br>
       <div id="bubbles_script" style="display: block" >
+      </div>
+      <br>
+      <div id="tables_script" width=100vw height=100vh style="display:block"></div>
       </div>
   </div>
 
@@ -237,6 +264,8 @@ for(state = 0; state < numStates; state++) {
         anchor.y = 0.5*height;
     data.push(anchor);
     links.push({"source":  state, "target":  numStates + state});
+    tabulate(data[state].top10Donees, ["Name","TotalDonations","State","Party"], "tables_script", "top10Donees_" + data[state].initials);
+    tabulate(data[state].top10Warchests, ["Name","Warchest","State","Party"], "tables_script", "top10Warchests_" + data[state].initials);
 
 }
 //alert(JSON.stringify(links))
@@ -345,11 +374,53 @@ arcs.append("svg:path")
            if(d.anchor) return "none";
            return "block";
        })
+
+function tabulate(data, columns, targetDivName, newDivName) {
+	var newDiv = d3.select('#' + targetDivName)
+		.append('div')
+		.attr("id", newDivName)
+		.attr("style", "display:none")
+	var table = newDiv
+		.append('table')
+		.attr("style", "margin:auto")
+	var thead = table.append('thead')
+	var	tbody = table.append('tbody');
+
+	// append the header row
+	thead.append('tr')
+	  .selectAll('th')
+	  .data(columns).enter()
+	  .append('th')
+	    .text(function (column) { return column; });
+
+	// create a row for each object in the data
+	var rows = tbody.selectAll('tr')
+	  .data(data)
+	  .enter()
+	  .append('tr');
+
+	// create a cell in each row for each column
+	var cells = rows.selectAll('td')
+	  .data(function (row) {
+	    return columns.map(function (column) {
+	      return {column: column, value: row[column]};
+	    });
+	  })
+	  .enter()
+	  .append('td')
+	    .text(function (d) { return d.value; });
+	newDiv.append('br');
+
+  return table;
+}
+
 bubbles_script_global.link = link;
 bubbles_script_global.node = node;
 bubbles_script_global.data = data;
 bubbles_script_global.maxRadius = maxRadius;
 bubbles_script_global.padding = padding;
+bubbles_script_global.currentClickedInitials = "AB";
+showCurrentStateTopTen();
 })();
 
 function sortByDominance(data, ascending) {
@@ -372,41 +443,26 @@ function sortByInitials(data, ascending) {
     });
 }
 
-function sortByTotals(data, ascending) {
-    data.sort(function(a,b) { return ascending * (a.total - b.total); });
+function setCurrentStateTopTen(initials) {
+    hideCurrentStateTopTen();
+    bubbles_script_global.currentClickedInitials = initials;
+    showCurrentStateTopTen();
 }
 
-
-function switchSortMode(newSortMode){
-    if(newSortMode != currentSortMode) setCurrentSorting(newSortMode, 1);
-    else toggleAscending();
+function hideCurrentStateTopTen() {
+  d3.select("#top10Donees_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:none");
+  d3.select("#top10Warchests_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:none");
 }
 
-function toggleAscending() {
-    setCurrentSorting(currentSortMode, currentAscending * -1);
+function showCurrentStateTopTen() {
+  d3.select("#top10Donees_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:block");
+  d3.select("#top10Warchests_" + bubbles_script_global.currentClickedInitials)
+    .attr("style", "display:block");
 }
 
-function setCurrentSorting(newSortMode, newAscending) {
-    hideCurrent();
-    currentSortMode = newSortMode;
-    currentAscending = newAscending;
-    showCurrent();
-}
-
-function hideCurrent() {
-    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
-    pieCharts.style.display = "none";
-}
-
-function showCurrent() {
-    var pieCharts = document.getElementById("pieCharts"+ currentSortMode + "" + currentAscending);
-    pieCharts.style.display = "block";
-}
-
-
-function getTranslateByRadius(d) { 
-    return "translate({0},{0})".format(d.radius); 
-}
 function tick() {
     bubbles_script_global.link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
@@ -417,14 +473,16 @@ function tick() {
     bubbles_script_global.node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 }
 
+
 function dblclick(d) {
   d3.select(this).classed("fixed", d.fixed = false);
 }
 
 function dragstart(d) {
-  //d3.select(this).classed("selected", d.selected = true);
+  setCurrentStateTopTen(d.initials);
 }
- 
+
+
  // Resolves collisions between d and all other circles.
  // adapted from https://bl.ocks.org/mbostock/1748247
 function collide(alpha) {
@@ -455,10 +513,8 @@ function collide(alpha) {
   };
 }
 
-
-    </script>
-
-    """
+</script>
+"""
     return pieEnd
 
 def generateHistogramBegin():
