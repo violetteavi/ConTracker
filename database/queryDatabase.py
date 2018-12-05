@@ -13,7 +13,7 @@ def state_total(state):
 def nationwide_total():
     df = pd.read_sql_query("SELECT total_receipt FROM candidate_table;", engine)
     nationalTotal = df['total_receipt'].sum()
-    #print(nationalTotal)
+    print(nationalTotal)
     return nationalTotal
 
 def party_over_state(state, party, stateTotal):

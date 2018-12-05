@@ -1,18 +1,16 @@
-<<<<<<< HEAD
 from flask import Flask, render_template
-from database.queryDatabase import getStateData 
-=======
-#from flask import Flask, render_template
 from database.queryDatabase import getStateData
 from database.queryDatabase import getTopTenOverall
 from database.queryDatabase import getTopTenState
 from database.queryDatabase import listOfContributions
 from database.queryDatabase import listOfWarchests
-#from ConTrackerFetcher import getStateData 
->>>>>>> e6f31b30e216cbe556ab88c804727ed9d9f02a2e
-from ConTrackerHtmlGen import generatePieHtmlBegin
+from ConTrackerHtmlGen import generateHtmlBegin
+from ConTrackerHtmlGen import generateHtmlEnd
+from ConTrackerHtmlGen import generatePieChartHtmlBegin
 from ConTrackerHtmlGen import generatePieHtmlDataStr
-from ConTrackerHtmlGen import generatePieHtmlEnd
+from ConTrackerHtmlGen import generatePieChartHtmlEnd
+from ConTrackerHtmlGen import generateHistogramBegin
+from ConTrackerHtmlGen import generateHistorgramEnd
 from ConTrackerHtmlGen import formatCandidateRows
 from ConTrackerHtmlGen import formatWarchestRows
 
@@ -23,19 +21,27 @@ states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
           "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 
 def writeHTMLforStates():
-    htmlContent = generatePieHtmlBegin()
-    htmlContent = htmlContent + "Contributions = "
-    htmlContent = htmlContent + str(listOfContributions())
-    htmlContent = htmlContent + "; \nWarchests = "
-    htmlContent = htmlContent + str(listOfWarchests())
-    htmlContent = htmlContent + "; \ndata = ["
+    htmlContent = generateHtmlBegin()
+    htmlContent = htmlContent + generatePieChartHtmlBegin()
+    stateContributions = []
     for state in states:
         (totalContState,DemPercent,RepPercent,OtherPercent) = getStateData(state)
+        stateContributions.append(totalContState)
         htmlContent = htmlContent + generatePieHtmlDataStr(state, totalContState,DemPercent,OtherPercent,RepPercent)
         if(state != "WY"):
             htmlContent = htmlContent + ",\n"
         else:
-            htmlContent = htmlContent + generatePieHtmlEnd()
+            htmlContent = htmlContent + generatePieChartHtmlEnd()
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(listOfContributions())
+    htmlContent = htmlContent + generateHistorgramEnd("donation_script");
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(listOfWarchests())
+    htmlContent = htmlContent + generateHistorgramEnd("warchest_script");
+    htmlContent = htmlContent + generateHistogramBegin();
+    htmlContent = htmlContent + str(stateContributions)
+    htmlContent = htmlContent + generateHistorgramEnd("histogram_script");
+    htmlContent = htmlContent + generateHtmlEnd();
     return htmlContent
 
 """
