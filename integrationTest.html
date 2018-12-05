@@ -1,25 +1,123 @@
 <!DOCTYPE html>
-<html>
-  <head>    
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>ConTracker v1.1</title>
+<meta charset='utf-8'>
+<!-- saved from url=(0064)https://www.w3schools.com/w3css/tryw3css_templates_marketing.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>W3.CSS Template</title>
+
     <script src='https://d3js.org/d3.v3.js'></script>
+<!--
+<script type='text/javascript' src='script.js'></script>
+-->
 
 
-    <style type="text/css">
-    </style>
-  </head>
-  <body>
-    <script type="text/javascript">
-    </script>
-    <button onclick="switchSortMode(0)">Party</button>
-    <button onclick="switchSortMode(1)">Total</button>
-    <button onclick="switchSortMode(2)">Initials</button>
-    <br>
-    <br>
-    <br>
-    <div id="bubbles_script" width=100vw height=100vh style="display:block"></div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./W3.CSS Template_files/w3.css">
+<link rel="stylesheet" href="./W3.CSS Template_files/css">
+<link rel="stylesheet" href="./W3.CSS Template_files/font-awesome.min.css">
+
+
+
+<style>
+html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
+.mySlides {display:none}
+.w3-tag, .fa {cursor:pointer}
+.w3-tag {height:15px;width:15px;padding:0;margin-top:6px}
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #999999;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+
+</style>
+
+
+
+</head><body>
+
+
+
+<div class="w3-top">
+  <div class="w3-row w3-large w3-light-grey">
+    <div class="w3-col s3">
+      <a href="W3.CSS Template.html" class="w3-button w3-block">Home</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#donation table" class="w3-button w3-block">Donation Table</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#warchest table" class="w3-button w3-block">Warchest Table</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#Histogram" class="w3-button w3-block">Histogram</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Content -->
+<div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+
+  <div class="w3-center">
+    <h1 ><b>ConTracker</b></h1>
+  </div>
+
+
+
+  <div class="bubbles">
+      <br><br>
+      <br><br>
+      <div id="bubbles_script" style="display: block" >
+      </div>
+  </div>
+
+  <div class="w3-center w3-padding-64" id="donation table">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Candidate Total Donation Dollars</span>
+      <br><br>
+      <br><br>
+      <div id="donation_script" style="display: block">
+      </div>
+  </div>
+ 
+
     
+  <div class="w3-center w3-padding-64" id="warchest table">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Candidate Total Warchest Dollars</span>
+      <br><br>
+      <br><br>
+      <div id="warchest_script" style="display: block">
+      </div>
+
+      
+  </div>
+
+  <div class="Warchest table">
+    
+   
+  </div>
+  <div class="w3-row-padding" id="Histogram">
+    <div class="w3-center w3-padding-64">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">State Total Donation Dollars</span>
+      <br><br>
+      <br><br>
+    <div id="histogram_script" style="display: block">
+    </div>
+    </div>
+
+
+   
 <script type="text/javascript">
     // Adapted from http://bl.ocks.org/enjalot/1203641   
 var bubbles_script_global = {};  
@@ -143,7 +241,8 @@ var drag = force.drag()
 
 var svg = d3.select("#bubbles_script").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("style", "border:solid;display:block;margin:auto");
 
 var link = svg.selectAll(".link"),
     node = svg.selectAll(".node");
@@ -343,6 +442,226 @@ function collide(alpha) {
 
     </script>
 
-  </body>
-</html>
+<script>
+(function() {
+var color = "steelblue";
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
+// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var values = randomData;
+//d3.values(stateData, function(d) {return stateData.total})
+//d3.range(1000).map(d3.random.normal(20, 5));
 
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
+
+var margin = {top: 20, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var max = d3.max(values);
+var min = d3.min(values);
+var x = d3.scale.linear()
+      .domain([min, max])
+      .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+var yMax = d3.max(data, function(d){return d.length});
+var yMin = d3.min(data, function(d){return d.length});
+var colorScale = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+var y = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var svg = d3.select("#donation_script").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("height", function(d) { return height - y(d.y); })
+    .attr("fill", function(d) { return colorScale(d.y) });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -12)
+    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+})();
+
+</script>
+
+<script>
+(function() {
+var color = "steelblue";
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
+// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var values = randomData;
+//d3.values(stateData, function(d) {return stateData.total})
+//d3.range(1000).map(d3.random.normal(20, 5));
+
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
+
+var margin = {top: 20, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var max = d3.max(values);
+var min = d3.min(values);
+var x = d3.scale.linear()
+      .domain([min, max])
+      .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+var yMax = d3.max(data, function(d){return d.length});
+var yMin = d3.min(data, function(d){return d.length});
+var colorScale = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+var y = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var svg = d3.select("#warchest_script").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("height", function(d) { return height - y(d.y); })
+    .attr("fill", function(d) { return colorScale(d.y) });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -12)
+    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+})();
+
+</script>
+
+<script>
+(function() {
+var color = "steelblue";
+var randomData = [19, 21, 11, 32, 15, 13, 20, 20, 19, 19, 22]
+// Generate a 1000 data points using normal distribution with mean=20, deviation=5
+var values = randomData;
+//d3.values(stateData, function(d) {return stateData.total})
+//d3.range(1000).map(d3.random.normal(20, 5));
+
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
+
+var margin = {top: 20, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var max = d3.max(values);
+var min = d3.min(values);
+var x = d3.scale.linear()
+      .domain([min, max])
+      .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+var yMax = d3.max(data, function(d){return d.length});
+var yMin = d3.min(data, function(d){return d.length});
+var colorScale = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+
+var y = d3.scale.linear()
+    .domain([0, yMax])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var svg = d3.select("#histogram_script").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", (x(data[0].dx) - x(0)) - 1)
+    .attr("height", function(d) { return height - y(d.y); })
+    .attr("fill", function(d) { return colorScale(d.y) });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -12)
+    .attr("x", (x(data[0].dx) - x(0)) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+})();
+
+</script>
+
+</body></html>
