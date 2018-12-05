@@ -28,7 +28,7 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 
 
 body {
-  font: 10px sans-serif;
+  font: 14px sans-serif;
 }
 
 .bar rect {
@@ -54,7 +54,7 @@ table {
 
 td, th {  
     border: 1px solid transparent; /* No more visible border */
-    height: 30px; 
+    height: 35px; 
     transition: all 0.3s;  /* Simple transition for hover effect */
 }
 
